@@ -1,0 +1,40 @@
+@mixin hub-padding {
+  padding: 0 5vw;
+}
+
+@mixin mob-hub-padding {
+  padding: 0 5vw;
+}
+
+@mixin top-bottom-border-line {
+  border-bottom: 1px solid #ededed;
+  border-top: 1px solid #ededed;
+}
+
+@mixin flex-center {
+  display:flex;
+  justify-content: center;
+  align-items: center;
+}
+
+@mixin flex-space-around {
+  display: flex;
+  justify-content: space-around;
+}
+
+@mixin flex-space-between {
+  display: flex;
+  justify-content: space-between;
+}
+
+@mixin flex-space-between-align-center {
+  @include flex-space-between;
+  align-items: center;
+}
+
+@mixin absolute-center {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+}
