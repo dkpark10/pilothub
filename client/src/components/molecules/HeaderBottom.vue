@@ -54,11 +54,11 @@ export default defineComponent({
 
 .category_menu {
   @include flex-space-between-align-center;
+  @include top-bottom-border-line;
   color: $font-color;
   padding: 12px;
   height: 45px;
   font-weight: bold;
-  @include top-bottom-border-line;
 
   & ul li {
     border: 1px solid yellow;

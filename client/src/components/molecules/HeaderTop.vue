@@ -10,7 +10,7 @@
       <button type="button" name="search_keyword_button" @click="openSearchBar">
         <div class="glass"></div>
       </button>
-      <hamburger />
+      <Hamburger />
     </div>
   </div>
 </template>
@@ -22,7 +22,7 @@ import Hamburger from "@/components/atoms/Hamburger.vue";
 export default defineComponent({
   name: "header-top",
   components: {
-    hamburger: Hamburger,
+    Hamburger,
   },
   methods: {
     openSearchBar() {

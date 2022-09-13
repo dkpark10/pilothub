@@ -2,9 +2,7 @@
   <div class="glass"></div>
 </template>
 
-<script lang="ts">
-
-</script>
+<script lang="ts"></script>
 
 <style lang="scss" scoped>
 .glass {
@@ -19,4 +17,3 @@
   display: block;
 }
 </style>
-
