@@ -50,12 +50,10 @@ export default defineComponent({
 }
 
 .title_wrapper {
+  @include word-ellipsis;
+  white-space: nowrap;
   width: 100%;
   font-size: 0.98rem;
-  overflow: hidden;
-  white-space: nowrap;
-  text-overflow: ellipsis;
-  font-weight: normal;
 
   strong {
     font-weight: normal;

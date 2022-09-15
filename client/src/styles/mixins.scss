@@ -12,7 +12,18 @@
 }
 
 @mixin flex-center {
-  display:flex;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+@mixin flex-align-items-center {
+  display: flex;
+  align-items: center;
+}
+
+@mixin inline-flex-center {
+  display: inline-flex;
   justify-content: center;
   align-items: center;
 }
@@ -40,5 +51,11 @@
 }
 
 @mixin hub-setion-wrapper {
-  padding: 2vw 3vw;
+  padding: 2vh 3vw;
+  margin-top: 10px;
+}
+
+@mixin word-ellipsis {
+  overflow: hidden;
+  text-overflow: ellipsis;
 }

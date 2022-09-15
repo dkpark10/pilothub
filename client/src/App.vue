@@ -3,6 +3,7 @@
     <Header />
     <TagContent />
     <TopPosts />
+    <Footer />
   </main>
 </template>
 
@@ -11,6 +12,7 @@ import { defineComponent } from "vue";
 import Header from "@/components/organisms/Header.vue";
 import TopPosts from "@/components/organisms/TopPosts.vue";
 import TagContent from "@/components/organisms/TagContents.vue";
+import Footer from "@/components/organisms/Footer.vue";
 
 export default defineComponent({
   name: "app",
@@ -18,6 +20,7 @@ export default defineComponent({
     Header,
     TopPosts,
     TagContent,
+    Footer,
   },
 });
 </script>
@@ -34,11 +37,12 @@ export default defineComponent({
 }
 
 body {
-  background-color: #ededed;
+  background-color: #eef0f2;
 }
 
 button {
   border: none;
   background-color: transparent;
+  cursor: pointer;
 }
 </style>

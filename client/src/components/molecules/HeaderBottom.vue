@@ -1,6 +1,6 @@
 <template>
-  <nav class="category_menu">
-    <ul v-for="(menuItem, idx) in menuItems" :key="idx">
+  <nav>
+    <!-- <ul v-for="(menuItem, idx) in menuItems" :key="idx">
       <li
         @click="onClickMenu(idx)"
         @keydown="onClickMenu(idx)"
@@ -8,20 +8,43 @@
       >
         {{ menuItem }}
       </li>
-    </ul>
+    </ul> -->
+    <Carousel :breakpoints="breakpoints">
+      <Slide v-for="(menuItem, idx) in menuItems" :key="idx">
+        <span
+          @click="onClickMenu(idx)"
+          @keydown="onClickMenu(idx)"
+          :class="{ on_tab: selectedMenuItemIndex === idx }"
+        >
+          {{ menuItem }}
+        </span>
+      </Slide>
+    </Carousel>
   </nav>
 </template>
 
 <script lang="ts">
 import { defineComponent } from "vue";
+import { Carousel, Slide } from "vue3-carousel";
+import "vue3-carousel/dist/carousel.css";
 
 interface State {
   menuItems: string[];
   selectedMenuItemIndex: number;
+  breakpoints: {
+    [key: number]: {
+      itemsToShow: number;
+      snapAlign: string;
+    };
+  };
 }
 
 export default defineComponent({
   name: "header-bottom",
+  components: {
+    Carousel,
+    Slide,
+  },
   methods: {
     onClickMenu(idx: number) {
       this.selectedMenuItemIndex = idx;
@@ -41,6 +64,12 @@ export default defineComponent({
         "연예",
       ],
       selectedMenuItemIndex: 0,
+      breakpoints: {
+        325: {
+          itemsToShow: 7,
+          snapAlign: "start",
+        },
+      },
     };
   },
 });
@@ -52,17 +81,23 @@ export default defineComponent({
   font-weight: bold;
 }
 
-.category_menu {
-  @include flex-space-between-align-center;
-  @include top-bottom-border-line;
-  color: $font-color;
-  padding: 12px;
+nav {
   height: 45px;
-  font-weight: bold;
-
-  & ul li {
-    border: 1px solid yellow;
-    margin: 0 5px;
-  }
+  border: 1px solid salmon;
 }
+
+// nav {
+//   @include flex-space-between-align-center;
+//   @include top-bottom-border-line;
+//   color: $font-color;
+//   padding: 12px;
+//   height: 45px;
+//   font-weight: bold;
+//   background-color: white;
+//   border: 1px solid yellow;
+
+//   & ul li {
+//     margin: 0 5px;
+//   }
+// }
 </style>

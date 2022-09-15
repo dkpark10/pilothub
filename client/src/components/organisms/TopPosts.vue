@@ -96,11 +96,9 @@ export default defineComponent({
 .top_posts_wrapper {
   @include hub-setion-wrapper;
   background-color: white;
-  margin-top: 8px;
-  border: 1px solid blue;
+  margin-top: 10px;
 
   h4 {
-    margin-top: 2vw;
     margin-bottom: 3vw;
   }
 }

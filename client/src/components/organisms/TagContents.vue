@@ -20,10 +20,15 @@
       {{ tagContents[1].tagTitle }}
     </h4>
     <div class="tag_content">
-      <article>11</article>
-      <article>22</article>
-      <article>33</article>
-      <article>44</article>
+      <ul v-for="(item, index) in tagContents[1].content" :key="index">
+        <li>
+          <TagContentCard
+            :imgUrl="item.imgUrl"
+            :title="item.title"
+            :author="item.author"
+          />
+        </li>
+      </ul>
     </div>
   </section>
   <section class="tag_content_wrapper">
@@ -31,12 +36,13 @@
       {{ tagContents[2].tagTitle }}
     </h4>
     <div class="tag_content">
-      <ul
-        v-for="(item, index) in Array.from({ length: 4 }, (v, i) => i + 1)"
-        :key="index"
-      >
+      <ul v-for="(item, index) in tagContents[2].content" :key="index">
         <li>
-          <article>{{ item }}</article>
+          <TagContentCard
+            :imgUrl="item.imgUrl"
+            :title="item.title"
+            :author="item.author"
+          />
         </li>
       </ul>
     </div>
@@ -48,8 +54,8 @@ import { defineComponent } from "vue";
 import TagContentCard from "@/components/molecules/TagContentCard.vue";
 
 interface TagContent {
-  tagTitle: string;
-  content: {
+  readonly tagTitle: string;
+  readonly content: {
     title: string;
     author: string;
     imgUrl: string;
@@ -168,12 +174,9 @@ export default defineComponent({
 .tag_content_wrapper {
   @include hub-setion-wrapper;
   background-color: white;
-  margin-top: 8px;
-  border: 1px solid blue;
 
   h4 {
     color: $mobile-main-color;
-    margin-top: 2vw;
     margin-bottom: 3vw;
   }
 }
@@ -182,9 +185,6 @@ export default defineComponent({
   display: grid;
   grid-template-columns: repeat(2, 1fr);
   grid-template-rows: repeat(2, 1fr);
-}
-
-article {
-  border: 1px solid red;
+  gap: 20px 8px;
 }
 </style>
