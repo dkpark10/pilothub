@@ -1,6 +1,6 @@
 <template>
   <article>
-    <Image :src="(imgUrl as string)" />
+    <ImageContainer :src="(imgUrl as string)" />
     <div class="title_wrapper">{{ title }}</div>
     <div class="author_wrapper">
       <em>by</em>
@@ -10,13 +10,13 @@
 </template>
 
 <script lang="ts">
-import Image from "@/components/atoms/Image.vue";
+import ImageContainer from "@/components/atoms/ImageContainer.vue";
 import { defineComponent, PropType } from "vue";
 
 export default defineComponent({
   name: "tag-content-card",
   components: {
-    Image,
+    ImageContainer,
   },
   props: {
     imgUrl: {

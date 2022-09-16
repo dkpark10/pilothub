@@ -2,31 +2,50 @@
   <div class="header_top">
     <div class="header_item_wrapper left">
       <div class="logo_wrapper">
-        <div class="logo"></div>
+        <ZoomLogo />
       </div>
       <span>허브</span>
     </div>
-    <div class="header_item_wrapper right">
-      <button type="button" name="search_keyword_button" @click="openSearchBar">
-        <div class="glass"></div>
+    <div class="header_item_wrapper right" v-if="!isShownSearchBar">
+      <button type="button" name="open_search_bar" @click="openSearchBar">
+        <Magnifier />
       </button>
       <Hamburger />
+    </div>
+    <div class="header_item_wrapper" :style="{ paddingRight: '12px' }" v-else>
+      <button type="button" name="close_search_bar" @click="closeSearchBar">
+        <Close />
+      </button>
     </div>
   </div>
 </template>
 
 <script lang="ts">
-import { defineComponent } from "vue";
+import { defineComponent, PropType } from "vue";
 import Hamburger from "@/components/atoms/Hamburger.vue";
+import Magnifier from "@/components/atoms/Magnifier.vue";
+import ZoomLogo from "@/components/atoms/ZumLogo.vue";
+import Close from "@/components/atoms/Close.vue";
 
 export default defineComponent({
   name: "header-top",
+  props: {
+    isShownSearchBar: {
+      type: Object as PropType<boolean>,
+    },
+  },
   components: {
     Hamburger,
+    Magnifier,
+    Close,
+    ZoomLogo,
   },
   methods: {
     openSearchBar() {
-      console.log("...test");
+      this.$emit("showSearchBar");
+    },
+    closeSearchBar() {
+      this.$emit("closeSearchBar");
     },
   },
 });
@@ -35,6 +54,7 @@ export default defineComponent({
 <style lang="scss" scoped>
 .header_top {
   @include flex-space-between-align-center;
+  padding-right: 6px;
 }
 
 .header_item_wrapper {
@@ -58,30 +78,5 @@ export default defineComponent({
   position: relative;
   display: inline-block;
   background-color: $mobile-main-color;
-}
-
-.logo,
-.glass {
-  background: url("https://m.hub.zum.com/resources/build/mobile/images/spr_header_190402.png?v=1661217438830");
-}
-
-.logo {
-  width: 18px;
-  height: 18px;
-  background-position: 0 0;
-  background-size: 101px 85px;
-  position: absolute;
-  top: 50%;
-  left: 50%;
-  transform: translate(-50%, -50%);
-}
-
-.glass {
-  width: 20px;
-  height: 19px;
-  overflow: hidden;
-  background-position: -25px -22px;
-  background-size: 101px 85px;
-  display: block;
 }
 </style>

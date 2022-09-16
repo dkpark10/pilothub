@@ -1,20 +1,16 @@
 <template>
   <nav>
-    <!-- <ul v-for="(menuItem, idx) in menuItems" :key="idx">
-      <li
-        @click="onClickMenu(idx)"
-        @keydown="onClickMenu(idx)"
-        :class="{ on_tab: selectedMenuItemIndex === idx }"
-      >
-        {{ menuItem }}
-      </li>
-    </ul> -->
-    <Carousel :breakpoints="breakpoints">
+    <Carousel
+      :breakpoints="breakpoints"
+      :style="{ width: '100%' }"
+      :transition="100"
+    >
       <Slide v-for="(menuItem, idx) in menuItems" :key="idx">
         <span
+          class="navi_item"
           @click="onClickMenu(idx)"
           @keydown="onClickMenu(idx)"
-          :class="{ on_tab: selectedMenuItemIndex === idx }"
+          :class="{ on_tab: isCurrentTab(idx) }"
         >
           {{ menuItem }}
         </span>
@@ -49,6 +45,9 @@ export default defineComponent({
     onClickMenu(idx: number) {
       this.selectedMenuItemIndex = idx;
     },
+    isCurrentTab(idx: number) {
+      return this.selectedMenuItemIndex === idx;
+    },
   },
   data(): State {
     return {
@@ -66,7 +65,11 @@ export default defineComponent({
       selectedMenuItemIndex: 0,
       breakpoints: {
         325: {
-          itemsToShow: 7,
+          itemsToShow: 7.5,
+          snapAlign: "start",
+        },
+        455: {
+          itemsToShow: 9,
           snapAlign: "start",
         },
       },
@@ -82,22 +85,15 @@ export default defineComponent({
 }
 
 nav {
+  @include top-bottom-border-line;
   height: 45px;
-  border: 1px solid salmon;
+  position: relative;
+  display: flex;
+  align-items: center;
 }
 
-// nav {
-//   @include flex-space-between-align-center;
-//   @include top-bottom-border-line;
-//   color: $font-color;
-//   padding: 12px;
-//   height: 45px;
-//   font-weight: bold;
-//   background-color: white;
-//   border: 1px solid yellow;
-
-//   & ul li {
-//     margin: 0 5px;
-//   }
-// }
+.navi_item {
+  font-weight: bold;
+  font-size: 1.05rem;
+}
 </style>

@@ -13,3 +13,12 @@ declare module 'third-party' {
     category: string;
   }
 }
+
+declare module 'carousel-type' {
+  export interface BreakPoints {
+    [width: number]: {
+      itemsToShow: number;
+      snapAlign: string;
+    }
+  }
+}

@@ -1,16 +1,25 @@
 <template>
   <div class="search_bar">
     <label for="search">
-      <input type="text" name="search" />
+      <input type="text" name="search" placeholder="허브글, 채널 검색" />
     </label>
+    <div class="magnifier_wrapper">
+      <button type="button" name="search_keyword_button">
+        <Magnifier />
+      </button>
+    </div>
   </div>
 </template>
 
 <script lang="ts">
 import { defineComponent } from "vue";
+import Magnifier from "@/components/atoms/Magnifier.vue";
 
 export default defineComponent({
   name: "search-bar",
+  components: {
+    Magnifier,
+  },
 });
 </script>
 
@@ -18,7 +27,6 @@ export default defineComponent({
 .search_bar {
   color: $mobile-main-color;
   height: 45px;
-  border: 1px solid red;
   position: relative;
 }
 
@@ -30,6 +38,15 @@ input[type="text"] {
   left: 50%;
   transform: translate(-50%, -50%);
   width: 94vw;
-  height: 66%;
+  height: 76%;
+  padding: 0 8px;
+  font-weight: bold;
+}
+
+.magnifier_wrapper {
+  background-color: white;
+  position: absolute;
+  left: 90%;
+  top: 32%;
 }
 </style>
