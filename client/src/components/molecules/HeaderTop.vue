@@ -1,4 +1,5 @@
 <template>
+  <SideMenu v-show="isShownSideMenu" @close-side-menu="closeSideMenu" />
   <div class="header_top">
     <div class="header_item_wrapper left">
       <div class="logo_wrapper">
@@ -10,7 +11,9 @@
       <button type="button" name="open_search_bar" @click="openSearchBar">
         <Magnifier />
       </button>
-      <Hamburger />
+      <button type="button" name="open_side_menu" @click="openSideMenu">
+        <Hamburger />
+      </button>
     </div>
     <div class="header_item_wrapper" :style="{ paddingRight: '12px' }" v-else>
       <button type="button" name="close_search_bar" @click="closeSearchBar">
@@ -26,6 +29,11 @@ import Hamburger from "@/components/atoms/Hamburger.vue";
 import Magnifier from "@/components/atoms/Magnifier.vue";
 import ZoomLogo from "@/components/atoms/ZumLogo.vue";
 import Close from "@/components/atoms/Close.vue";
+import SideMenu from "@/components/molecules/SideMenu.vue";
+
+interface Status {
+  isShownSideMenu: boolean;
+}
 
 export default defineComponent({
   name: "header-top",
@@ -34,18 +42,30 @@ export default defineComponent({
       type: Object as PropType<boolean>,
     },
   },
+  data(): Status {
+    return {
+      isShownSideMenu: false,
+    };
+  },
   components: {
     Hamburger,
     Magnifier,
     Close,
     ZoomLogo,
+    SideMenu,
   },
   methods: {
     openSearchBar() {
-      this.$emit("showSearchBar");
+      this.$emit("show-search-bar");
     },
     closeSearchBar() {
-      this.$emit("closeSearchBar");
+      this.$emit("close-search-bar");
+    },
+    openSideMenu() {
+      this.isShownSideMenu = true;
+    },
+    closeSideMenu() {
+      this.isShownSideMenu = false;
     },
   },
 });

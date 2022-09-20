@@ -7,17 +7,17 @@
     >
       <Slide v-for="(menuItem, idx) in mainItems" :key="idx">
         <div class="main_content_item_wrapper">
-          <div class="overlay" />
+          <Overlay />
           <strong class="main_content_text">
-            {{ firstLineParsingTitle(menuItem.title) }}
+            {{ parsingTitle(menuItem.title, 0) }}
             <br />
-            {{ secondLineParsingTitle(menuItem.title) }}
+            {{ parsingTitle(menuItem.title, 1) }}
           </strong>
           <div class="author_wrapper">
             <em>by</em>
             {{ menuItem.author }}
           </div>
-          <ImageContainer :src="menuItem.imgUrl" />
+          <ImageContainer height="220px" :src="menuItem.imgUrl" />
         </div>
       </Slide>
     </Carousel>
@@ -29,6 +29,7 @@ import { defineComponent } from "vue";
 import { Carousel, Slide } from "vue3-carousel";
 import "vue3-carousel/dist/carousel.css";
 import ImageContainer from "@/components/atoms/ImageContainer.vue";
+import Overlay from "@/components/atoms/Overlay.vue";
 
 interface MainItem {
   title: string;
@@ -52,6 +53,7 @@ export default defineComponent({
     Carousel,
     Slide,
     ImageContainer,
+    Overlay,
   },
   data(): State {
     return {
@@ -102,11 +104,8 @@ export default defineComponent({
     };
   },
   methods: {
-    firstLineParsingTitle(title: string) {
-      return title.split("\n")[0];
-    },
-    secondLineParsingTitle(title: string) {
-      return title.split("\n")[1];
+    parsingTitle(title: string, idx: number) {
+      return title.split("\n")[idx];
     },
   },
 });
@@ -119,16 +118,12 @@ export default defineComponent({
 
 .main_content_item_wrapper {
   position: relative;
+  width: 100%;
   height: 100%;
-}
-
-.overlay {
-  @include overlay;
 }
 
 .main_content_text {
   @include absolute-center;
-  border: 1px solid red;
   color: white;
   font-size: 1.1rem;
   width: 67%;

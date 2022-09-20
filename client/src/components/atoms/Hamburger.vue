@@ -24,7 +24,6 @@ button {
   border-top: 2px solid $mobile-main-color;
   border-bottom: 2px solid $mobile-main-color;
   border-radius: 1px;
-  background-color: white;
 
   &::after {
     width: 20px;

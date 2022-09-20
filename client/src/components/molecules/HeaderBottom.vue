@@ -1,5 +1,5 @@
 <template>
-  <nav>
+  <nav :class="{ nav_fixed: showElementFixed }">
     <Carousel
       :breakpoints="breakpoints"
       :style="{ width: '100%' }"
@@ -27,6 +27,7 @@ import "vue3-carousel/dist/carousel.css";
 interface State {
   menuItems: string[];
   selectedMenuItemIndex: number;
+  showElementFixed: boolean;
   breakpoints: {
     [key: number]: {
       itemsToShow: number;
@@ -40,6 +41,16 @@ export default defineComponent({
   components: {
     Carousel,
     Slide,
+  },
+  mounted() {
+    document.addEventListener("scroll", () => {
+      if (window.pageYOffset <= 48) {
+        this.showElementFixed = false;
+        return;
+      }
+
+      this.showElementFixed = true;
+    });
   },
   methods: {
     onClickMenu(idx: number) {
@@ -63,6 +74,7 @@ export default defineComponent({
         "연예",
       ],
       selectedMenuItemIndex: 0,
+      showElementFixed: false,
       breakpoints: {
         325: {
           itemsToShow: 7.5,
@@ -87,9 +99,16 @@ export default defineComponent({
 nav {
   @include top-bottom-border-line;
   height: 45px;
-  position: relative;
+  background-color: white;
   display: flex;
   align-items: center;
+}
+
+.nav_fixed {
+  position: fixed;
+  top: 0;
+  width: 100%;
+  z-index: 1;
 }
 
 .navi_item {

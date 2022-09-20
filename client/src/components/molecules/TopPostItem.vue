@@ -53,7 +53,7 @@ export default defineComponent({
   @include word-ellipsis;
   white-space: nowrap;
   width: 100%;
-  font-size: 0.98rem;
+  font-size: 1.02rem;
 
   strong {
     font-weight: normal;

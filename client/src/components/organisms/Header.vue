@@ -2,8 +2,8 @@
   <header>
     <HeaderTop
       :isShownSearchBar="isShownSearchBar"
-      @showSearchBar="showSearchBar"
-      @closeSearchBar="closeSearchBar"
+      @show-search-bar="showSearchBar"
+      @close-search-bar="closeSearchBar"
     />
     <HeaderBottom />
     <SearchBar v-show="isShownSearchBar" />

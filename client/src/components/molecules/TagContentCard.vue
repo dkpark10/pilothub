@@ -1,6 +1,6 @@
 <template>
   <article>
-    <ImageContainer :src="(imgUrl as string)" />
+    <ImageContainer height="120px" :src="(imgUrl as string)" />
     <div class="title_wrapper">{{ title }}</div>
     <div class="author_wrapper">
       <em>by</em>
@@ -42,6 +42,7 @@ article {
   display: -webkit-box;
   -webkit-line-clamp: 2;
   -webkit-box-orient: vertical;
+  color: $font-color;
 }
 
 .author_wrapper {
