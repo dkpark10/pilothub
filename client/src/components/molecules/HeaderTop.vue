@@ -1,24 +1,26 @@
 <template>
-  <SideMenu v-show="isShownSideMenu" @close-side-menu="closeSideMenu" />
-  <div class="header_top">
-    <div class="header_item_wrapper left">
-      <div class="logo_wrapper">
-        <ZoomLogo />
+  <div>
+    <SideMenu v-show="isShownSideMenu" @close-side-menu="closeSideMenu" />
+    <div class="header_top">
+      <div class="header_item_wrapper left">
+        <div class="logo_wrapper">
+          <ZoomLogo />
+        </div>
+        <span>허브</span>
       </div>
-      <span>허브</span>
-    </div>
-    <div class="header_item_wrapper right" v-if="!isShownSearchBar">
-      <button type="button" name="open_search_bar" @click="openSearchBar">
-        <Magnifier />
-      </button>
-      <button type="button" name="open_side_menu" @click="openSideMenu">
-        <Hamburger />
-      </button>
-    </div>
-    <div class="header_item_wrapper" :style="{ paddingRight: '12px' }" v-else>
-      <button type="button" name="close_search_bar" @click="closeSearchBar">
-        <Close />
-      </button>
+      <div class="header_item_wrapper right" v-if="!isShownSearchBar">
+        <button type="button" name="open_search_bar" @click="openSearchBar">
+          <Magnifier />
+        </button>
+        <button type="button" name="open_side_menu" @click="openSideMenu">
+          <Hamburger />
+        </button>
+      </div>
+      <div class="header_item_wrapper" :style="{ paddingRight: '12px' }" v-else>
+        <button type="button" name="close_search_bar" @click="closeSearchBar">
+          <Close />
+        </button>
+      </div>
     </div>
   </div>
 </template>
@@ -39,7 +41,7 @@ export default defineComponent({
   name: "header-top",
   props: {
     isShownSearchBar: {
-      type: Object as PropType<boolean>,
+      type: Boolean,
     },
   },
   data(): Status {

@@ -1,38 +1,30 @@
 <template>
-  <button :style="style">
+  <button type="button" :style="style">
     <slot />
   </button>
 </template>
 
 <script lang="ts">
-import { defineComponent, PropType } from "vue";
-
-type Unit = "px" | "%" | "vw" | "vh" | "vmin" | "vmax";
-type SizeUnit = `${number}${Unit}`;
+import { defineComponent, PropType, CSSProperties } from "vue";
 
 interface Status {
-  style: {
-    width: SizeUnit;
-    height: SizeUnit;
-    backgroundColor: string;
-    color: string;
-  };
+  style?: CSSProperties;
 }
 
 export default defineComponent({
   name: "button-component",
   props: {
     width: {
-      type: Object as PropType<SizeUnit>,
+      type: Object as PropType<CSSProperties["width"]>,
     },
     height: {
-      type: Object as PropType<SizeUnit>,
+      type: Object as PropType<CSSProperties["height"]>,
     },
     backgroundColor: {
-      type: Object as PropType<string>,
+      type: Object as PropType<CSSProperties["backgroundColor"]>,
     },
-    fontColor: {
-      type: Object as PropType<string>,
+    color: {
+      type: Object as PropType<CSSProperties["color"]>,
     },
   },
   data(): Status {
@@ -41,7 +33,7 @@ export default defineComponent({
         width: this.$props.width || "100%",
         height: this.$props.height || "100%",
         backgroundColor: this.$props.backgroundColor || "none",
-        color: this.$props.fontColor || "black",
+        color: this.$props.color || "black",
       },
     };
   },
@@ -52,5 +44,9 @@ export default defineComponent({
 button {
   border: none;
   cursor: pointer;
+
+  &:hover {
+    background-color: red;
+  }
 }
 </style>

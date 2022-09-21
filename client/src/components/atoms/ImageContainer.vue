@@ -24,14 +24,14 @@ export default defineComponent({
   },
   props: {
     src: {
-      type: Object as PropType<string>,
+      type: String,
       required: true,
     },
     width: {
-      type: Object as PropType<string>,
+      type: String,
     },
     height: {
-      type: Object as PropType<string>,
+      type: String,
     },
   },
   data(): Status {

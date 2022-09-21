@@ -1,32 +1,12 @@
 <template>
-  <div>
-    <Header />
-    <main>
-      <MainContent />
-      <TagContent />
-    </main>
-    <TopPosts />
-    <Footer />
-  </div>
+  <router-view />
 </template>
 
 <script lang="ts">
 import { defineComponent } from "vue";
-import Header from "@/components/organisms/Header.vue";
-import MainContent from "@/components/organisms/MainContent.vue";
-import TopPosts from "@/components/organisms/TopPosts.vue";
-import TagContent from "@/components/organisms/TagContents.vue";
-import Footer from "@/components/organisms/Footer.vue";
 
 export default defineComponent({
   name: "app",
-  components: {
-    Header,
-    MainContent,
-    TopPosts,
-    TagContent,
-    Footer,
-  },
 });
 </script>
 
@@ -49,5 +29,9 @@ button {
   border: none;
   background-color: transparent;
   cursor: pointer;
+}
+
+a {
+  text-decoration: none;
 }
 </style>

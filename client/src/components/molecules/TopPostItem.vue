@@ -22,13 +22,13 @@ export default defineComponent({
   name: "top-post-item",
   props: {
     rank: {
-      type: Object as PropType<number>,
+      type: Number,
     },
     title: {
-      type: Object as PropType<string>,
+      type: String,
     },
     author: {
-      type: Object as PropType<string>,
+      type: String,
     },
   },
 });

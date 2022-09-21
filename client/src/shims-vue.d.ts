@@ -6,12 +6,14 @@ declare module '*.vue' {
 }
 
 /* eslint-disable */
-declare module 'third-party' {
+declare module 'custom-type' {
   export interface CustomPost {
     title: string;
     author: string;
     category: string;
   }
+  export type Unit = "px" | "%" | "vw" | "vh" | "vmin" | "vmax";
+  export type SizeUnit = `${number}${Unit}`;
 }
 
 declare module 'carousel-type' {

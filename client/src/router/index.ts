@@ -1,23 +1,54 @@
 import { createRouter, createWebHistory } from "vue-router";
-import HomeView from "../views/HomeView.vue";
+import HomeView from "../components/page/Home.vue";
 
 const router = createRouter({
   history: createWebHistory(process.env.BASE_URL),
   routes: [
-    // {
-    //   path: "/",
-    //   name: "home",
-    //   component: HomeView,
-    // },
-    // {
-    //   path: "/about",
-    //   name: "about",
-    //   // route level code-splitting
-    //   // this generates a separate chunk (about.[hash].js) for this route
-    //   // which is lazy-loaded when the route is visited.
-    //   component: () =>
-    //     import(/* webpackChunkName: "about" */ "../views/AboutView.vue"),
-    // },
+    {
+      path: "/",
+      name: "home",
+      component: HomeView,
+    },
+    {
+      path: "/life",
+      name: "life",
+      component: () => import("../components/page/Life.vue"),
+    },
+    {
+      path: "/food",
+      name: "food",
+      component: () => import("../components/page/Life.vue"),
+    },
+    {
+      path: "/trip",
+      name: "trip",
+      component: () => import("../components/page/Life.vue"),
+    },
+    {
+      path: "/culture",
+      name: "culture",
+      component: () => import("../components/page/Life.vue"),
+    },
+    {
+      path: "/tech",
+      name: "tech",
+      component: () => import("../components/page/Life.vue"),
+    },
+    {
+      path: "/biz",
+      name: "biz",
+      component: () => import("../components/page/Life.vue"),
+    },
+    {
+      path: "/issue",
+      name: "issue",
+      component: () => import("../components/page/Life.vue"),
+    },
+    {
+      path: "/entertainment",
+      name: "entertainment",
+      component: () => import("../components/page/Life.vue"),
+    },
   ],
 });
 

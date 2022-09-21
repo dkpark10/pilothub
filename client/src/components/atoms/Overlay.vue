@@ -3,19 +3,17 @@
 </template>
 
 <script lang="ts">
-import { defineComponent, PropType } from "vue";
+import { defineComponent, PropType, CSSProperties } from "vue";
 
 interface Status {
-  style: {
-    zIndex: number;
-  };
+  style: CSSProperties;
 }
 
 export default defineComponent({
   name: "overlay-component",
   props: {
     zIndex: {
-      type: Object as PropType<number>,
+      type: Number,
     },
   },
   data(): Status {

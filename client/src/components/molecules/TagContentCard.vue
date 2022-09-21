@@ -1,7 +1,7 @@
 <template>
   <article>
     <ImageContainer height="120px" :src="(imgUrl as string)" />
-    <div class="title_wrapper">{{ title }}</div>
+    <strong class="title_wrapper">{{ title }}</strong>
     <div class="author_wrapper">
       <em>by</em>
       {{ author }}
@@ -20,13 +20,16 @@ export default defineComponent({
   },
   props: {
     imgUrl: {
-      type: Object as PropType<string>,
+      type: String,
+      require: true,
     },
     title: {
-      type: Object as PropType<string>,
+      type: String,
+      require: true,
     },
     author: {
-      type: Object as PropType<string>,
+      type: String,
+      require: true,
     },
   },
 });
@@ -37,12 +40,13 @@ article {
   width: 45vw;
 }
 
-.title_wrapper {
+strong {
   @include word-ellipsis;
   display: -webkit-box;
   -webkit-line-clamp: 2;
   -webkit-box-orient: vertical;
   color: $font-color;
+  font-weight: normal;
 }
 
 .author_wrapper {
