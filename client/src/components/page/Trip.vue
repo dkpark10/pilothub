@@ -21,14 +21,14 @@
 </template>
 
 <script lang="ts">
-import { defineComponent, ref } from "vue";
+import { defineComponent, ref, Ref } from "vue";
 import Header from "@/components/organisms/Header.vue";
 import TagContentCard from "@/components/molecules/TagContentCard.vue";
 import Footer from "@/components/organisms/Footer.vue";
 import LifeMockData, { Item } from "@/assets/hubmock/Lifehub";
 
 interface Status {
-  data: Item[];
+  data: Ref<Item[]>;
 }
 
 export default defineComponent({
@@ -38,7 +38,7 @@ export default defineComponent({
     Header,
     TagContentCard,
   },
-  setup() {
+  setup(): Status {
     const data = ref(LifeMockData);
     return {
       data,

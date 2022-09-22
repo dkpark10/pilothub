@@ -14,9 +14,9 @@ app.config.warnHandler = (msg) => {
     return;
   }
 
-  if (msg.indexOf("Invalid prop: type check failed for prop") === 0) {
-    return;
-  }
+  // if (msg.indexOf("Invalid prop: type check failed for prop") === 0) {
+  //   return;
+  // }
 
   console.log(msg);
 };

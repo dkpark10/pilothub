@@ -14,6 +14,7 @@
             </li>
           </ul>
         </div>
+        <div class="target" ref="targetRef" />
       </div>
     </main>
     <Footer />
@@ -21,14 +22,18 @@
 </template>
 
 <script lang="ts">
-import { defineComponent, ref } from "vue";
+import { defineComponent, onMounted, onUnmounted, ref, Ref } from "vue";
 import Header from "@/components/organisms/Header.vue";
 import TagContentCard from "@/components/molecules/TagContentCard.vue";
 import Footer from "@/components/organisms/Footer.vue";
 import LifeMockData, { Item } from "@/assets/hubmock/Lifehub";
 
 interface Status {
-  data: Item[];
+  data: Ref<Item[]>;
+  observer: IntersectionObserver | null;
+  targetRef: Ref<Element | undefined>;
+  countOfFetchData: number;
+  beginIndexofFetchData: number;
 }
 
 export default defineComponent({
@@ -38,10 +43,60 @@ export default defineComponent({
     Header,
     TagContentCard,
   },
-  setup() {
-    const data = ref(LifeMockData);
+  setup(): Status {
+    const data = ref(LifeMockData.slice(0, 8));
+    const itemLength = LifeMockData.length;
+    const countOfFetchData = 8;
+    const targetRef = ref<Element>();
+
+    let beginIndexofFetchData = 0;
+
+    const intersectionHandler = (
+      [entry]: IntersectionObserverEntry[],
+      intersec: IntersectionObserver
+    ) => {
+      if (entry.isIntersecting) {
+        intersec.unobserve(entry.target);
+        fetchData();
+        intersec.observe(entry.target);
+      }
+    };
+
+    const observer = new IntersectionObserver(intersectionHandler, {
+      threshold: 0.45,
+    });
+
+    onMounted(() => {
+      observer.observe(targetRef.value as Element);
+    });
+
+    onUnmounted(() => {
+      if (targetRef.value) {
+        observer.unobserve(targetRef.value as Element);
+      }
+    });
+
+    const fetchData = () => {
+      if (data.value.length >= itemLength) {
+        return;
+      }
+
+      beginIndexofFetchData += countOfFetchData;
+      data.value = [
+        ...data.value,
+        ...LifeMockData.slice(
+          beginIndexofFetchData,
+          beginIndexofFetchData + countOfFetchData
+        ),
+      ];
+    };
+
     return {
       data,
+      observer,
+      targetRef,
+      countOfFetchData,
+      beginIndexofFetchData,
     };
   },
 });

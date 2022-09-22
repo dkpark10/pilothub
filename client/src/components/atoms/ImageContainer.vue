@@ -45,7 +45,9 @@ export default defineComponent({
   },
   methods: {
     onLoad() {
-      this.isLoad = true;
+      setTimeout(() => {
+        this.isLoad = true;
+      }, 600);
     },
   },
 });

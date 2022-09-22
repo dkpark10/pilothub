@@ -11,7 +11,7 @@
 
 <script lang="ts">
 import ImageContainer from "@/components/atoms/ImageContainer.vue";
-import { defineComponent, PropType } from "vue";
+import { defineComponent } from "vue";
 
 export default defineComponent({
   name: "tag-content-card",

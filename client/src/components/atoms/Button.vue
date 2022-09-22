@@ -5,7 +5,7 @@
 </template>
 
 <script lang="ts">
-import { defineComponent, PropType, CSSProperties } from "vue";
+import { defineComponent, CSSProperties, PropType } from "vue";
 
 interface Status {
   style?: CSSProperties;
@@ -13,6 +13,16 @@ interface Status {
 
 export default defineComponent({
   name: "button-component",
+  data(): Status {
+    return {
+      style: {
+        width: this.$props.width || "100%",
+        height: this.$props.height || "100%",
+        backgroundColor: this.$props.backgroundColor || "none",
+        color: this.$props.color || "black",
+      },
+    };
+  },
   props: {
     width: {
       type: Object as PropType<CSSProperties["width"]>,
@@ -27,16 +37,6 @@ export default defineComponent({
       type: Object as PropType<CSSProperties["color"]>,
     },
   },
-  data(): Status {
-    return {
-      style: {
-        width: this.$props.width || "100%",
-        height: this.$props.height || "100%",
-        backgroundColor: this.$props.backgroundColor || "none",
-        color: this.$props.color || "black",
-      },
-    };
-  },
 });
 </script>
 
@@ -46,7 +46,7 @@ button {
   cursor: pointer;
 
   &:hover {
-    background-color: red;
+    background-color: v-bind(backgroundColor);
   }
 }
 </style>
