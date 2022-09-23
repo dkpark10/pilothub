@@ -33,5 +33,6 @@ button {
 
 a {
   text-decoration: none;
+  color: $nav-font-color;
 }
 </style>

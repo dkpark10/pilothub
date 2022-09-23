@@ -17,7 +17,11 @@
             <em>by</em>
             {{ menuItem.author }}
           </div>
-          <ImageContainer height="220px" :src="menuItem.imgUrl" />
+          <ImageContainer
+            height="220px"
+            :src="menuItem.imgUrl"
+            :alt="menuItem.title"
+          />
         </div>
       </Slide>
     </Carousel>

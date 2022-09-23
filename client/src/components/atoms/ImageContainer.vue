@@ -1,7 +1,7 @@
 <template>
   <div class="img_wrapper" :style="style">
     <Skeleton v-if="!isLoad" />
-    <img :src="src" @load="onLoad" />
+    <img :src="src" @load="onLoad" :alt="alt" />
   </div>
 </template>
 
@@ -24,14 +24,17 @@ export default defineComponent({
   },
   props: {
     src: {
-      type: String,
+      type: Object as PropType<string>,
       required: true,
     },
     width: {
-      type: String,
+      type: Object as PropType<string>,
     },
     height: {
-      type: String,
+      type: Object as PropType<string>,
+    },
+    alt: {
+      type: Object as PropType<string>,
     },
   },
   data(): Status {
@@ -45,9 +48,10 @@ export default defineComponent({
   },
   methods: {
     onLoad() {
-      setTimeout(() => {
-        this.isLoad = true;
-      }, 600);
+      // setTimeout(() => {
+      //   this.isLoad = true;
+      // }, 700);
+      this.isLoad = true;
     },
   },
 });

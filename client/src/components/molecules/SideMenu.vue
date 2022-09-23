@@ -3,8 +3,12 @@
     <Overlay @click="closeSideMenu" :zIndex="1" />
     <nav>
       <ul>
-        <li>허브홈</li>
-        <li>인기 허브 글</li>
+        <router-link to="/">
+          <li>허브홈</li>
+        </router-link>
+        <router-link to="/ranking">
+          <li>인기 허브 글</li>
+        </router-link>
         <li>최근 읽은 글</li>
       </ul>
     </nav>
@@ -48,5 +52,9 @@ nav {
   ul li {
     margin: 10px 0px;
   }
+}
+
+a {
+  color: $mobile-main-color;
 }
 </style>

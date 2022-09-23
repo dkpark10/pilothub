@@ -1,6 +1,6 @@
 <template>
   <article>
-    <ImageContainer height="120px" :src="(imgUrl as string)" />
+    <ImageContainer height="120px" :src="(imgUrl as string)" :alt="title" />
     <strong class="title_wrapper">{{ title }}</strong>
     <div class="author_wrapper">
       <em>by</em>
@@ -36,10 +36,6 @@ export default defineComponent({
 </script>
 
 <style lang="scss" scoped>
-article {
-  width: 45vw;
-}
-
 strong {
   @include word-ellipsis;
   display: -webkit-box;

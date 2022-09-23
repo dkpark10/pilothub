@@ -13,7 +13,7 @@ export default defineComponent({
   name: "overlay-component",
   props: {
     zIndex: {
-      type: Number,
+      type: Object as PropType<CSSProperties["zIndex"]>,
     },
   },
   data(): Status {

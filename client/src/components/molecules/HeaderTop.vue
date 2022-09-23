@@ -9,15 +9,30 @@
         <span>허브</span>
       </div>
       <div class="header_item_wrapper right" v-if="!isShownSearchBar">
-        <button type="button" name="open_search_bar" @click="openSearchBar">
+        <button
+          type="button"
+          name="open_search_bar"
+          aria-label="open_search_bar_button"
+          @click="openSearchBar"
+        >
           <Magnifier />
         </button>
-        <button type="button" name="open_side_menu" @click="openSideMenu">
+        <button
+          type="button"
+          name="open_side_menu"
+          @click="openSideMenu"
+          aria-label="open_side_menu_button"
+        >
           <Hamburger />
         </button>
       </div>
       <div class="header_item_wrapper" :style="{ paddingRight: '12px' }" v-else>
-        <button type="button" name="close_search_bar" @click="closeSearchBar">
+        <button
+          type="button"
+          name="close_search_bar"
+          @click="closeSearchBar"
+          aria-label="close_search_bar_button"
+        >
           <Close />
         </button>
       </div>
