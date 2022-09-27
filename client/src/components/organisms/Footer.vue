@@ -48,21 +48,19 @@
         </div>
       </div>
     </div>
-    <h1>{{ fontSize }}</h1>
   </footer>
 </template>
 
 <script lang="ts">
-import { defineComponent, computed, ComputedRef } from "vue";
+import { defineComponent } from "vue";
 import Refresh from "@/components/atoms/Refresh.vue";
 import FontLouder from "@/components/atoms/FontLouder.vue";
 import FontSmaller from "@/components/atoms/FontSmaller.vue";
-import { SET_FONT_SIZE } from "@/store/fontsize/index";
+import { INCREASE_FONT_SIZE, DECREASE_FONT_SIZE } from "@/store/fontsize/index";
 import { RootState } from "@/store/index";
 import { useStore } from "vuex";
 
 interface State {
-  fontSize: ComputedRef<number>;
   increaseFontSize: () => void;
   decreaseFontSize: () => void;
 }
@@ -76,19 +74,15 @@ export default defineComponent({
   },
   setup(): State {
     const store = useStore<RootState>();
-
-    const fontSize = computed(() => store.state.fontSizeModule.fontSizeRatio);
-
     const increaseFontSize = () => {
-      store.commit(SET_FONT_SIZE, 1);
+      store.commit(INCREASE_FONT_SIZE, 1.1);
     };
 
     const decreaseFontSize = () => {
-      store.commit(SET_FONT_SIZE, -1);
+      store.commit(DECREASE_FONT_SIZE, 1.1);
     };
 
     return {
-      fontSize,
       increaseFontSize,
       decreaseFontSize,
     };

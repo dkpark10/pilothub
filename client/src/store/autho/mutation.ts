@@ -7,8 +7,7 @@ export type Mutations<S = userInfoType> = {
 };
 
 export const mutations: MutationTree<userInfoType> & Mutations = {
-  [MutationType.LOGIN](state: userInfoType, payload: userInfoType) {
-    state.userId = payload.userId;
-    state.userName = payload.userName;
+  [MutationType.LOGIN](state: userInfoType) {
+    console.log("??????>>", state);
   },
 };

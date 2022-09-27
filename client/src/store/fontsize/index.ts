@@ -1,7 +1,8 @@
-import { Module, ActionContext } from "vuex";
+import { Module } from "vuex";
 import { RootState } from "@/store/index";
 
-export const SET_FONT_SIZE = "INCREASE_FONT_SIZE";
+export const INCREASE_FONT_SIZE = "INCREASE_FONT_SIZE";
+export const DECREASE_FONT_SIZE = "DECREASE_FONT_SIZE";
 
 export interface FontSizeState {
   fontSizeRatio: number;
@@ -12,8 +13,13 @@ export const fontSizeModule: Module<FontSizeState, RootState> = {
     fontSizeRatio: 1,
   }),
   mutations: {
-    [SET_FONT_SIZE](state, value: number) {
-      state.fontSizeRatio += value;
+    [INCREASE_FONT_SIZE](state, ratio: number) {
+      state.fontSizeRatio = Number((state.fontSizeRatio *= ratio).toFixed(2));
+      console.log(state.fontSizeRatio);
+    },
+    [DECREASE_FONT_SIZE](state, ratio: number) {
+      state.fontSizeRatio = Number((state.fontSizeRatio /= ratio).toFixed(2));
+      console.log(state.fontSizeRatio);
     },
   },
   getters: {
@@ -22,8 +28,11 @@ export const fontSizeModule: Module<FontSizeState, RootState> = {
     },
   },
   actions: {
-    setFontSize({ commit }, value: number) {
-      commit(SET_FONT_SIZE, value);
+    increaseFontSize({ commit }, ratio: number) {
+      commit(INCREASE_FONT_SIZE, ratio);
+    },
+    decreaseFontSize({ commit }, ratio: number) {
+      commit(DECREASE_FONT_SIZE, ratio);
     },
   },
 };

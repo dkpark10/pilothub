@@ -12,11 +12,19 @@
         {{ author }}
       </div>
     </div>
+    <h1>{{ fontSizeRatio }}</h1>
   </div>
 </template>
 
 <script lang="ts">
-import { defineComponent, PropType } from "vue";
+import { defineComponent, onUpdated, PropType, ref, Ref } from "vue";
+import { RootState } from "@/store/index";
+import { useStore } from "vuex";
+import { computed } from "@vue/reactivity";
+
+interface Status {
+  fontSizeRatio: Ref<string>;
+}
 
 export default defineComponent({
   name: "top-post-item",
@@ -30,6 +38,16 @@ export default defineComponent({
     author: {
       type: Object as PropType<string>,
     },
+  },
+  setup(): Status {
+    const store = useStore<RootState>();
+    const fontSizeRatio = computed(
+      () => `${store.state.fontSizeModule.fontSizeRatio * 15}px`
+    );
+
+    return {
+      fontSizeRatio,
+    };
   },
 });
 </script>
@@ -54,10 +72,10 @@ export default defineComponent({
   @include word-ellipsis;
   white-space: nowrap;
   width: 100%;
-  font-size: 1.02rem;
 
   strong {
     font-weight: normal;
+    color: $font-color;
   }
 }
 
