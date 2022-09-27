@@ -48,10 +48,10 @@ export default defineComponent({
   },
   methods: {
     onLoad() {
-      // setTimeout(() => {
-      //   this.isLoad = true;
-      // }, 700);
-      this.isLoad = true;
+      setTimeout(() => {
+        this.isLoad = true;
+      }, 700);
+      // this.isLoad = true;
     },
   },
 });

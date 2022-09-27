@@ -176,6 +176,6 @@ nav {
 
 .navi_item {
   font-weight: bold;
-  font-size: 1.05rem;
+  font-size: 17px;
 }
 </style>

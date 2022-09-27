@@ -1,5 +1,5 @@
 <template>
-  <span class="font_louder" />
+  <div class="font_louder" />
 </template>
 
 <script lang="ts">

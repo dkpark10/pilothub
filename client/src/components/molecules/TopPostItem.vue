@@ -22,13 +22,13 @@ export default defineComponent({
   name: "top-post-item",
   props: {
     rank: {
-      type: Number,
+      type: Object as PropType<number>,
     },
     title: {
-      type: String,
+      type: Object as PropType<string>,
     },
     author: {
-      type: String,
+      type: Object as PropType<string>,
     },
   },
 });
@@ -39,14 +39,15 @@ export default defineComponent({
   height: 70px;
   display: flex;
   border-top: 1px solid $line-color;
-  padding: 3vw 0px;
+  align-items: center;
 }
 
 .rank_wrapper {
   color: $mobile-main-color;
-  font-size: 1.1rem;
+  font-size: 1.12rem;
   width: 24px;
-  line-height: 20px;
+  position: relative;
+  top: -9px;
 }
 
 .title_wrapper {

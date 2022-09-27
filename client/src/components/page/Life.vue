@@ -23,6 +23,7 @@
 
 <script lang="ts">
 import { defineComponent, onMounted, onUnmounted, ref, Ref } from "vue";
+import { useRoute, RouteLocationNormalizedLoaded } from "vue-router";
 import Header from "@/components/organisms/Header.vue";
 import TagContentCard from "@/components/molecules/TagContentCard.vue";
 import Footer from "@/components/organisms/Footer.vue";
@@ -30,6 +31,7 @@ import LifeMockData, { Item } from "@/assets/hubmock/Lifehub";
 
 interface Status {
   data: Ref<Item[]>;
+  route: RouteLocationNormalizedLoaded;
   observer: IntersectionObserver | null;
   targetRef: Ref<Element | undefined>;
   countOfFetchData: number;
@@ -48,8 +50,9 @@ export default defineComponent({
     const itemLength = LifeMockData.length;
     const countOfFetchData = 8;
     const targetRef = ref<Element>();
-
     let beginIndexofFetchData = 0;
+
+    const route = useRoute();
 
     const intersectionHandler = (
       [entry]: IntersectionObserverEntry[],
@@ -93,6 +96,7 @@ export default defineComponent({
 
     return {
       data,
+      route,
       observer,
       targetRef,
       countOfFetchData,

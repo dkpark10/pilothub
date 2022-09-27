@@ -97,7 +97,7 @@ export default defineComponent({
 .header_item_wrapper {
   @include flex-space-between-align-center;
   color: $mobile-main-color;
-  font-size: 1.3rem;
+  font-size: 21px;
 }
 
 .left {
