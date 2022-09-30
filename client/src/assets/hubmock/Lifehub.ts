@@ -1,5 +1,5 @@
 export interface Item {
-  postid: number;
+  postId: number;
   imgUrl: string;
   title: string;
   author: string;
@@ -232,7 +232,7 @@ const authorList = [
 
 const data: Item[] = ImgList.map(
   (item, idx): Item => ({
-    postid: idx,
+    postId: idx,
     imgUrl: item,
     title: titleList[idx],
     author: authorList[idx],

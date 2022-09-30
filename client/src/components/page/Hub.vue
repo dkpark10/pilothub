@@ -5,13 +5,15 @@
       <div class="tag_content_wrapper">
         <div class="tag_content">
           <ul v-for="(item, idx) in data" :key="idx">
-            <li>
-              <TagContentCard
-                :imgUrl="item.imgUrl"
-                :title="item.title"
-                :author="item.author"
-              />
-            </li>
+            <router-link :to="`post/${item.postId}`">
+              <li>
+                <TagContentCard
+                  :imgUrl="item.imgUrl"
+                  :title="item.title"
+                  :author="item.author"
+                />
+              </li>
+            </router-link>
           </ul>
         </div>
         <div class="target" ref="targetRef" />
@@ -73,21 +75,6 @@ export default defineComponent({
     const observer = useIntersection(fetchData, {
       threshold: 0.45,
     });
-
-    // const intersectionHandler = (
-    //   [entry]: IntersectionObserverEntry[],
-    //   intersec: IntersectionObserver
-    // ) => {
-    //   if (entry.isIntersecting) {
-    //     intersec.unobserve(entry.target);
-    //     fetchData();
-    //     intersec.observe(entry.target);
-    //   }
-    // };
-
-    // const observer = new IntersectionObserver(intersectionHandler, {
-    //   threshold: 0.45,
-    // });
 
     onMounted(() => {
       observer.observe(targetRef.value as Element);

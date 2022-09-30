@@ -1,7 +1,10 @@
 <template>
   <div class="img_wrapper" :style="style">
-    <Skeleton v-if="!isLoad" />
-    <img :src="src" @load="onLoad" :alt="alt" />
+    <Skeleton v-show="loading" />
+    <div class="error_msg_wrapper" v-show="error">
+      <span>이미지를 불러오는데 실패하였습니다.</span>
+    </div>
+    <img :src="src" @load="onLoad" :alt="alt" @error="onError" />
   </div>
 </template>
 
@@ -10,7 +13,8 @@ import { defineComponent, PropType } from "vue";
 import Skeleton from "@/components/atoms/Skeleton.vue";
 
 interface Status {
-  isLoad: boolean;
+  loading: boolean;
+  error: boolean;
   style: {
     width: string;
     height: string;
@@ -39,7 +43,8 @@ export default defineComponent({
   },
   data(): Status {
     return {
-      isLoad: false,
+      loading: true,
+      error: false,
       style: {
         width: this.$props.width || "100%",
         height: this.$props.height || "100%",
@@ -49,9 +54,11 @@ export default defineComponent({
   methods: {
     onLoad() {
       setTimeout(() => {
-        this.isLoad = true;
+        this.loading = false;
       }, 700);
-      // this.isLoad = true;
+    },
+    onError() {
+      this.error = true;
     },
   },
 });
@@ -67,6 +74,15 @@ export default defineComponent({
     width: 100%;
     height: 100%;
     object-fit: cover;
+  }
+
+  .error_msg_wrapper {
+    width: 100%;
+    height: 100%;
+    border: 1px solid $darker-gray;
+    color: $font-color;
+    text-align: center;
+    @include flex-align-items-center;
   }
 }
 </style>

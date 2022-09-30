@@ -100,4 +100,11 @@ main {
   background-color: $main-color;
   font-size: 0.9rem;
 }
+.logo_wrapper {
+  width: 48px;
+  height: 48px;
+  position: relative;
+  display: inline-block;
+  background-color: $mobile-main-color;
+}
 </style>

@@ -12,8 +12,32 @@ declare module 'custom-type' {
     author: string;
     category: string;
   }
+  
   export type Unit = "px" | "%" | "vw" | "vh" | "vmin" | "vmax";
+
   export type SizeUnit = `${number}${Unit}`;
+  
+  export type NavText =
+  | "홈"
+  | "라이프"
+  | "푸드"
+  | "여행"
+  | "컬처"
+  | "테크"
+  | "비즈"
+  | "이슈"
+  | "연예";
+
+  export type NavUrl =
+  | "/"
+  | "/life"
+  | "/food"
+  | "/trip"
+  | "/culture"
+  | "/tech"
+  | "/biz"
+  | "/issue"
+  | "/entertainment";
 }
 
 declare module 'carousel-type' {

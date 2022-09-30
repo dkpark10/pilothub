@@ -11,8 +11,13 @@
 
 <script lang="ts">
 import ImageContainer from "@/components/atoms/ImageContainer.vue";
-import { defineComponent } from "vue";
+import { CSSProperties, defineComponent, Ref } from "vue";
 import { useFontSize } from "@/hooks/usefontsize";
+
+interface Status {
+  titleStyle: Ref<CSSProperties>;
+  authorStyle: Ref<CSSProperties>;
+}
 
 export default defineComponent({
   name: "tag-content-card",
@@ -33,7 +38,7 @@ export default defineComponent({
       require: true,
     },
   },
-  setup() {
+  setup(): Status {
     const titleStyle = useFontSize(15);
     const authorStyle = useFontSize(12);
 

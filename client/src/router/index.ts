@@ -12,12 +12,22 @@ const router = createRouter({
     {
       path: "/:category",
       name: "category",
-      component: () => import("../components/page/Life.vue"),
+      component: () => import("../components/page/Hub.vue"),
     },
     {
       path: "/login",
       name: "login",
       component: () => import("../components/page/Login.vue"),
+    },
+    {
+      path: "/post/:id",
+      name: "post-detail",
+      component: () => import("../components/page/PostDetail.vue"),
+    },
+    {
+      path: "/recent",
+      name: "recent-read-posts",
+      component: () => import("../components/page/RecentReadPost.vue"),
     },
   ],
 });
