@@ -34,7 +34,11 @@
           <button class="footer_button" :style="{ padding: '0 10px' }">
             pc버전
           </button>
-          <button class="footer_button" :style="{ padding: '0 10px' }">
+          <button
+            class="footer_button"
+            :style="{ padding: '0 10px' }"
+            @click="toTop"
+          >
             맨 위로
           </button>
         </div>
@@ -65,6 +69,7 @@ import { useStore } from "vuex";
 interface State {
   increaseFontSize: () => void;
   decreaseFontSize: () => void;
+  toTop: () => void;
 }
 
 export default defineComponent({
@@ -84,9 +89,14 @@ export default defineComponent({
       store.commit(DECREASE_FONT_SIZE, 1.1);
     };
 
+    const toTop = () => {
+      window.scrollTo(0, 0);
+    };
+
     return {
       increaseFontSize,
       decreaseFontSize,
+      toTop,
     };
   },
 });

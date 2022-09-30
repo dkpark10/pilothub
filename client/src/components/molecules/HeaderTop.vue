@@ -58,7 +58,7 @@ export default defineComponent({
   name: "header-top",
   props: {
     isShownSearchBar: {
-      type: Boolean,
+      type: Object as PropType<boolean>,
     },
   },
   data(): Status {

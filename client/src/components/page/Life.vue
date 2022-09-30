@@ -28,6 +28,7 @@ import Header from "@/components/organisms/Header.vue";
 import TagContentCard from "@/components/molecules/TagContentCard.vue";
 import Footer from "@/components/organisms/Footer.vue";
 import LifeMockData, { Item } from "@/assets/hubmock/Lifehub";
+import { useIntersection } from "@/hooks/useintersection";
 
 interface Status {
   data: Ref<Item[]>;
@@ -54,31 +55,6 @@ export default defineComponent({
 
     const route = useRoute();
 
-    const intersectionHandler = (
-      [entry]: IntersectionObserverEntry[],
-      intersec: IntersectionObserver
-    ) => {
-      if (entry.isIntersecting) {
-        intersec.unobserve(entry.target);
-        fetchData();
-        intersec.observe(entry.target);
-      }
-    };
-
-    const observer = new IntersectionObserver(intersectionHandler, {
-      threshold: 0.45,
-    });
-
-    onMounted(() => {
-      observer.observe(targetRef.value as Element);
-    });
-
-    onUnmounted(() => {
-      if (targetRef.value) {
-        observer.unobserve(targetRef.value as Element);
-      }
-    });
-
     const fetchData = () => {
       if (data.value.length >= itemLength) {
         return;
@@ -93,6 +69,35 @@ export default defineComponent({
         ),
       ];
     };
+
+    const observer = useIntersection(fetchData, {
+      threshold: 0.45,
+    });
+
+    // const intersectionHandler = (
+    //   [entry]: IntersectionObserverEntry[],
+    //   intersec: IntersectionObserver
+    // ) => {
+    //   if (entry.isIntersecting) {
+    //     intersec.unobserve(entry.target);
+    //     fetchData();
+    //     intersec.observe(entry.target);
+    //   }
+    // };
+
+    // const observer = new IntersectionObserver(intersectionHandler, {
+    //   threshold: 0.45,
+    // });
+
+    onMounted(() => {
+      observer.observe(targetRef.value as Element);
+    });
+
+    onUnmounted(() => {
+      if (targetRef.value) {
+        observer.unobserve(targetRef.value as Element);
+      }
+    });
 
     return {
       data,

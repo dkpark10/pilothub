@@ -230,11 +230,13 @@ const authorList = [
   "명견실버",
 ];
 
-const data: Item[] = ImgList.map((item, idx):Item => ({
-  postid: idx,
-  imgUrl: item,
-  title: titleList[idx],
-  author: authorList[idx],
-}));
+const data: Item[] = ImgList.map(
+  (item, idx): Item => ({
+    postid: idx,
+    imgUrl: item,
+    title: titleList[idx],
+    author: authorList[idx],
+  })
+);
 
 export default data;
