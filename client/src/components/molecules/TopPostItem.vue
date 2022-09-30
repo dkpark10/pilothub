@@ -4,26 +4,24 @@
       {{ rank }}
     </div>
     <div class="title_wrapper">
-      <strong>
+      <strong :style="titleStyle">
         {{ title }}
       </strong>
-      <div class="author_wrapper">
+      <div class="author_wrapper" :style="authorStyle">
         <em>by</em>
         {{ author }}
       </div>
     </div>
-    <h1>{{ fontSizeRatio }}</h1>
   </div>
 </template>
 
 <script lang="ts">
-import { defineComponent, onUpdated, PropType, ref, Ref } from "vue";
-import { RootState } from "@/store/index";
-import { useStore } from "vuex";
-import { computed } from "@vue/reactivity";
+import { defineComponent, PropType, Ref, CSSProperties } from "vue";
+import { useFontSize } from "@/hooks/usefontsize";
 
 interface Status {
-  fontSizeRatio: Ref<string>;
+  titleStyle: Ref<CSSProperties>;
+  authorStyle: Ref<CSSProperties>;
 }
 
 export default defineComponent({
@@ -40,13 +38,12 @@ export default defineComponent({
     },
   },
   setup(): Status {
-    const store = useStore<RootState>();
-    const fontSizeRatio = computed(
-      () => `${store.state.fontSizeModule.fontSizeRatio * 15}px`
-    );
+    const titleStyle = useFontSize(15);
+    const authorStyle = useFontSize(12);
 
     return {
-      fontSizeRatio,
+      titleStyle,
+      authorStyle,
     };
   },
 });

@@ -6,7 +6,9 @@
         <div class="logo_wrapper">
           <ZoomLogo />
         </div>
-        <span>허브</span>
+        <router-link to="/">
+          <span>허브</span>
+        </router-link>
       </div>
       <div class="header_item_wrapper right" v-if="!isShownSearchBar">
         <button
@@ -96,8 +98,11 @@ export default defineComponent({
 
 .header_item_wrapper {
   @include flex-space-between-align-center;
-  color: $mobile-main-color;
   font-size: 21px;
+
+  a {
+    color: $mobile-main-color;
+  }
 }
 
 .left {

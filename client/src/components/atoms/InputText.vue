@@ -1,9 +1,42 @@
-<template></template>
+<template>
+  <input :style="style" />
+</template>
 
-<script lang="ts"></script>
+<script lang="ts">
+import { defineComponent, PropType, CSSProperties } from "vue";
+
+interface Status {
+  style: CSSProperties;
+}
+
+export default defineComponent({
+  name: "input-text-component",
+  props: {
+    width: {
+      type: Object as PropType<CSSProperties["width"]>,
+    },
+    height: {
+      type: Object as PropType<CSSProperties["height"]>,
+    },
+  },
+  setup(props): Status {
+    const style = {
+      width: props.width,
+      height: props.height,
+    };
+
+    return {
+      style,
+    };
+  },
+});
+</script>
 
 <style lang="scss" scoped>
-input[type="text"] {
+input {
   outline: none;
+  border-radius: 4px;
+  border: 1px solid #dfdfdf;
+  padding: 0 8px;
 }
 </style>

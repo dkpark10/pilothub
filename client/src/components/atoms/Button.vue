@@ -1,6 +1,6 @@
 <template>
   <button type="button" :style="style">
-    <slot name="content" />
+    <slot />
   </button>
 </template>
 
@@ -20,6 +20,7 @@ export default defineComponent({
         height: this.$props.height || "100%",
         backgroundColor: this.$props.backgroundColor || "none",
         color: this.$props.color || "black",
+        borderRadius: this.$props.borderRadius || "none",
       },
     };
   },
@@ -36,6 +37,9 @@ export default defineComponent({
     color: {
       type: Object as PropType<CSSProperties["color"]>,
     },
+    borderRadius: {
+      type: Object as PropType<CSSProperties["borderRadius"]>,
+    },
   },
 });
 </script>
@@ -44,9 +48,5 @@ export default defineComponent({
 button {
   border: none;
   cursor: pointer;
-
-  &:hover {
-    background-color: v-bind(backgroundColor);
-  }
 }
 </style>
