@@ -4,6 +4,7 @@ import router from "./router";
 import store from "./store";
 
 const app = createApp(App);
+app.use(store).use(router).mount("#app");
 const isProductionMode = process.env.NODE_ENV === "production";
 
 /**
@@ -20,5 +21,3 @@ app.config.warnHandler = (msg) => {
 
   console.log(msg);
 };
-
-app.use(store).use(router).mount("#app");
