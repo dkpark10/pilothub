@@ -64,3 +64,7 @@
   overflow: hidden;
   text-overflow: ellipsis;
 }
+
+@mixin margin-y-axis {
+  margin: 10px 0;
+}

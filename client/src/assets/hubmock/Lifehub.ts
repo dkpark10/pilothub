@@ -1,4 +1,5 @@
 export interface Item {
+  postId: number;
   imgUrl: string;
   title: string;
   author: string;
@@ -229,10 +230,13 @@ const authorList = [
   "명견실버",
 ];
 
-const data: Item[] = ImgList.map((item, idx) => ({
-  imgUrl: item,
-  title: titleList[idx],
-  author: authorList[idx],
-}));
+const data: Item[] = ImgList.map(
+  (item, idx): Item => ({
+    postId: idx,
+    imgUrl: item,
+    title: titleList[idx],
+    author: authorList[idx],
+  })
+);
 
 export default data;

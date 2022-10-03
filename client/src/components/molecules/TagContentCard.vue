@@ -1,8 +1,8 @@
 <template>
   <article>
     <ImageContainer height="120px" :src="(imgUrl as string)" :alt="title" />
-    <strong class="title_wrapper">{{ title }}</strong>
-    <div class="author_wrapper">
+    <strong class="title_wrapper" :style="titleStyle">{{ title }}</strong>
+    <div class="author_wrapper" :style="authorStyle">
       <em>by</em>
       {{ author }}
     </div>
@@ -11,7 +11,13 @@
 
 <script lang="ts">
 import ImageContainer from "@/components/atoms/ImageContainer.vue";
-import { defineComponent } from "vue";
+import { CSSProperties, defineComponent, Ref } from "vue";
+import { useFontSize } from "@/hooks/usefontsize";
+
+interface Status {
+  titleStyle: Ref<CSSProperties>;
+  authorStyle: Ref<CSSProperties>;
+}
 
 export default defineComponent({
   name: "tag-content-card",
@@ -31,6 +37,15 @@ export default defineComponent({
       type: String,
       require: true,
     },
+  },
+  setup(): Status {
+    const titleStyle = useFontSize(15);
+    const authorStyle = useFontSize(12);
+
+    return {
+      titleStyle,
+      authorStyle,
+    };
   },
 });
 </script>

@@ -6,19 +6,31 @@ export const DECREASE_FONT_SIZE = "DECREASE_FONT_SIZE";
 
 export interface FontSizeState {
   fontSizeRatio: number;
+  index: 0;
 }
 
 export const fontSizeModule: Module<FontSizeState, RootState> = {
   state: (): FontSizeState => ({
     fontSizeRatio: 1,
+    index: 0,
   }),
   mutations: {
     [INCREASE_FONT_SIZE](state, ratio: number) {
+      if (state.index >= 3) {
+        return;
+      }
+
       state.fontSizeRatio = Number((state.fontSizeRatio *= ratio).toFixed(2));
+      state.index += 1;
       console.log(state.fontSizeRatio);
     },
     [DECREASE_FONT_SIZE](state, ratio: number) {
+      if (state.index <= -3) {
+        return;
+      }
+
       state.fontSizeRatio = Number((state.fontSizeRatio /= ratio).toFixed(2));
+      state.index -= 1;
       console.log(state.fontSizeRatio);
     },
   },

@@ -18,7 +18,7 @@
             {{ menuItem.author }}
           </div>
           <ImageContainer
-            height="220px"
+            height="100%"
             :src="menuItem.imgUrl"
             :alt="menuItem.title"
           />
@@ -117,7 +117,7 @@ export default defineComponent({
 
 <style lang="scss" scoped>
 .main_content_wrapper {
-  padding: 2vw 0 0 2vw;
+  margin: 2vw 0;
 }
 
 .main_content_item_wrapper {

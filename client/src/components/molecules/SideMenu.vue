@@ -9,7 +9,9 @@
         <router-link to="/ranking">
           <li>인기 허브 글</li>
         </router-link>
-        <li>최근 읽은 글</li>
+        <router-link to="/recent">
+          <li>최근 읽은 글({{ recentReadPostsLength }})</li>
+        </router-link>
       </ul>
     </nav>
   </div>
@@ -18,6 +20,7 @@
 <script lang="ts">
 import { defineComponent } from "vue";
 import Overlay from "@/components/atoms/Overlay.vue";
+import { useRecentPosts } from "@/hooks/use_recent_post";
 
 export default defineComponent({
   name: "side-menu",
@@ -29,6 +32,12 @@ export default defineComponent({
       this.$emit("close-side-menu");
     },
   },
+  setup() {
+    const recentReadPosts = useRecentPosts();
+    return {
+      recentReadPostsLength: recentReadPosts?.length || 0,
+    };
+  },
 });
 </script>
 
@@ -38,7 +47,7 @@ export default defineComponent({
 }
 
 nav {
-  width: 41%;
+  width: 47vw;
   height: 100%;
   position: fixed;
   background-color: white;

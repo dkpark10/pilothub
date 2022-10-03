@@ -26,7 +26,7 @@ export default defineComponent({
 <style lang="scss" scoped>
 .search_bar {
   color: $mobile-main-color;
-  height: 45px;
+  height: 46px;
   position: relative;
 }
 

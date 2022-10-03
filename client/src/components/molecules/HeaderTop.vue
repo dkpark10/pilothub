@@ -6,7 +6,9 @@
         <div class="logo_wrapper">
           <ZoomLogo />
         </div>
-        <span>허브</span>
+        <router-link to="/">
+          <span>허브</span>
+        </router-link>
       </div>
       <div class="header_item_wrapper right" v-if="!isShownSearchBar">
         <button
@@ -41,7 +43,7 @@
 </template>
 
 <script lang="ts">
-import { defineComponent } from "vue";
+import { defineComponent, PropType } from "vue";
 import Hamburger from "@/components/atoms/Hamburger.vue";
 import Magnifier from "@/components/atoms/Magnifier.vue";
 import ZoomLogo from "@/components/atoms/ZumLogo.vue";
@@ -56,7 +58,7 @@ export default defineComponent({
   name: "header-top",
   props: {
     isShownSearchBar: {
-      type: Boolean,
+      type: Object as PropType<boolean>,
     },
   },
   data(): Status {
@@ -96,8 +98,11 @@ export default defineComponent({
 
 .header_item_wrapper {
   @include flex-space-between-align-center;
-  color: $mobile-main-color;
   font-size: 21px;
+
+  a {
+    color: $mobile-main-color;
+  }
 }
 
 .left {

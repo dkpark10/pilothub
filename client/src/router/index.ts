@@ -27,6 +27,16 @@ export default () => {
         name: "login",
         component: () => import("../components/page/Login.vue"),
       },
+      {
+        path: "/post/:id",
+        name: "post-detail",
+        component: () => import("../components/page/PostDetail.vue"),
+      },
+      {
+        path: "/recent",
+        name: "recent-read-posts",
+        component: () => import("../components/page/RecentReadPost.vue"),
+      },
     ],
   });
 };

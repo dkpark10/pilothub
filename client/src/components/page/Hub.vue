@@ -5,13 +5,15 @@
       <div class="tag_content_wrapper">
         <div class="tag_content">
           <ul v-for="(item, idx) in data" :key="idx">
-            <li>
-              <TagContentCard
-                :imgUrl="item.imgUrl"
-                :title="item.title"
-                :author="item.author"
-              />
-            </li>
+            <router-link :to="`post/${item.postId}`">
+              <li>
+                <TagContentCard
+                  :imgUrl="item.imgUrl"
+                  :title="item.title"
+                  :author="item.author"
+                />
+              </li>
+            </router-link>
           </ul>
         </div>
         <div class="target" ref="targetRef" />
@@ -28,6 +30,7 @@ import Header from "@/components/organisms/Header.vue";
 import TagContentCard from "@/components/molecules/TagContentCard.vue";
 import Footer from "@/components/organisms/Footer.vue";
 import LifeMockData, { Item } from "@/assets/hubmock/Lifehub";
+import { useIntersection } from "@/hooks/useintersection";
 
 interface Status {
   data: Ref<Item[]>;
@@ -54,31 +57,6 @@ export default defineComponent({
 
     const route = useRoute();
 
-    const intersectionHandler = (
-      [entry]: IntersectionObserverEntry[],
-      intersec: IntersectionObserver
-    ) => {
-      if (entry.isIntersecting) {
-        intersec.unobserve(entry.target);
-        fetchData();
-        intersec.observe(entry.target);
-      }
-    };
-
-    const observer = new IntersectionObserver(intersectionHandler, {
-      threshold: 0.45,
-    });
-
-    onMounted(() => {
-      observer.observe(targetRef.value as Element);
-    });
-
-    onUnmounted(() => {
-      if (targetRef.value) {
-        observer.unobserve(targetRef.value as Element);
-      }
-    });
-
     const fetchData = () => {
       if (data.value.length >= itemLength) {
         return;
@@ -93,6 +71,20 @@ export default defineComponent({
         ),
       ];
     };
+
+    const observer = useIntersection(fetchData, {
+      threshold: 0.45,
+    });
+
+    onMounted(() => {
+      observer.observe(targetRef.value as Element);
+    });
+
+    onUnmounted(() => {
+      if (targetRef.value) {
+        observer.unobserve(targetRef.value as Element);
+      }
+    });
 
     return {
       data,
