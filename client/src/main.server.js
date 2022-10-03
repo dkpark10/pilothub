@@ -1,3 +1,11 @@
-import App from "./App.vue";
+import createApp from "./main";
 
-export default App;
+export default () => {
+  const { app, router, store } = createApp();
+
+  return {
+    app,
+    router,
+    store,
+  };
+};

@@ -17,7 +17,7 @@
 </template>
 
 <script lang="ts">
-import { defineComponent, onUpdated, PropType, ref, Ref } from "vue";
+import { defineComponent, PropType, Ref } from "vue";
 import { RootState } from "@/store/index";
 import { useStore } from "vuex";
 import { computed } from "@vue/reactivity";

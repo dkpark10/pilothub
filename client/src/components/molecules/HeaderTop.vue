@@ -41,7 +41,7 @@
 </template>
 
 <script lang="ts">
-import { defineComponent, PropType } from "vue";
+import { defineComponent } from "vue";
 import Hamburger from "@/components/atoms/Hamburger.vue";
 import Magnifier from "@/components/atoms/Magnifier.vue";
 import ZoomLogo from "@/components/atoms/ZumLogo.vue";

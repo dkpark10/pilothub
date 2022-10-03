@@ -1,6 +1,6 @@
 <template>
   <div id="app">
-    <router-view />
+    <router-view></router-view>
   </div>
 </template>
 
@@ -21,6 +21,10 @@ export default defineComponent({
   box-sizing: border-box;
   list-style: none;
   vertical-align: baseline;
+}
+
+h1 {
+  color: red;
 }
 
 body {

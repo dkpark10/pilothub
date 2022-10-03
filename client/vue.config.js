@@ -4,6 +4,7 @@ const nodeExternals = require("webpack-node-externals");
 
 module.exports = defineConfig({
   transpileDependencies: true,
+  runtimeCompiler: true,
   css: {
     loaderOptions: {
       sass: {
@@ -16,8 +17,13 @@ module.exports = defineConfig({
   },
   chainWebpack: (webpackConfig) => {
     console.log(`렌더링 모드 ${process.env.SSR ? "섭사" : "클사"}`);
+    webpackConfig.module.rule("vue").uses.delete("cache-loader");
+    webpackConfig.module.rule("js").uses.delete("cache-loader");
+    webpackConfig.module.rule("ts").uses.delete("cache-loader");
+    webpackConfig.module.rule("tsx").uses.delete("cache-loader");
+
     if (!process.env.SSR) {
-      webpackConfig.devServer.disableHostCheck(true);
+      // webpackConfig.devServer.disableHostCheck(true);
       return;
     }
 
@@ -25,6 +31,17 @@ module.exports = defineConfig({
 
     webpackConfig.target("node");
     webpackConfig.output.libraryTarget("commonjs2");
+
+    // webpackConfig.module
+    //   .rule("vue")
+    //   .use("vue-loader")
+    //   .tap((options) => {
+    //     options.compilerOptions = {
+    //       ...options.compilerOptions,
+    //       isCustomElement: (tag) => tag.startsWith("router"),
+    //     };
+    //     return options;
+    //   });
 
     webpackConfig
       .plugin("manifest")

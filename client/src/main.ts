@@ -1,10 +1,10 @@
-import { createApp } from "vue";
+import { createApp, createSSRApp, h } from "vue";
 import App from "./App.vue";
-import router from "./router";
-import store from "./store";
+import createRouter from "./router/index";
+import createStore from "./store/index";
 
 const app = createApp(App);
-app.use(store).use(router).mount("#app");
+app.use(createStore()).use(createRouter()).mount("#app");
 const isProductionMode = process.env.NODE_ENV === "production";
 
 /**
@@ -21,3 +21,24 @@ app.config.warnHandler = (msg) => {
 
   console.log(msg);
 };
+
+// export default () => {
+//   const rootComponent = {
+//     render: () => h(App),
+//     components: { App },
+//   };
+
+//   const isSSR = process.env.SSR;
+//   const app = (isSSR ? createSSRApp : createApp)(rootComponent);
+//   const router = createRouter();
+//   const store = createStore();
+
+//   app.use(router);
+//   app.use(store);
+
+//   return {
+//     app,
+//     router,
+//     store,
+//   };
+// };

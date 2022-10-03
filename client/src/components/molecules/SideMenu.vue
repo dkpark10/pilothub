@@ -16,7 +16,7 @@
 </template>
 
 <script lang="ts">
-import { defineComponent, PropType } from "vue";
+import { defineComponent } from "vue";
 import Overlay from "@/components/atoms/Overlay.vue";
 
 export default defineComponent({
