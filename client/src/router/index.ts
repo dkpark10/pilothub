@@ -20,7 +20,7 @@ export default () => {
       {
         path: "/:category",
         name: "category",
-        component: () => import("../components/page/Life.vue"),
+        component: () => import("../components/page/Hub.vue"),
       },
       {
         path: "/login",
