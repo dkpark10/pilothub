@@ -1,5 +1,5 @@
 <template>
-  <Header />
+  <HeaderTop />
   <main>
     <div class="tag_content_wrapper">
       <div class="page_title">인기 허브글</div>
@@ -18,7 +18,7 @@
 
 <script lang="ts">
 import { defineComponent, reactive } from "vue";
-import Header from "@/components/organisms/Header.vue";
+import HeaderTop from "@/components/molecules/HeaderTop.vue";
 import ImageContainer from "@/components/atoms/ImageContainer.vue";
 import Footer from "@/components/organisms/Footer.vue";
 import PostInfo from "@/components/molecules/PostInfo.vue";
@@ -32,7 +32,7 @@ export default defineComponent({
   name: "ranking-page",
   components: {
     Footer,
-    Header,
+    HeaderTop,
     ImageContainer,
     PostInfo,
   },

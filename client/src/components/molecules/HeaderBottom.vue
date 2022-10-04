@@ -160,7 +160,6 @@ a {
 }
 
 nav {
-  @include top-bottom-border-line;
   height: 45px;
   background-color: white;
   display: flex;

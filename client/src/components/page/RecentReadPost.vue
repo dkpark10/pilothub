@@ -22,6 +22,7 @@ export default defineComponent({
     Header,
   },
   setup() {
+    console.log("아니 머함.....");
     const recentReadPosts = ref(useRecentPosts());
     return {
       recentReadPosts,

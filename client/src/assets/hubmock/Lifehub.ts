@@ -229,7 +229,7 @@ const authorList = [
   "명견실버",
 ];
 
-const data: Item[] = ImgList.map(
+const data = ImgList.map(
   (item, idx): Item => ({
     postId: idx,
     imgUrl: item,

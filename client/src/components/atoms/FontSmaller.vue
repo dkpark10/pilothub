@@ -12,7 +12,8 @@ export default defineComponent({
 
 <style lang="scss" scoped>
 .font_louder {
-  background: url("https://m.hub.zum.com/resources/build/mobile/images/spr_footer_191212.png?v=1661217438830");
+  background: url("https://m.hub.zum.com/resources/build/mobile/images/spr_footer_191212.png?v=1661217438830")
+    no-repeat;
   background-size: 30px 55px;
 }
 

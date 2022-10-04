@@ -1,5 +1,5 @@
 <template>
-  <section>
+  <div class="comment_write_wrapper">
     <div class="comment_header">
       <span class="left">전체 댓글 6</span>
       <span class="right">내 댓글</span>
@@ -10,17 +10,21 @@
         <span class="comment_length">{{ comment.length }} / 1000</span>
       </div>
       <textarea :value="comment" @input="onChangeComment" />
-      <Button
-        class="main_color"
-        color="white"
-        width="59px"
-        height="28px"
-        borderRadius="18px"
-      >
-        등록
-      </Button>
+      <div class="button_wrapper">
+        <span />
+        <Button
+          class="main_color"
+          type="submit"
+          color="white"
+          width="59px"
+          height="28px"
+          borderRadius="18px"
+        >
+          등록
+        </Button>
+      </div>
     </div>
-  </section>
+  </div>
 </template>
 
 <script lang="ts">
@@ -34,14 +38,14 @@ interface Status {
 }
 
 export default defineComponent({
-  name: "comment-component",
+  name: "comment-write",
   components: {
     Button,
   },
   setup(): Status {
     const [comment, onChangeComment] = useInput(
       "",
-      (value) => value.length > 10
+      (value) => value.length > 1000
     );
 
     return {
@@ -53,17 +57,14 @@ export default defineComponent({
 </script>
 
 <style lang="scss" scoped>
-section {
-  @include margin-y-axis;
+.comment_write_wrapper {
+  @include mob-hub-padding;
+  padding-top: 15px;
   background-color: white;
-  padding: 20px 0;
 }
 
 .comment_header {
-  @include mob-hub-padding;
   @include flex-space-between-align-center;
-  margin-bottom: 16px;
-
   .left {
     font-weight: bold;
   }
@@ -75,11 +76,10 @@ section {
 }
 
 .textarea_header {
-  @include mob-hub-padding;
   @include flex-space-between-align-center;
   border-top: 1px solid $darker-gray;
   margin: 7px 0;
-  height: 34px;
+  height: 32px;
   color: $font-color;
 
   .user {
@@ -94,7 +94,6 @@ section {
 }
 
 textarea {
-  @include mob-hub-padding;
   @include flex-space-between-align-center;
   width: 100%;
   height: 112px;
@@ -105,6 +104,13 @@ textarea {
   &:focus {
     outline: none;
   }
+}
+
+.button_wrapper {
+  margin-top: 10px;
+  height: 30px;
+  display: flex;
+  justify-content: space-between;
 }
 
 .main_color {

@@ -18,19 +18,14 @@ export default () => {
         component: HomeView,
       },
       {
-        path: "/:category",
-        name: "category",
-        component: () => import("../components/page/Hub.vue"),
-      },
-      {
         path: "/login",
         name: "login",
         component: () => import("../components/page/Login.vue"),
       },
       {
-        path: "/post/:id",
-        name: "post-detail",
-        component: () => import("../components/page/PostDetail.vue"),
+        path: "/ranking",
+        name: "ranking",
+        component: () => import("../components/page/Ranking.vue"),
       },
       {
         path: "/recent",
@@ -38,9 +33,14 @@ export default () => {
         component: () => import("../components/page/RecentReadPost.vue"),
       },
       {
-        path: "/ranking",
-        name: "recent-read-posts",
-        component: () => import("../components/page/Ranking.vue"),
+        path: "/post/:id",
+        name: "post-detail",
+        component: () => import("../components/page/PostDetail.vue"),
+      },
+      {
+        path: "/:category",
+        name: "category",
+        component: () => import("../components/page/Hub.vue"),
       },
     ],
   });

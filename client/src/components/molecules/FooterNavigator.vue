@@ -81,6 +81,7 @@ export default defineComponent({
   grid-template-rows: repeat(2, 1fr);
   grid-template-columns: repeat(4, 1fr);
   gap: 1px;
+  margin: 1rem 0;
 }
 
 nav {

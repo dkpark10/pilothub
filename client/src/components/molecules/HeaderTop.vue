@@ -94,6 +94,8 @@ export default defineComponent({
 .header_top {
   @include flex-space-between-align-center;
   padding-right: 6px;
+  background-color: white;
+  border-bottom: 1px solid $darker-gray;
 }
 
 .header_item_wrapper {

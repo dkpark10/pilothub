@@ -23,10 +23,6 @@ export default defineComponent({
   vertical-align: baseline;
 }
 
-h1 {
-  color: red;
-}
-
 body {
   background-color: #eef0f2;
 }

@@ -2,7 +2,8 @@
   <section>
     <Header />
     <h1>{{ postId }}</h1>
-    <Comment />
+    <CommentWrite />
+    <CommentList />
     <FooterNavigator />
     <Footer />
   </section>
@@ -15,7 +16,8 @@ import { useRecentPosts, RECENT_POST_KEY } from "@/hooks/use_recent_post";
 import Header from "@/components/organisms/Header.vue";
 import Footer from "@/components/organisms/Footer.vue";
 import FooterNavigator from "@/components/molecules/FooterNavigator.vue";
-import Comment from "@/components/organisms/Comment.vue";
+import CommentWrite from "@/components/organisms/CommentWrite.vue";
+import CommentList from "@/components/organisms/CommentList.vue";
 
 interface Status {
   postId: number;
@@ -27,7 +29,8 @@ export default defineComponent({
     Footer,
     Header,
     FooterNavigator,
-    Comment,
+    CommentWrite,
+    CommentList,
   },
   setup(): Status {
     const route = useRoute();

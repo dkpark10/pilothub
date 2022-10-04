@@ -1,11 +1,6 @@
 <template>
   <div class="carousel_track">
-    <div
-      class="carousel_slide"
-      @mousemove="onMouseMove"
-      @mousedown="onMouseDown"
-      @mouseup="onMouseUp"
-    >
+    <div class="carousel_slide" @mousedown="onMouseDown" @mouseup="onMouseUp">
       <slot />
     </div>
   </div>
@@ -27,9 +22,6 @@ export default defineComponent({
     },
     onMouseUp() {
       this.isClicked = false;
-    },
-    onMouseMove(e: Event) {
-      console.log(e, "모바일은 이벤트 명이 다르다 이말이야");
     },
   },
 });

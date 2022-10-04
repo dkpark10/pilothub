@@ -103,7 +103,7 @@ const authors = [
   "딩고",
 ];
 
-const items: RankPostItem[] = imgs.map(
+const items = imgs.map(
   (img, idx): RankPostItem => ({
     rank: idx + 1,
     imgUrl: img,

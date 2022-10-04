@@ -12,7 +12,8 @@ export default defineComponent({
 
 <style lang="scss" scoped>
 .magnifier {
-  background: url("https://m.hub.zum.com/resources/build/mobile/images/spr_header_190402.png?v=1661217438830");
+  background: url("https://m.hub.zum.com/resources/build/mobile/images/spr_header_190402.png?v=1661217438830")
+    no-repeat;
   width: 20px;
   height: 19px;
   overflow: hidden;
