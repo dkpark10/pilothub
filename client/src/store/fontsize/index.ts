@@ -22,16 +22,14 @@ export const fontSizeModule: Module<FontSizeState, RootState> = {
 
       state.fontSizeRatio = Number((state.fontSizeRatio *= ratio).toFixed(2));
       state.index += 1;
-      console.log(state.fontSizeRatio);
     },
     [DECREASE_FONT_SIZE](state, ratio: number) {
-      if (state.index <= -3) {
+      if (state.index <= 0) {
         return;
       }
 
       state.fontSizeRatio = Number((state.fontSizeRatio /= ratio).toFixed(2));
       state.index -= 1;
-      console.log(state.fontSizeRatio);
     },
   },
   getters: {

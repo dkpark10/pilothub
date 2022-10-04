@@ -1,8 +1,7 @@
-export interface Item {
+import { PostItem } from "custom-type";
+
+export interface Item extends PostItem {
   postId: number;
-  imgUrl: string;
-  title: string;
-  author: string;
 }
 
 const ImgList = [

@@ -37,6 +37,11 @@ export default () => {
         name: "recent-read-posts",
         component: () => import("../components/page/RecentReadPost.vue"),
       },
+      {
+        path: "/ranking",
+        name: "recent-read-posts",
+        component: () => import("../components/page/Ranking.vue"),
+      },
     ],
   });
 };

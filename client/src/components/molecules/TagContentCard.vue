@@ -37,6 +37,9 @@ export default defineComponent({
       type: String,
       require: true,
     },
+    webkitLineClamp: {
+      type: Number,
+    },
   },
   setup(): Status {
     const titleStyle = useFontSize(15);
@@ -53,11 +56,11 @@ export default defineComponent({
 <style lang="scss" scoped>
 strong {
   @include word-ellipsis;
-  display: -webkit-box;
-  -webkit-line-clamp: 2;
-  -webkit-box-orient: vertical;
   color: $font-color;
   font-weight: normal;
+  display: -webkit-box;
+  -webkit-line-clamp: v-bind(webkitLineClamp);
+  -webkit-box-orient: vertical;
 }
 
 .author_wrapper {

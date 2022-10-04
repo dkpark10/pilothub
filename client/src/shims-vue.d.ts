@@ -38,6 +38,12 @@ declare module 'custom-type' {
   | "/biz"
   | "/issue"
   | "/entertainment";
+
+  export interface PostItem {
+    imgUrl: string;
+    title: string;
+    author: string;
+  };
 }
 
 declare module 'carousel-type' {

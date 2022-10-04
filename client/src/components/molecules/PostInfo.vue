@@ -1,7 +1,7 @@
 <template>
   <div class="postitem_wrapper">
     <div class="rank_wrapper">
-      {{ rank }}
+      <slot />
     </div>
     <div class="title_wrapper">
       <strong :style="titleStyle">
@@ -51,15 +51,13 @@ export default defineComponent({
 
 <style lang="scss" scoped>
 .postitem_wrapper {
-  height: 70px;
   display: flex;
-  border-top: 1px solid $line-color;
   align-items: center;
 }
 
 .rank_wrapper {
   color: $mobile-main-color;
-  font-size: 1.12rem;
+  font-size: 1.05rem;
   width: 24px;
   position: relative;
   top: -9px;

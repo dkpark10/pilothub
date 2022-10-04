@@ -1,13 +1,11 @@
 <template>
-  <section class="wrapper">
-    <Header />
-    <main>
-      <MainContent />
-      <TagContent />
-    </main>
-    <TopPosts />
-    <Footer />
-  </section>
+  <Header />
+  <main>
+    <MainContent />
+    <TagContent />
+  </main>
+  <TopPosts />
+  <Footer />
 </template>
 
 <script lang="ts">

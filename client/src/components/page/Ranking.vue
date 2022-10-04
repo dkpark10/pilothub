@@ -1,34 +1,31 @@
 <template>
-  <section class="wrapper">
-    <Header />
-    <main>
-      <div class="tag_content_wrapper">
-        <div class="tag_content">
-          <ul v-for="(item, idx) in data" :key="idx">
-            <li>
-              <TagContentCard
-                :imgUrl="item.imgUrl"
-                :title="item.title"
-                :author="item.author"
-              />
-            </li>
-          </ul>
-        </div>
-      </div>
-    </main>
-    <Footer />
-  </section>
+  <Header />
+  <main>
+    <div class="tag_content_wrapper">
+      <div class="page_title">인기 허브글</div>
+      <ul v-for="(item, idx) in data" :key="idx">
+        <li>
+          <ImageContainer :src="item.imgUrl" :alt="item.title" />
+          <PostInfo :title="item.title" :author="item.author">
+            <span> {{ item.rank }} </span>
+          </PostInfo>
+        </li>
+      </ul>
+    </div>
+  </main>
+  <Footer />
 </template>
 
 <script lang="ts">
-import { defineComponent, ref } from "vue";
+import { defineComponent, reactive } from "vue";
 import Header from "@/components/organisms/Header.vue";
-import TagContentCard from "@/components/molecules/TagContentCard.vue";
+import ImageContainer from "@/components/atoms/ImageContainer.vue";
 import Footer from "@/components/organisms/Footer.vue";
-import LifeMockData, { Item } from "@/assets/hubmock/Lifehub";
+import PostInfo from "@/components/molecules/PostInfo.vue";
+import RankingPost, { RankPostItem } from "@/assets/hubmock/RankPost";
 
 interface Status {
-  data: Item[];
+  data: RankPostItem[];
 }
 
 export default defineComponent({
@@ -36,10 +33,11 @@ export default defineComponent({
   components: {
     Footer,
     Header,
-    TagContentCard,
+    ImageContainer,
+    PostInfo,
   },
-  setup() {
-    const data = ref(LifeMockData);
+  setup(): Status {
+    const data = reactive(RankingPost);
     return {
       data,
     };
@@ -47,16 +45,20 @@ export default defineComponent({
 });
 </script>
 
-<style lang="scss">
+<style lang="scss" scoped>
 .tag_content_wrapper {
   @include hub-setion-wrapper;
   margin: 0;
   background-color: white;
 }
+.page_title {
+  font-size: 1.1rem;
+  font-weight: bold;
+  color: $font-color;
+  margin-bottom: 13px;
+}
 
-.tag_content {
-  display: grid;
-  grid-template-columns: repeat(1, 1fr);
-  gap: 20px 8px;
+ul li {
+  margin-bottom: 15px;
 }
 </style>

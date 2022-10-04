@@ -24,7 +24,7 @@
 </template>
 
 <script lang="ts">
-import { defineComponent, onUpdated, Ref, ref } from "vue";
+import { defineComponent, Ref } from "vue";
 import { useInput } from "@/hooks/useinput";
 import Button from "@/components/atoms/Button.vue";
 

@@ -11,6 +11,7 @@
                   :imgUrl="item.imgUrl"
                   :title="item.title"
                   :author="item.author"
+                  :webkitLineClamp="2"
                 />
               </li>
             </router-link>

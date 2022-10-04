@@ -1,4 +1,4 @@
-import { createApp, createSSRApp, h } from "vue";
+import { createApp } from "vue";
 import App from "./App.vue";
 import createRouter from "./router/index";
 import createStore from "./store/index";
@@ -10,7 +10,7 @@ const isProductionMode = process.env.NODE_ENV === "production";
 /**
  * @description 뷰 경고 메세지 필터 핸들러 함수
  */
-app.config.warnHandler = (msg) => {
+app.config.warnHandler = (msg: string | string[]) => {
   if (isProductionMode) {
     return;
   }
