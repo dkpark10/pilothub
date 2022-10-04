@@ -34,12 +34,7 @@ import { Carousel, Slide } from "vue3-carousel";
 import "vue3-carousel/dist/carousel.css";
 import ImageContainer from "@/components/atoms/ImageContainer.vue";
 import Overlay from "@/components/atoms/Overlay.vue";
-
-interface MainItem {
-  title: string;
-  author: string;
-  imgUrl: string;
-}
+import { PostItem } from "custom-type";
 
 interface State {
   breakpoints: {
@@ -48,7 +43,7 @@ interface State {
       snapAlign: string;
     };
   };
-  mainItems: MainItem[];
+  mainItems: PostItem[];
 }
 
 export default defineComponent({
