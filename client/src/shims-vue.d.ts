@@ -28,16 +28,18 @@ declare module 'custom-type' {
   | "이슈"
   | "연예";
 
-  export type NavUrl =
-  | "/"
-  | "/life"
-  | "/food"
-  | "/trip"
-  | "/culture"
-  | "/tech"
-  | "/biz"
-  | "/issue"
-  | "/entertainment";
+  export type NavName =
+  | ""
+  | "life"
+  | "food"
+  | "trip"
+  | "culture"
+  | "tech"
+  | "biz"
+  | "issue"
+  | "entertainment";
+
+  export type NavUrl = `/${NavName}`;
 
   export interface PostItem {
     imgUrl: string;

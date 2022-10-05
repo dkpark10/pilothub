@@ -25,13 +25,22 @@
 </template>
 
 <script lang="ts">
-import { defineComponent, onMounted, onUnmounted, ref, Ref } from "vue";
+import {
+  defineComponent,
+  onMounted,
+  onUnmounted,
+  watch,
+  ref,
+  Ref,
+  onUpdated,
+} from "vue";
 import { useRoute, RouteLocationNormalizedLoaded } from "vue-router";
 import Header from "@/components/organisms/Header.vue";
 import TagContentCard from "@/components/molecules/TagContentCard.vue";
 import Footer from "@/components/organisms/Footer.vue";
-import LifeMockData, { Item } from "@/assets/hubmock/Lifehub";
 import { useIntersection } from "@/hooks/useintersection";
+import { Item, mockData } from "@/assets/hubmock/index";
+import { NavName } from "custom-type";
 
 interface Status {
   data: Ref<Item[]>;
@@ -45,18 +54,26 @@ interface Status {
 export default defineComponent({
   name: "app",
   components: {
-    Footer,
     Header,
     TagContentCard,
+    Footer,
   },
   setup(): Status {
-    const data = ref(LifeMockData.slice(0, 8));
-    const itemLength = LifeMockData.length;
     const countOfFetchData = 8;
     const targetRef = ref<Element>();
     let beginIndexofFetchData = 0;
 
     const route = useRoute();
+    const category = route.params.category;
+    const data = ref(mockData[category as NavName].slice(0, 8));
+    const itemLength = mockData[category as NavName].length;
+
+    watch(
+      () => route.params.category,
+      async (newParam) => {
+        data.value = mockData[newParam as NavName];
+      }
+    );
 
     const fetchData = () => {
       if (data.value.length >= itemLength) {
@@ -66,7 +83,7 @@ export default defineComponent({
       beginIndexofFetchData += countOfFetchData;
       data.value = [
         ...data.value,
-        ...LifeMockData.slice(
+        ...mockData[category as NavName].slice(
           beginIndexofFetchData,
           beginIndexofFetchData + countOfFetchData
         ),

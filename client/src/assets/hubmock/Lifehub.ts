@@ -4,7 +4,7 @@ export interface Item extends PostItem {
   postId: number;
 }
 
-const ImgList = [
+const lifeImgList = [
   "https://thumb.zumst.com/320x200/https://static.hubzum.zumst.com/hubzum/2022/09/20/00/4b563667e8034e7bb4a7117af5699397.webp",
   "https://thumb.zumst.com/320x200/https://static.hubzum.zumst.com/hubzum/2022/09/19/17/4bc39af67c0741e88a57d731e8abf0ce.jpg",
   "https://thumb.zumst.com/320x200/https://static.hubzum.zumst.com/hubzum/2022/09/19/17/62901a5e84ce4edd9ea253b6d0e8d930.jpg",
@@ -79,7 +79,7 @@ const ImgList = [
   "https://thumb.zumst.com/320x200/https://static.hubzum.zumst.com/hubzum/2022/08/03/17/d9c3323bba8b47178705788e540d7247_640x480c.png",
 ];
 
-const titleList = [
+const lifeTitleList = [
   "오은영 박사가 앓고 있다는 ‘강박증’ 고백에 모두가 충격받았다",
   "동네 아이 다 아는 이런 아파트가 있답니다",
   "승승장구하던 대기업 떠나 한국의 스필버그로…인생을 더 아끼세요",
@@ -154,7 +154,7 @@ const titleList = [
   "유독 부부관계 좋은 사람들의 신체적 공통점은 '이것'",
 ];
 
-const authorList = [
+const lifeAuthorList = [
   "명견실버",
   "타이슨퓨리",
   "조지포먼",
@@ -229,13 +229,13 @@ const authorList = [
   "명견실버",
 ];
 
-const data = ImgList.map(
+const lifeMockData = lifeImgList.map(
   (item, idx): Item => ({
     postId: idx,
     imgUrl: item,
-    title: titleList[idx],
-    author: authorList[idx],
+    title: lifeTitleList[idx],
+    author: lifeAuthorList[idx],
   })
 );
 
-export default data;
+export default lifeMockData;
