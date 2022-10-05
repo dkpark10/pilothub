@@ -20,7 +20,7 @@ import CommentWrite from "@/components/organisms/CommentWrite.vue";
 import CommentList from "@/components/organisms/CommentList.vue";
 
 interface Status {
-  postId: number;
+  postId: string;
 }
 
 export default defineComponent({
@@ -34,8 +34,12 @@ export default defineComponent({
   },
   setup(): Status {
     const route = useRoute();
-    const postId = Number(route.params.id);
+    const postId = route.params.id as string;
     const recentPost = useRecentPosts();
+
+    const duplicateRecentPostCheck = (postList: string[], postId: string) => {
+      return postList.filter((item) => item !== postId);
+    };
 
     const setRecentPost = () => {
       if (recentPost === null) {
@@ -43,7 +47,7 @@ export default defineComponent({
         return;
       }
 
-      const newRecentPost = recentPost.filter((item) => item !== postId);
+      const newRecentPost = duplicateRecentPostCheck(recentPost, postId);
       newRecentPost.push(postId);
 
       localStorage.setItem(RECENT_POST_KEY, JSON.stringify(newRecentPost));

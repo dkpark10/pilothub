@@ -40,8 +40,11 @@ declare module 'custom-type' {
   | "entertainment";
 
   export type NavUrl = `/${NavName}`;
+  
+  export type PostId = `${NavName}_${nubmer}`;
 
   export interface PostItem {
+    postId: PostId;
     imgUrl: string;
     title: string;
     author: string;

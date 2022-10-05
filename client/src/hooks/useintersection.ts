@@ -1,14 +1,14 @@
-export const useIntersection = (
-  callback: () => void,
-  option?: IntersectionObserverInit
-): IntersectionObserver => {
+type P = IntersectionObserverInit;
+type R = IntersectionObserver;
+
+export const useIntersection = (cb: () => void, option?: P): R => {
   const intersectionHandler = (
     [entry]: IntersectionObserverEntry[],
     intersec: IntersectionObserver
   ) => {
     if (entry.isIntersecting) {
       intersec.unobserve(entry.target);
-      callback();
+      cb();
       intersec.observe(entry.target);
     }
   };

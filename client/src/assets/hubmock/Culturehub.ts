@@ -1,9 +1,5 @@
 import { PostItem } from "custom-type";
 
-export interface Item extends PostItem {
-  postId: number;
-}
-
 const cultureImgList = [
   "https://thumb.zumst.com/320x200/https://static.hubzum.zumst.com/hubzum/2022/09/30/15/dbf7c307076e43ed9ccb4c51894fddcf.jpg",
   "https://thumb.zumst.com/320x200/https://static.hubzum.zumst.com/hubzum/2022/09/27/15/5a71a98d40d44687a3bd44edeaeeb1a6.jpg",
@@ -230,8 +226,8 @@ const cultureAuthorList = [
 ];
 
 const cultureMockData = cultureImgList.map(
-  (item, idx): Item => ({
-    postId: idx,
+  (item, idx): PostItem => ({
+    postId: `culture_${idx}`,
     imgUrl: item,
     title: cultureTitleList[idx],
     author: cultureAuthorList[idx],

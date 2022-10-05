@@ -6,7 +6,7 @@
       <ul v-for="(item, idx) in data" :key="idx">
         <li>
           <ImageContainer :src="item.imgUrl" :alt="item.title" />
-          <PostInfo :title="item.title" :author="item.author">
+          <PostInfo :showRank="true" :title="item.title" :author="item.author">
             <span> {{ item.rank }} </span>
           </PostInfo>
         </li>

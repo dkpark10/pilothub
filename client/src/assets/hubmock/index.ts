@@ -8,12 +8,8 @@ import techMockData from "./Techhub";
 import tripMockData from "./Triphub";
 import { PostItem, NavName } from "custom-type";
 
-export interface Item extends PostItem {
-  postId: number;
-}
-
 type MockStatus = {
-  [key in NavName]: Item[];
+  [key in NavName]: PostItem[];
 };
 
 export const mockData: MockStatus = {

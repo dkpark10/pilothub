@@ -1,7 +1,8 @@
-import { PostItem } from "custom-type";
-
-export interface RankPostItem extends PostItem {
+export interface RankPostItem {
   rank: number;
+  imgUrl: string;
+  title: string;
+  author: string;
 }
 
 const imgs = [

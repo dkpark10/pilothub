@@ -1,9 +1,5 @@
 import { PostItem } from "custom-type";
 
-export interface Item extends PostItem {
-  postId: number;
-}
-
 const issueImgList = [
   "https://thumb.zumst.com/320x200/https://static.hubzum.zumst.com/hubzum/2022/09/30/16/3041026b2b1a46e2a59fc7d0688cad36.jpg",
   "https://thumb.zumst.com/320x200/https://static.hubzum.zumst.com/hubzum/2022/09/30/16/dac876cc782143229467779427ffa5bd.jpg",
@@ -77,23 +73,6 @@ const issueImgList = [
   "https://thumb.zumst.com/320x200/https://static.hubzum.zumst.com/hubzum/2022/09/08/16/0ae1851e80c944bab2bd62df3cf08b2a.jpg",
   "https://thumb.zumst.com/320x200/https://static.hubzum.zumst.com/hubzum/2022/09/05/15/fb776cd0192441fa91fc5571f05107a8.jpg",
   "https://thumb.zumst.com/320x200/https://static.hubzum.zumst.com/hubzum/2022/09/05/14/a3fd95acf811432ea6dbaf025e8ad2ed.jpg",
-  "https://thumb.zumst.com/320x200/https://static.hubzum.zumst.com/hubzum/2022/09/08/14/fffada7914b3470c801c906dbdd8647c.jpg",
-  "https://thumb.zumst.com/320x200/https://static.hubzum.zumst.com/hubzum/2022/09/07/16/d3fa9ac99aef417395d79512e0c9fc03.jpg",
-  "https://thumb.zumst.com/320x200/https://static.hubzum.zumst.com/hubzum/2022/09/07/16/e6c56af3905d4f62b7febedc8d088454.jpg",
-  "https://thumb.zumst.com/320x200/https://static.hubzum.zumst.com/hubzum/2022/09/07/16/549d59495b454179b835222f91e6da8b.jpg",
-  "https://thumb.zumst.com/320x200/https://static.hubzum.zumst.com/hubzum/2022/09/07/16/1411199f595c4997a2b42f389558ff8d.jpg",
-  "https://thumb.zumst.com/320x200/https://static.hubzum.zumst.com/hubzum/2022/09/07/16/b037db383f304a75aae42abe7d187f58_640x480c.jpg",
-  "https://thumb.zumst.com/320x200/https://static.hubzum.zumst.com/hubzum/2022/09/05/13/e1442bf9a5234ce18ac4ddf1d8e569de.jpg",
-  "https://thumb.zumst.com/320x200/https://static.hubzum.zumst.com/hubzum/2022/09/05/14/55152b66c9cf46a08075907744a3f048.jpg",
-  "https://thumb.zumst.com/320x200/https://static.hubzum.zumst.com/hubzum/2022/09/05/14/4300d9908b6146d7bbc2cd967255b980.jpg",
-  "https://thumb.zumst.com/320x200/https://static.hubzum.zumst.com/hubzum/2022/09/05/15/dc4c0124ed484840a0e3667704f44291.webp",
-  "https://thumb.zumst.com/320x200/https://static.hubzum.zumst.com/hubzum/2022/09/05/15/9021fe5d78c747d6aa8a606e4fa9cd6a.jpg",
-  "https://thumb.zumst.com/320x200/https://static.hubzum.zumst.com/hubzum/2022/09/06/12/ebe9948283dd4aaab53bd8678816de71.webp",
-  "https://thumb.zumst.com/320x200/https://static.hubzum.zumst.com/hubzum/2022/09/06/03/1a285487bd7048e792cacad0bf40d9aa_640x480c.jpg",
-  "https://thumb.zumst.com/320x200/https://static.hubzum.zumst.com/hubzum/2022/09/05/11/17c243a3b56e493b92e3fdbf6aae5812.jpg",
-  "https://thumb.zumst.com/320x200/https://static.hubzum.zumst.com/hubzum/2022/09/05/11/330e8548d34d4bf1bcd735271e4a738f.jpg",
-  "https://thumb.zumst.com/320x200/https://static.hubzum.zumst.com/hubzum/2022/09/05/11/f5a721a289d44fd6b3c2068e800907a6.jpg",
-  "https://thumb.zumst.com/320x200/https://static.hubzum.zumst.com/hubzum/2022/09/02/09/502215682dec4bd9937fbdb14ebdef4e_640x480c.jpg",
 ];
 
 const issueTitleList = [
@@ -247,8 +226,8 @@ const issueAuthorList = [
 ];
 
 const issueMockData = issueImgList.map(
-  (item, idx): Item => ({
-    postId: idx,
+  (item, idx): PostItem => ({
+    postId: `issue_${idx}`,
     imgUrl: item,
     title: issueTitleList[idx],
     author: issueAuthorList[idx],

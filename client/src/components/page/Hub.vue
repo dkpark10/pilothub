@@ -25,26 +25,17 @@
 </template>
 
 <script lang="ts">
-import {
-  defineComponent,
-  onMounted,
-  onUnmounted,
-  watch,
-  ref,
-  Ref,
-  onUpdated,
-} from "vue";
-import { useRoute, RouteLocationNormalizedLoaded } from "vue-router";
+import { defineComponent, onMounted, onUnmounted, watch, ref, Ref } from "vue";
+import { useRoute } from "vue-router";
 import Header from "@/components/organisms/Header.vue";
 import TagContentCard from "@/components/molecules/TagContentCard.vue";
 import Footer from "@/components/organisms/Footer.vue";
 import { useIntersection } from "@/hooks/useintersection";
-import { Item, mockData } from "@/assets/hubmock/index";
-import { NavName } from "custom-type";
+import { mockData } from "@/assets/hubmock/index";
+import { NavName, PostItem } from "custom-type";
 
 interface Status {
-  data: Ref<Item[]>;
-  route: RouteLocationNormalizedLoaded;
+  data: Ref<PostItem[]>;
   observer: IntersectionObserver | null;
   targetRef: Ref<Element | undefined>;
   countOfFetchData: number;
@@ -106,7 +97,6 @@ export default defineComponent({
 
     return {
       data,
-      route,
       observer,
       targetRef,
       countOfFetchData,

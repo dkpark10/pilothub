@@ -1,8 +1,8 @@
 <template>
   <div class="postitem_wrapper">
-    <div class="rank_wrapper">
+    <span class="rank_wrapper" v-show="showRank">
       <slot />
-    </div>
+    </span>
     <div class="title_wrapper">
       <strong :style="titleStyle">
         {{ title }}
@@ -35,6 +35,9 @@ export default defineComponent({
     },
     author: {
       type: Object as PropType<string>,
+    },
+    showRank: {
+      type: Object as PropType<boolean>,
     },
   },
   setup(): Status {
