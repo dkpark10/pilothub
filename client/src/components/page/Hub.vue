@@ -30,11 +30,11 @@ import Header from "@/components/organisms/Header.vue";
 import TagContentCard from "@/components/molecules/TagContentCard.vue";
 import Footer from "@/components/organisms/Footer.vue";
 import { useIntersection } from "@/hooks/useintersection";
+import { useScroll } from "@/hooks/usescroll";
 import { PostItem } from "custom-type";
 
 interface Status {
   shwonItem: Ref<PostItem[]>;
-  observer: IntersectionObserver | null;
   targetRef: Ref<Element | undefined>;
   countOfFetchData: number;
   beginIndexofFetchData: number;
@@ -94,6 +94,8 @@ export default defineComponent({
       threshold: 0.45,
     });
 
+    // useScroll(getMoreData);
+
     onMounted(() => {
       fetchData();
       observer.observe(targetRef.value as Element);
@@ -107,7 +109,6 @@ export default defineComponent({
 
     return {
       shwonItem,
-      observer,
       targetRef,
       countOfFetchData,
       beginIndexofFetchData,

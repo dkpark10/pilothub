@@ -13,9 +13,10 @@ export class CommentController {
   @Post()
   setComment() {
     const data = {
-      title: "허브줌 아주 조아",
-      description: "헤헤 나 짱",
-    }
-    return this.commentService.setComment('hub_1', data);
+      title: "타이틀입니당",
+      description: "댓글냉용"
+    };
+
+    return this.commentService.setComment('hub1', data);
   }
 }

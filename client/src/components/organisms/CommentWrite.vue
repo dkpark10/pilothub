@@ -13,6 +13,7 @@
       <div class="button_wrapper">
         <span />
         <Button
+          @click="submitComment"
           class="main_color"
           type="submit"
           color="white"
@@ -28,6 +29,7 @@
 </template>
 
 <script lang="ts">
+import axios from "axios";
 import { defineComponent, Ref } from "vue";
 import { useInput } from "@/hooks/useinput";
 import Button from "@/components/atoms/Button.vue";
@@ -35,6 +37,7 @@ import Button from "@/components/atoms/Button.vue";
 interface Status {
   comment: Ref<string>;
   onChangeComment: (e: Event) => void;
+  submitComment: () => void;
 }
 
 export default defineComponent({
@@ -48,9 +51,17 @@ export default defineComponent({
       (value) => value.length > 1000
     );
 
+    const submitComment = async () => {
+      await axios.post("http://localhost:3000/comment", {
+        author: "wakandadeveloper",
+        description: comment.value,
+      });
+    };
+
     return {
       comment,
       onChangeComment,
+      submitComment,
     };
   },
 });

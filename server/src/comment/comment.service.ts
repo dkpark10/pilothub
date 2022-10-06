@@ -1,6 +1,11 @@
 import { Inject, Injectable, CACHE_MANAGER } from '@nestjs/common';
 import { Cache } from 'cache-manager';
 
+interface Comment {
+  title: string;
+  description: string;
+}
+
 @Injectable()
 export class CommentService {
   constructor(
@@ -8,13 +13,11 @@ export class CommentService {
   ) { }
 
   async getComment() {
-    await this.cacheManager.get('culture_01');
-    return '댓글 서비스';
+    return await this.cacheManager.get('hub1');
   }
 
-  async setComment(key:string, data: any) {
-    console.log('들어오지??');
-    await this.cacheManager.set(key, data);
+  async setComment(key: string, data: any) {
+    await this.cacheManager.set<Comment>(key, data);
     return true;
   }
 }
