@@ -1,13 +1,23 @@
-import { Controller, Get } from '@nestjs/common';
+import { Controller, Get, Post, Param } from '@nestjs/common';
 import { AppService } from './app.service';
-import { Item } from './assets/Lifehub';
+import { NavName, PostItem } from 'custom-type';
 
-@Controller()
+@Controller('/')
 export class AppController {
-  constructor(private readonly appService: AppService) {}
+  constructor(private appService: AppService) { }
 
   @Get()
-  getHello(): Item[] {
-    return this.appService.getHello();
+  getHome() {
+    return this.appService.getHome();
+  }
+
+  @Post()
+  setHome() {
+    return this.appService.setHome();
+  }
+
+  @Get('/:category')
+  getDataByCategory(@Param('category') category: string): PostItem[] {
+    return this.appService.getDataByCategory(category as NavName);
   }
 }

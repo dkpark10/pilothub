@@ -25,27 +25,7 @@
 import { defineComponent } from "vue";
 import { Carousel, Slide } from "vue3-carousel";
 import "vue3-carousel/dist/carousel.css";
-
-type NavText =
-  | "홈"
-  | "라이프"
-  | "푸드"
-  | "여행"
-  | "컬처"
-  | "테크"
-  | "비즈"
-  | "이슈"
-  | "연예";
-type NavUrl =
-  | "/"
-  | "/life"
-  | "/food"
-  | "/trip"
-  | "/culture"
-  | "/tech"
-  | "/biz"
-  | "/issue"
-  | "/entertainment";
+import { NavText, NavUrl } from "custom-type";
 
 interface MenuItem {
   text: NavText;
@@ -174,6 +154,8 @@ nav {
 }
 
 .navi_item {
+  display: inline-block;
+  min-width: 72px;
   font-weight: bold;
   font-size: 17px;
 }

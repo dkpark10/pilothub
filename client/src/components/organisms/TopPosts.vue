@@ -3,7 +3,11 @@
     <h4>인기허브글</h4>
     <ul v-for="(postItem, idx) in postItems" :key="idx">
       <li>
-        <PostInfo :title="postItem.title" :author="postItem.author">
+        <PostInfo
+          :show-rank="true"
+          :title="postItem.title"
+          :author="postItem.author"
+        >
           <span> {{ postItem.rank }} </span>
         </PostInfo>
       </li>

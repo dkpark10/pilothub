@@ -1,20 +1,30 @@
-import { Module, CacheModule } from '@nestjs/common';
 import { AppController } from './app.controller';
 import { AppService } from './app.service';
-import * as redisStore from 'cache-manager-redis-store';
+import { CommentController } from './comment/comment.controller';
+import { CommentService } from './comment/comment.service';
+import { CommentModule } from './comment/comment.module';
+import { Module, CacheModule, CacheStoreFactory, CacheStore } from '@nestjs/common';
+import * as redisStore from 'cache-manager-ioredis';
 
 @Module({
   imports: [
-    CacheModule.register({
-      useFactory: async () => ({
+    CacheModule.registerAsync({
+      useFactory: () => ({
         store: redisStore,
         host: 'localhost',
         port: 6379,
         ttl: 5,
       })
     }),
+    CommentModule,
   ],
-  controllers: [AppController],
-  providers: [AppService],
+  controllers: [
+    CommentController,
+    AppController
+  ],
+  providers: [
+    CommentService,
+    AppService
+  ],
 })
 export class AppModule { }

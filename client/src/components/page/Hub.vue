@@ -1,41 +1,39 @@
 <template>
-  <section class="wrapper">
-    <Header />
-    <main>
-      <div class="tag_content_wrapper">
-        <div class="tag_content">
-          <ul v-for="(item, idx) in data" :key="idx">
-            <router-link :to="`post/${item.postId}`">
-              <li>
-                <TagContentCard
-                  :imgUrl="item.imgUrl"
-                  :title="item.title"
-                  :author="item.author"
-                  :webkitLineClamp="2"
-                />
-              </li>
-            </router-link>
-          </ul>
-        </div>
-        <div class="target" ref="targetRef" />
+  <Header />
+  <main>
+    <div class="tag_content_wrapper">
+      <div class="tag_content">
+        <ul v-for="(item, idx) in shwonItem" :key="idx">
+          <router-link :to="`post/${item.postId}`">
+            <li>
+              <TagContentCard
+                :imgUrl="item.imgUrl"
+                :title="item.title"
+                :author="item.author"
+                :webkitLineClamp="2"
+              />
+            </li>
+          </router-link>
+        </ul>
       </div>
-    </main>
-    <Footer />
-  </section>
+      <div class="target" ref="targetRef" />
+    </div>
+  </main>
+  <Footer />
 </template>
 
 <script lang="ts">
+import axios from "axios";
 import { defineComponent, onMounted, onUnmounted, watch, ref, Ref } from "vue";
 import { useRoute } from "vue-router";
 import Header from "@/components/organisms/Header.vue";
 import TagContentCard from "@/components/molecules/TagContentCard.vue";
 import Footer from "@/components/organisms/Footer.vue";
 import { useIntersection } from "@/hooks/useintersection";
-import { mockData } from "@/assets/hubmock/index";
-import { NavName, PostItem } from "custom-type";
+import { PostItem } from "custom-type";
 
 interface Status {
-  data: Ref<PostItem[]>;
+  shwonItem: Ref<PostItem[]>;
   observer: IntersectionObserver | null;
   targetRef: Ref<Element | undefined>;
   countOfFetchData: number;
@@ -50,42 +48,54 @@ export default defineComponent({
     Footer,
   },
   setup(): Status {
+    const route = useRoute();
+    let beginIndexofFetchData = 0;
+    let category = route.params.category;
+    let totalItem: PostItem[] = [];
+
     const countOfFetchData = 8;
     const targetRef = ref<Element>();
-    let beginIndexofFetchData = 0;
 
-    const route = useRoute();
-    const category = route.params.category;
-    const data = ref(mockData[category as NavName].slice(0, 8));
-    const itemLength = mockData[category as NavName].length;
+    const shwonItem = ref<PostItem[]>([]);
+    const itemLength = 72;
+
+    const fetchData = async () => {
+      const { data } = await axios(`http://localhost:3000/${category}`);
+      beginIndexofFetchData = 0;
+      totalItem = data;
+      shwonItem.value = totalItem.slice(0, 8);
+    };
 
     watch(
       () => route.params.category,
       async (newParam) => {
-        data.value = mockData[newParam as NavName];
+        category = newParam;
+        window.scrollTo(0, 0);
+        fetchData();
       }
     );
 
-    const fetchData = () => {
-      if (data.value.length >= itemLength) {
+    const getMoreData = () => {
+      if (shwonItem.value.length >= itemLength) {
         return;
       }
 
       beginIndexofFetchData += countOfFetchData;
-      data.value = [
-        ...data.value,
-        ...mockData[category as NavName].slice(
+      shwonItem.value = [
+        ...shwonItem.value,
+        ...totalItem.slice(
           beginIndexofFetchData,
           beginIndexofFetchData + countOfFetchData
         ),
       ];
     };
 
-    const observer = useIntersection(fetchData, {
+    const observer = useIntersection(getMoreData, {
       threshold: 0.45,
     });
 
     onMounted(() => {
+      fetchData();
       observer.observe(targetRef.value as Element);
     });
 
@@ -96,7 +106,7 @@ export default defineComponent({
     });
 
     return {
-      data,
+      shwonItem,
       observer,
       targetRef,
       countOfFetchData,

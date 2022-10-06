@@ -3,5 +3,8 @@ import { AppModule } from './app.module';
 
 (async function () {
   const app = await NestFactory.create(AppModule);
+  app.enableCors({
+    "origin": "http://localhost:8080",
+  });
   await app.listen(3000);
 })();
