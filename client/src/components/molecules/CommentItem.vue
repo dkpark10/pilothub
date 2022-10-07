@@ -11,6 +11,7 @@
     </div>
     <div class="comment_date">
       {{ date }}
+      <button @click="deleteComment">삭제</button>
     </div>
     <div class="comment_handler">
       <span>답글달기</span>
@@ -32,6 +33,7 @@
 import { defineComponent, computed, PropType } from "vue";
 import Like from "@/components/atoms/Like.vue";
 import Hate from "@/components/atoms/Hate.vue";
+import { Comment } from "custom-type";
 
 export default defineComponent({
   name: "comment-item",
@@ -60,12 +62,20 @@ export default defineComponent({
       type: Object as PropType<number>,
       require: true,
     },
+    commentId: {
+      type: Object as PropType<Comment["commentId"]>,
+      require: true,
+    },
   },
   setup(props) {
     const parsedAuthor = computed(() => `${props.author?.slice(0, -3)}****`);
+    const deleteComment = () => {
+      console.log(`이 댓글은 삭제한다. ${props.commentId}`);
+    };
 
     return {
       parsedAuthor,
+      deleteComment,
     };
   },
 });
@@ -102,6 +112,11 @@ export default defineComponent({
 .comment_date {
   font-size: 0.73rem;
   color: $light-font-color;
+
+  button {
+    font-size: inherit;
+    color: inherit;
+  }
 }
 
 .comment_handler {

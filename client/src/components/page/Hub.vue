@@ -60,7 +60,9 @@ export default defineComponent({
     const itemLength = 72;
 
     const fetchData = async () => {
-      const { data } = await axios(`http://localhost:3000/${category}`);
+      const { data } = await axios.get<PostItem[]>(
+        `http://localhost:3000/${category}`
+      );
       beginIndexofFetchData = 0;
       totalItem = data;
       shwonItem.value = totalItem.slice(0, 8);

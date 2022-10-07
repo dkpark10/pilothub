@@ -24,7 +24,7 @@
 </template>
 
 <script lang="ts">
-import { computed, defineComponent, ref } from "vue";
+import { defineComponent } from "vue";
 import HeaderTop from "@/components/molecules/HeaderTop.vue";
 import Footer from "@/components/organisms/Footer.vue";
 import { mockData } from "@/assets/hubmock/index";

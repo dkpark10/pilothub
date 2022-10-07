@@ -30,35 +30,47 @@
 
 <script lang="ts">
 import axios from "axios";
-import { defineComponent, Ref } from "vue";
+import { defineComponent, Ref, PropType } from "vue";
 import { useInput } from "@/hooks/useinput";
 import Button from "@/components/atoms/Button.vue";
+import { useRouter } from "vue-router";
+import { PostId } from "custom-type";
 
-interface Status {
-  comment: Ref<string>;
-  onChangeComment: (e: Event) => void;
-  submitComment: () => void;
-}
+// interface Status {
+//   comment: Ref<string>;
+//   onChangeComment: (e: Event) => void;
+//   submitComment: () => void;
+// }
 
 export default defineComponent({
   name: "comment-write",
   components: {
     Button,
   },
-  setup(): Status {
-    const [comment, onChangeComment] = useInput(
-      "",
-      (value) => value.length > 1000
-    );
+  props: {
+    postId: {
+      type: Object as PropType<PostId>,
+    },
+  },
+  setup(props) {
+    const [comment, onChangeComment] = useInput({
+      init: "",
+      validator: (value) => value.length > 1000,
+    });
+    const router = useRouter();
 
     const submitComment = async () => {
-      await axios.post("http://localhost:3000/comment", {
+      await axios.post("http://localhost:3000/post/comment", {
+        postId: props.postId,
         author: "wakandadeveloper",
         description: comment.value,
       });
+
+      router.go(0);
     };
 
     return {
+      router,
       comment,
       onChangeComment,
       submitComment,
@@ -76,6 +88,7 @@ export default defineComponent({
 
 .comment_header {
   @include flex-space-between-align-center;
+
   .left {
     font-weight: bold;
   }

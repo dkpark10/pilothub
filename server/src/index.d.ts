@@ -41,4 +41,13 @@ declare module 'custom-type' {
     title: string;
     author: string;
   };
+
+  export interface Comment {
+    commentId: `${PostId}_${number}`;
+    description: string;
+    author: string;
+    date: string;
+    like: number;
+    hate: number;
+  };
 }

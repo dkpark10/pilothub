@@ -1,4 +1,5 @@
 import { IsString, Matches, MaxLength, MinLength } from "class-validator";
+import { PostId } from "custom-type";
 
 export class CommentCredentialsDto {
   @IsString()
@@ -10,4 +11,7 @@ export class CommentCredentialsDto {
   @MinLength(1)
   @MaxLength(1000)
   description: string;
+
+  @IsString()
+  postId: PostId;
 }
