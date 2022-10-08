@@ -60,7 +60,7 @@ export default defineComponent({
     const router = useRouter();
 
     const submitComment = async () => {
-      await axios.post("http://localhost:3000/post/comment", {
+      await axios.post("http://localhost:3000/comment", {
         postId: props.postId,
         author: "wakandadeveloper",
         description: comment.value,

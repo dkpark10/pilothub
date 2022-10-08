@@ -10,7 +10,7 @@
 </template>
 
 <script lang="ts">
-import { defineComponent } from "vue";
+import { defineComponent, onMounted } from "vue";
 import { useRoute } from "vue-router";
 import Header from "@/components/organisms/Header.vue";
 import Footer from "@/components/organisms/Footer.vue";
@@ -18,6 +18,7 @@ import FooterNavigator from "@/components/molecules/FooterNavigator.vue";
 import CommentWrite from "@/components/organisms/CommentWrite.vue";
 import CommentList from "@/components/organisms/CommentList.vue";
 import { PostId } from "custom-type";
+import { useRecentPosts, RECENT_POST_KEY } from "@/hooks/use_recent_post";
 
 export default defineComponent({
   name: "post-detail-page",
@@ -31,6 +32,25 @@ export default defineComponent({
   setup() {
     const route = useRoute();
     const postId = route.params.id as PostId;
+
+    const recentPost = useRecentPosts();
+    const duplicateRecentPostCheck = (postList: string[], postId: string) => {
+      return postList.filter((item) => item !== postId);
+    };
+
+    const setRecentPost = () => {
+      if (recentPost === null) {
+        localStorage.setItem(RECENT_POST_KEY, JSON.stringify([postId]));
+        return;
+      }
+      const newRecentPost = duplicateRecentPostCheck(recentPost, postId);
+      newRecentPost.push(postId);
+      localStorage.setItem(RECENT_POST_KEY, JSON.stringify(newRecentPost));
+    };
+
+    onMounted(() => {
+      setRecentPost();
+    });
 
     return {
       postId,

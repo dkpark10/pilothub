@@ -53,7 +53,7 @@ export default defineComponent({
 
     const fetchComment = async () => {
       const { data } = await axios.get<Comment[]>(
-        `http://localhost:3000/post/comment/${props.postId}`
+        `http://localhost:3000/comment/${props.postId}`
       );
       commentData.value = data;
     };

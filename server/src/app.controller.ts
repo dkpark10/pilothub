@@ -4,7 +4,7 @@ import { NavName, PostItem } from 'custom-type';
 
 @Controller('/')
 export class AppController {
-  constructor(private appService: AppService) { }
+  constructor(private appService: AppService) {}
 
   @Get()
   getHome() {

@@ -6,14 +6,20 @@
   <main v-if="data">
     <div class="content_wrapper">
       <ul v-for="(item, idx) in data" :key="idx">
-        <li>
-          <ImageContainer height="160px" :src="item.imgUrl" :alt="item.title" />
-          <PostInfo
-            :showRank="false"
-            :title="item.title"
-            :author="item.author"
-          />
-        </li>
+        <router-link :to="`post/${item.postId}`">
+          <li>
+            <ImageContainer
+              height="160px"
+              :src="item.imgUrl"
+              :alt="item.title"
+            />
+            <PostInfo
+              :showRank="false"
+              :title="item.title"
+              :author="item.author"
+            />
+          </li>
+        </router-link>
       </ul>
     </div>
   </main>

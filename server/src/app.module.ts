@@ -4,6 +4,7 @@ import { PostController } from './post/post.controller';
 import { PostService } from './post/post.service';
 import { PostModule } from './post/post.module';
 import { Module, CacheModule } from '@nestjs/common';
+import { ScheduleModule } from '@nestjs/schedule';
 import * as redisStore from 'cache-manager-ioredis';
 
 @Module({
@@ -14,15 +15,10 @@ import * as redisStore from 'cache-manager-ioredis';
       port: 6379,
       ttl: 0,
     }),
+    ScheduleModule.forRoot(),
     PostModule,
   ],
-  controllers: [
-    PostController,
-    AppController
-  ],
-  providers: [
-    PostService,
-    AppService
-  ],
+  controllers: [PostController, AppController],
+  providers: [PostService, AppService],
 })
-export class AppModule { }
+export class AppModule {}
