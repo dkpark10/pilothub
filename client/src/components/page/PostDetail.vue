@@ -39,10 +39,15 @@ export default defineComponent({
     };
 
     const setRecentPost = () => {
+      if (typeof window === "undefined") {
+        return;
+      }
+
       if (recentPost === null) {
         localStorage.setItem(RECENT_POST_KEY, JSON.stringify([postId]));
         return;
       }
+
       const newRecentPost = duplicateRecentPostCheck(recentPost, postId);
       newRecentPost.push(postId);
       localStorage.setItem(RECENT_POST_KEY, JSON.stringify(newRecentPost));

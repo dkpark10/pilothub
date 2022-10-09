@@ -8,7 +8,7 @@ export class AppController {
 
   @Get()
   getHome() {
-    return this.appService.getHome();
+    return this.appService.getServerSideRender();
   }
 
   @Post()

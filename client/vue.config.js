@@ -24,6 +24,7 @@ module.exports = defineConfig({
 
     if (!process.env.SSR) {
       // webpackConfig.devServer.disableHostCheck(true);
+      webpackConfig.entry("app").clear().add("./src/main.client.js");
       return;
     }
 
