@@ -45,17 +45,19 @@ const path = require("path");
 const express = require("express");
 const fs = require("fs");
 const serialize = require("serialize-javascript");
-const { renderToString } = require("@vue/server-renderer");
+// const { renderToString } = require("@vue/server-renderer");
+const { renderToString } = require("vue/server-renderer");
 const manifest = require("../dist/server/ssr-manifest.json");
 
 const server = express();
 
 const appPath = path.join(__dirname, "../dist", "server", manifest["app.js"]);
+console.log(appPath);
 const createApp = require(appPath).default;
 
 server.use(
   "/img",
-  express.static(path.join(__dirname, ".../dist/client", "img"))
+  express.static(path.join(__dirname, "..dist/client", "img"))
 );
 server.use("/js", express.static(path.join(__dirname, "../dist/client", "js")));
 server.use(
@@ -70,8 +72,8 @@ server.use(
 server.get("/", async (req, res) => {
   const { app, vuexStore, nativeStore, router } = await createApp();
 
-  // router.push(req.url);
-  // await router.isReady();
+  router.push(req.url);
+  await router.isReady();
   let appContent = await renderToString(app);
 
   fs.readFile(

@@ -7,23 +7,8 @@
 <script lang="ts">
 import { defineComponent, CSSProperties, PropType } from "vue";
 
-interface Status {
-  style?: CSSProperties;
-}
-
 export default defineComponent({
   name: "button-component",
-  data(): Status {
-    return {
-      style: {
-        width: this.$props.width || "100%",
-        height: this.$props.height || "100%",
-        backgroundColor: this.$props.backgroundColor || "none",
-        color: this.$props.color || "black",
-        borderRadius: this.$props.borderRadius || "none",
-      },
-    };
-  },
   props: {
     width: {
       type: Object as PropType<CSSProperties["width"]>,
@@ -40,6 +25,17 @@ export default defineComponent({
     borderRadius: {
       type: Object as PropType<CSSProperties["borderRadius"]>,
     },
+  },
+  setup(props) {
+    return {
+      style: {
+        width: props.width || "100%",
+        height: props.height || "100%",
+        backgroundColor: props.backgroundColor || "none",
+        color: props.color || "black",
+        borderRadius: props.borderRadius || "none",
+      },
+    };
   },
 });
 </script>

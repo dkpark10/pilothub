@@ -6,5 +6,7 @@ import { AppModule } from './app.module';
   app.enableCors({
     origin: '*',
   });
-  await app.listen(3000);
+  const PORT = 3000;
+  console.log(`서버실행 ${PORT}`);
+  await app.listen(PORT);
 })();

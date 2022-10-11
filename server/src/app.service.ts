@@ -2,6 +2,7 @@ import { Inject, Injectable, CACHE_MANAGER } from '@nestjs/common';
 import { Cache } from 'cache-manager';
 import { NavName, PostItem } from 'custom-type';
 import { mockData } from '@/assets/hubmock/index';
+import ssrManifest from '../ssr/server/ssr-manifest.json';
 
 @Injectable()
 export class AppService {
@@ -26,20 +27,19 @@ export class AppService {
             <strong>We re sorry but hub3 doesnt work properly without JavaScript enabled. Please enable it to continue.
           </strong>
           </noscript>
-          <div id="app"></div>
+          <div id="app">
+            얘 대체 왜이러는지 아시는분...
+          </div>
         </body>
       </html>`;
   }
 
-  async setHome() {
-    await this.cacheManager.set('hub1', {
-      title: '흠...',
-      description: '흐흐흐으으으으123123123',
-    });
-    return '성공했어요 ㅜㅜㅜㅜ';
-  }
-
-  getDataByCategory(category: NavName): PostItem[] {
-    return mockData[category];
+  getDataByCategory(category: NavName): Promise<PostItem[]> {
+    console.log("스케쥴러 확인");
+    return new Promise((res) => {
+      setTimeout(() => {
+        res(mockData[category]);
+      }, 500);
+    })
   }
 }

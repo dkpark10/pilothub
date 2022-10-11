@@ -6,18 +6,13 @@ import { NavName, PostItem } from 'custom-type';
 export class AppController {
   constructor(private appService: AppService) {}
 
+  @Get('/:category')
+  async getDataByCategory(@Param('category') category: string): Promise<PostItem[]> {
+    return await this.appService.getDataByCategory(category as NavName);
+  }
+
   @Get()
   getHome() {
     return this.appService.getServerSideRender();
-  }
-
-  @Post()
-  setHome() {
-    return this.appService.setHome();
-  }
-
-  @Get('/:category')
-  getDataByCategory(@Param('category') category: string): PostItem[] {
-    return this.appService.getDataByCategory(category as NavName);
   }
 }

@@ -6,6 +6,8 @@ import { PostModule } from './post/post.module';
 import { Module, CacheModule } from '@nestjs/common';
 import { ScheduleModule } from '@nestjs/schedule';
 import * as redisStore from 'cache-manager-ioredis';
+import { ServeStaticModule } from '@nestjs/serve-static';
+import { join } from 'path';
 
 @Module({
   imports: [
@@ -14,6 +16,9 @@ import * as redisStore from 'cache-manager-ioredis';
       host: 'localhost',
       port: 6379,
       ttl: 0,
+    }),
+    ServeStaticModule.forRoot({
+      rootPath: join(__dirname, '..', 'ssr'),
     }),
     ScheduleModule.forRoot(),
     PostModule,

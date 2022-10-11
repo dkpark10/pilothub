@@ -5,9 +5,9 @@
   "scripts": {
     "start": "vue-cli-service serve",
     "build": "vue-cli-service build",
-    "ssrbuild": "cross-env SSR=true vue-cli-service build --dest dist/server",
-    "ssrclient": "vue-cli-service build --dest dist/client",
-    "build:all": "rm -rf ./dist && npm run ssrclient && npm run ssrbuild",
+    "ssrbuild": "cross-env SSR=true vue-cli-service build --dest ../server/ssr/server",
+    "ssrclient": "vue-cli-service build --dest ../server/ssr/client",
+    "build:all": "rm -rf ../server/ssr && npm run ssrclient && npm run ssrbuild",
     "ssrstart": "node ./src/server.js",
     "test:unit": "vue-cli-service test:unit",
     "lint": "vue-cli-service lint"
