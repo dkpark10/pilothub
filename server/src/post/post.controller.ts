@@ -6,10 +6,10 @@ import { PostId } from 'custom-type';
 export class PostController {
   constructor(private postService: PostService) {}
 
-  // @Get('/test')
-  // setMockData() {
-  //   return this.postService.getMockData();
-  // }
+  @Get('/ranking')
+  async getRankedPost() {
+    return await this.postService.getRankedPost();
+  }
 
   @Get('/:postid')
   getPostById(@Param('postid') postid: PostId) {

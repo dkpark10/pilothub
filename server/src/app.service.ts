@@ -35,11 +35,10 @@ export class AppService {
   }
 
   getDataByCategory(category: NavName): Promise<PostItem[]> {
-    console.log("스케쥴러 확인");
     return new Promise((res) => {
       setTimeout(() => {
         res(mockData[category]);
-      }, 500);
+      }, 1000);
     })
   }
 }

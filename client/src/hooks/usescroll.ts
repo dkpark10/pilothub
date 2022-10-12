@@ -7,12 +7,10 @@ export const useScroll = (callback: () => void) => {
       documentElement: { scrollTop, offsetHeight },
     } = document;
 
-    console.log("실행은 되는거지 친구??", innerHeight, scrollTop, offsetHeight);
-
     if (innerHeight + scrollTop >= offsetHeight - 10) {
       callback();
     }
-  }, 250);
+  }, 120);
 
   document.addEventListener("scroll", onScrollEventHandler);
 };

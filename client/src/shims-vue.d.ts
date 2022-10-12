@@ -50,6 +50,10 @@ declare module 'custom-type' {
     author: string;
   };
 
+  export interface RankedPostItem extends PostItem {
+    rank: number;
+  };
+
   export interface Comment {
     commentId: `${PostId}_${number}`;
     description: string;
