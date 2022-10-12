@@ -1,18 +1,18 @@
 import { Controller, Get, Param } from '@nestjs/common';
 import { PostService } from './post.service';
-import { PostId } from 'custom-type';
+import { PostId, PostItem } from 'custom-type';
 
 @Controller('post')
 export class PostController {
   constructor(private postService: PostService) {}
 
   @Get('/ranking')
-  async getRankedPost() {
+  async getRankedPost(): Promise<PostItem[]> {
     return await this.postService.getRankedPost();
   }
 
   @Get('/:postid')
-  getPostById(@Param('postid') postid: PostId) {
+  getPostById(@Param('postid') postid: PostId): PostItem {
     return this.postService.getPostById(postid);
   }
 }

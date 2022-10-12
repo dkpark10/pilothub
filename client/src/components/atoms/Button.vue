@@ -1,5 +1,5 @@
 <template>
-  <button type="button" :style="style">
+  <button type="button">
     <slot />
   </button>
 </template>
@@ -25,17 +25,9 @@ export default defineComponent({
     borderRadius: {
       type: Object as PropType<CSSProperties["borderRadius"]>,
     },
-  },
-  setup(props) {
-    return {
-      style: {
-        width: props.width || "100%",
-        height: props.height || "100%",
-        backgroundColor: props.backgroundColor || "none",
-        color: props.color || "black",
-        borderRadius: props.borderRadius || "none",
-      },
-    };
+    hoverColor: {
+      type: Object as PropType<string>,
+    },
   },
 });
 </script>
@@ -44,5 +36,14 @@ export default defineComponent({
 button {
   border: none;
   cursor: pointer;
+  width: v-bind(width);
+  height: v-bind(height);
+  background-color: v-bind(backgroundColor);
+  color: v-bind(color);
+  border-radius: v-bind(borderRadius);
+
+  &:hover {
+    background-color: v-bind(hoverColor);
+  }
 }
 </style>

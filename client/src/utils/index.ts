@@ -1,3 +1,5 @@
+export const BASE_URL = "http://localhost:3000";
+
 // eslint-disable-next-line
 export const debounce = (callback: (args?: any) => void, delay: number) => {
   let timer: number | undefined = undefined;

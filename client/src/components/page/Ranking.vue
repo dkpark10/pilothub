@@ -3,9 +3,14 @@
   <main>
     <div class="tag_content_wrapper">
       <div class="page_title">인기 허브글</div>
-      <ul v-for="(item, idx) in data" :key="idx">
+      <ul v-for="(item, idx) in postItems" :key="idx">
         <li>
-          <ImageContainer :src="item.imgUrl" :alt="item.title" />
+          <ImageContainer
+            width="100%"
+            height="160px"
+            :src="item.imgUrl"
+            :alt="item.title"
+          />
           <PostInfo :show-rank="true" :title="item.title" :author="item.author">
             <span> {{ item.rank }} </span>
           </PostInfo>
@@ -17,16 +22,13 @@
 </template>
 
 <script lang="ts">
-import { defineComponent, reactive } from "vue";
+import axios from "axios";
+import { defineComponent, ref, onMounted } from "vue";
 import HeaderTop from "@/components/molecules/HeaderTop.vue";
 import ImageContainer from "@/components/atoms/ImageContainer.vue";
 import Footer from "@/components/organisms/Footer.vue";
 import PostInfo from "@/components/molecules/PostInfo.vue";
-import RankingPost, { RankPostItem } from "@/assets/hubmock/RankPost";
-
-interface Status {
-  data: RankPostItem[];
-}
+import { RankedPostItem } from "custom-type";
 
 export default defineComponent({
   name: "ranking-page",
@@ -36,10 +38,21 @@ export default defineComponent({
     ImageContainer,
     PostInfo,
   },
-  setup(): Status {
-    const data = reactive(RankingPost);
+  setup() {
+    const postItems = ref<RankedPostItem[]>([]);
+
+    onMounted(async () => {
+      const { data } = await axios.get<RankedPostItem[]>(
+        "http://localhost:3000/post/ranking"
+      );
+      postItems.value = data.map((item, idx) => ({
+        ...item,
+        rank: idx + 1,
+      }));
+    });
+
     return {
-      data,
+      postItems,
     };
   },
 });
@@ -51,6 +64,7 @@ export default defineComponent({
   margin: 0;
   background-color: white;
 }
+
 .page_title {
   font-size: 1.1rem;
   font-weight: bold;

@@ -29,9 +29,11 @@ import { useRoute } from "vue-router";
 import Header from "@/components/organisms/Header.vue";
 import TagContentCard from "@/components/molecules/TagContentCard.vue";
 import Footer from "@/components/organisms/Footer.vue";
+import { BASE_URL } from "@/utils/index";
+import { PostItem } from "custom-type";
 import { useIntersection } from "@/hooks/useintersection";
 import { useScroll } from "@/hooks/usescroll";
-import { PostItem } from "custom-type";
+import { useRequestAniFrame } from "@/hooks/userequestaniframe";
 
 interface Status {
   shwonItem: Ref<PostItem[]>;
@@ -60,9 +62,7 @@ export default defineComponent({
     const itemLength = 72;
 
     const fetchData = async () => {
-      const { data } = await axios.get<PostItem[]>(
-        `http://localhost:3000/${category}`
-      );
+      const { data } = await axios.get<PostItem[]>(`${BASE_URL}/${category}`);
       beginIndexofFetchData = 0;
       totalItem = data;
       shwonItem.value = totalItem.slice(0, 8);
@@ -95,8 +95,6 @@ export default defineComponent({
     const observer = useIntersection(getMoreData, {
       threshold: 0.45,
     });
-
-    // useScroll(getMoreData);
 
     onMounted(() => {
       fetchData();

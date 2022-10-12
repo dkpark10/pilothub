@@ -7,4 +7,4 @@ import { CommentController } from './commet.controller';
   controllers: [CommentController],
   providers: [CommentService],
 })
-export class PostModule {}
+export class CommentModule {}

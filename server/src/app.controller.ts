@@ -11,8 +11,8 @@ export class AppController {
     return await this.appService.getDataByCategory(category as NavName);
   }
 
-  @Get()
-  getHome() {
-    return this.appService.getServerSideRender();
+  @Get('/')
+  async getHome(): Promise<string> {
+    return await this.appService.getServerSideRender();
   }
 }

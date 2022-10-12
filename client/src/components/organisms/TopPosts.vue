@@ -20,6 +20,7 @@ import axios from "axios";
 import { defineComponent, ref, onMounted } from "vue";
 import PostInfo from "@/components/molecules/PostInfo.vue";
 import { RankedPostItem } from "custom-type";
+import { BASE_URL } from "@/utils/index";
 
 export default defineComponent({
   name: "top-posts",
@@ -31,7 +32,7 @@ export default defineComponent({
 
     onMounted(async () => {
       const { data } = await axios.get<RankedPostItem[]>(
-        "http://localhost:3000/post/ranking"
+        `${BASE_URL}/post/ranking`
       );
       postItems.value = data.map((item, idx) => ({
         ...item,

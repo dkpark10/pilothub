@@ -1,6 +1,8 @@
 const { defineConfig } = require("@vue/cli-service");
 const { WebpackManifestPlugin } = require("webpack-manifest-plugin");
 const nodeExternals = require("webpack-node-externals");
+const BundleAnalyzerPlugin =
+  require("webpack-bundle-analyzer").BundleAnalyzerPlugin;
 
 module.exports = defineConfig({
   transpileDependencies: true,
@@ -14,6 +16,9 @@ module.exports = defineConfig({
         `,
       },
     },
+  },
+  configureWebpack: {
+    plugins: [new BundleAnalyzerPlugin()],
   },
   chainWebpack: (webpackConfig) => {
     console.log(`렌더링 모드 ${process.env.SSR ? "섭사" : "클사"}`);

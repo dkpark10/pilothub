@@ -9,7 +9,8 @@
         <router-link :to="`post/${item.postId}`">
           <li>
             <ImageContainer
-              height="160px"
+              width="100%"
+              height="140px"
               :src="item.imgUrl"
               :alt="item.title"
             />
