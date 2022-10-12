@@ -56,7 +56,6 @@ export default defineComponent({
         `http://localhost:3000/comment/${props.postId}`
       );
       commentData.value = data;
-      console.log(commentData.value);
     };
 
     onMounted(() => {

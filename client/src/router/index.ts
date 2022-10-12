@@ -60,31 +60,31 @@ export default () => {
         path: "/login",
         name: "login",
         component: () =>
-          import(/* webpackChunkName: login */ "../components/page/Login.vue"),
+          import(/* webpackChunkName: "login" */ "../components/page/Login.vue"),
       },
       {
         path: "/ranking",
         name: "ranking",
         component: () =>
-          import(/* webpackChunkName: ranking */ "../components/page/Ranking.vue"),
+          import(/* webpackChunkName: "ranking" */ "../components/page/Ranking.vue"),
       },
       {
         path: "/recent",
         name: "recent-read-posts",
         component: () =>
-          import(/* webpackChunkName: recentreadpost */ "../components/page/RecentReadPost.vue"),
+          import(/* webpackChunkName: "recentreadpost" */ "../components/page/RecentReadPost.vue"),
       },
       {
         path: "/post/:id",
         name: "post-detail",
         component: () =>
-          import(/* webpackChunkName: postdetail */ "../components/page/PostDetail.vue"),
+          import(/* webpackChunkName: "postdetail" */ "../components/page/PostDetail.vue"),
       },
       {
         path: "/:category",
         name: "category",
         component: () =>
-          import(/* webpackChunkName: hub */ "../components/page/Hub.vue"),
+          import(/* webpackChunkName: "hub" */ "../components/page/Hub.vue"),
       },
     ],
   });

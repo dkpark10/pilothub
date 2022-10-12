@@ -1,7 +1,7 @@
 <template>
   <div class="comment_write_wrapper">
     <div class="comment_header">
-      <span class="left">전체 댓글 6</span>
+      <span class="left">전체 댓글</span>
       <span class="right">내 댓글</span>
     </div>
     <div>

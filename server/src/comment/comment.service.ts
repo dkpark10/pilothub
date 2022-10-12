@@ -16,9 +16,9 @@ export class CommentService {
   async getPostCommentById(postid: string): Promise<Comment[]> {
     const comments = await this.cacheManager.get<Comment[]>(postid);
     if (comments === undefined) {
-      throw new NotFoundException(`게시글이 없음 게시글 아이디: ${postid}`);
+      return [];
     }
-    return comments || [];
+    return comments;
   }
 
   async createCommentByPostId(
