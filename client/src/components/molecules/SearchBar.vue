@@ -18,7 +18,7 @@
 
 <script lang="ts">
 import axios from "axios";
-import { defineComponent, ref } from "vue";
+import { defineComponent, PropType, ref } from "vue";
 import Magnifier from "@/components/atoms/Magnifier.vue";
 import { useRouter } from "vue-router";
 
@@ -27,8 +27,13 @@ export default defineComponent({
   components: {
     Magnifier,
   },
-  setup() {
-    const keyword = ref<string>("");
+  props: {
+    initKeyword: {
+      type: Object as PropType<string>,
+    },
+  },
+  setup(props) {
+    const keyword = ref<string>(props.initKeyword || "");
     const router = useRouter();
 
     const search = () => {

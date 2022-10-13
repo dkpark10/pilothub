@@ -1,5 +1,6 @@
 <template>
   <HeaderTop />
+  <SearchBar :init-keyword="keyword" />
   <main>
     <div class="noresult" v-if="serachResult.length === 0">
       검색결과가 없습니다.
@@ -37,6 +38,7 @@ import HeaderTop from "@/components/molecules/HeaderTop.vue";
 import ImageContainer from "@/components/atoms/ImageContainer.vue";
 import Footer from "@/components/organisms/Footer.vue";
 import PostInfo from "@/components/molecules/PostInfo.vue";
+import SearchBar from "@/components/molecules/SearchBar.vue";
 import { PostItem } from "custom-type";
 import { useRoute } from "vue-router";
 import { BASE_URL } from "@/utils/index";
@@ -48,6 +50,7 @@ export default defineComponent({
     HeaderTop,
     ImageContainer,
     PostInfo,
+    SearchBar,
   },
   setup() {
     const route = useRoute();
@@ -59,7 +62,6 @@ export default defineComponent({
         `${BASE_URL}/post/search/${keyword}`
       );
       serachResult.value = data;
-      console.log(data);
     };
 
     onMounted(() => {
