@@ -1,7 +1,5 @@
 <template>
-  <button type="button">
-    <span class="hamburger"> </span>
-  </button>
+  <span class="hamburger"> </span>
 </template>
 
 <script lang="ts">

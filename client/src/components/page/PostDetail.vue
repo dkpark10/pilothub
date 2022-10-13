@@ -29,7 +29,7 @@ import FooterNavigator from "@/components/molecules/FooterNavigator.vue";
 import CommentWrite from "@/components/organisms/CommentWrite.vue";
 import CommentList from "@/components/organisms/CommentList.vue";
 import ImageContainer from "@/components/atoms/ImageContainer.vue";
-import { PostId, PostItem, Comment } from "custom-type";
+import { PostId, PostItem } from "custom-type";
 import { useRecentPosts, useFetch } from "@/hooks/index";
 import { BASE_URL, setRecentPost } from "@/utils";
 

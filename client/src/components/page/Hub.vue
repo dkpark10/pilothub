@@ -26,8 +26,8 @@
 import axios from "axios";
 import { defineComponent, onMounted, onUnmounted, watch, ref, Ref } from "vue";
 import { useRoute } from "vue-router";
-import Header from "@/components/organisms/Header.vue";
 import TagContentCard from "@/components/molecules/TagContentCard.vue";
+import Header from "@/components/organisms/Header.vue";
 import Footer from "@/components/organisms/Footer.vue";
 import { BASE_URL } from "@/utils/index";
 import { PostItem } from "custom-type";

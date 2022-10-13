@@ -15,9 +15,10 @@ export const useFetch = <T>(
     try {
       const response = await axios.get<T>(url);
       data.value = response.data;
-      loading.value = false;
     } catch (e) {
       error.value = true;
+    } finally {
+      loading.value = false;
     }
   };
 

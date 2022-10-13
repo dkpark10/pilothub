@@ -2,15 +2,17 @@
   <section class="top_posts_wrapper">
     <h4>인기허브글</h4>
     <ul v-for="(postItem, idx) in postItems" :key="idx">
-      <li>
-        <PostInfo
-          :show-rank="true"
-          :title="postItem.title"
-          :author="postItem.author"
-        >
-          <span> {{ postItem.rank }} </span>
-        </PostInfo>
-      </li>
+      <router-link :to="`post/${postItem.postId}`">
+        <li>
+          <PostInfo
+            :show-rank="true"
+            :title="postItem.title"
+            :author="postItem.author"
+          >
+            <span> {{ idx + 1 }} </span>
+          </PostInfo>
+        </li>
+      </router-link>
     </ul>
   </section>
 </template>

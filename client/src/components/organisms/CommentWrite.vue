@@ -36,12 +36,6 @@ import Button from "@/components/atoms/Button.vue";
 import { useRouter } from "vue-router";
 import { PostId } from "custom-type";
 
-// interface Status {
-//   comment: Ref<string>;
-//   onChangeComment: (e: Event) => void;
-//   submitComment: () => void;
-// }
-
 export default defineComponent({
   name: "comment-write",
   components: {

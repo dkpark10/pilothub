@@ -5,7 +5,7 @@
       :transition="100"
       :breakpoints="breakpoints"
     >
-      <Slide v-for="(menuItem, idx) in mainItems" :key="idx">
+      <Slide v-for="(menuItem, idx) in mainData" :key="idx">
         <div class="main_content_item_wrapper">
           <Overlay />
           <strong class="main_content_text">
@@ -29,12 +29,12 @@
 </template>
 
 <script lang="ts">
-import { defineComponent } from "vue";
+import { defineComponent, PropType } from "vue";
 import { Carousel, Slide } from "vue3-carousel";
 import "vue3-carousel/dist/carousel.css";
 import ImageContainer from "@/components/atoms/ImageContainer.vue";
 import Overlay from "@/components/atoms/Overlay.vue";
-import { mainData, PostItem } from "@/assets/hubmock/MainContent";
+import { PostItem } from "@/assets/hubmock/MainContent";
 
 interface State {
   breakpoints: {
@@ -43,7 +43,6 @@ interface State {
       snapAlign: string;
     };
   };
-  mainItems: PostItem[];
 }
 
 export default defineComponent({
@@ -54,21 +53,27 @@ export default defineComponent({
     ImageContainer,
     Overlay,
   },
-  data(): State {
-    return {
-      breakpoints: {
-        1: {
-          itemsToShow: 1.2,
-          snapAlign: "start",
-        },
-      },
-      mainItems: mainData,
-    };
-  },
-  methods: {
-    parsingTitle(title: string, idx: number) {
-      return title.split("\n")[idx];
+  props: {
+    mainData: {
+      type: Object as PropType<PostItem[]>,
     },
+  },
+  setup() {
+    const breakpoints: State["breakpoints"] = {
+      1: {
+        itemsToShow: 1.2,
+        snapAlign: "start",
+      },
+    };
+
+    const parsingTitle = (title: string, idx: number) => {
+      return title.split("\n")[idx];
+    };
+
+    return {
+      breakpoints,
+      parsingTitle,
+    };
   },
 });
 </script>

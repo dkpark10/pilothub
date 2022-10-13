@@ -11,15 +11,14 @@
   border-top: 1px solid #ededed;
 }
 
-@mixin flex-center {
-  display: flex;
-  justify-content: center;
-  align-items: center;
-}
-
 @mixin flex-justify-content-center {
   display: flex;
   justify-content: center;
+}
+
+@mixin flex-center {
+  @include flex-justify-content-center;
+  align-items: center;
 }
 
 @mixin flex-align-items-center {

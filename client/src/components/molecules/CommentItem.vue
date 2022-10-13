@@ -14,7 +14,7 @@
       <button @click="deleteComment">삭제</button>
     </div>
     <div class="comment_handler">
-      <span>답글달기</span>
+      <span></span>
       <div class="likehate">
         <button>
           <Like />

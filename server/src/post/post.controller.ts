@@ -6,6 +6,11 @@ import { PostId, PostItem } from 'custom-type';
 export class PostController {
   constructor(private postService: PostService) {}
 
+  @Get('/main')
+  async getMainPost() {
+    return await this.postService.getMainPost();
+  }
+
   @Get('/ranking')
   async getRankedPost(): Promise<PostItem[]> {
     return await this.postService.getRankedPost();
@@ -14,6 +19,11 @@ export class PostController {
   @Get('/search/:keyword')
   getSearchResult(@Param('keyword') keyword: string): PostItem[] {
     return this.postService.getSearchResult(keyword);
+  }
+
+  @Get('/test')
+  setCacheTest() {
+    return this.postService.setCacheTest();
   }
 
   @Get('/:postid')
