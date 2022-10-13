@@ -1,7 +1,7 @@
 import { throttle } from "@/utils/index";
 
 export const useScroll = (callback: () => void) => {
-  const onScrollEventHandler = () => {
+  const onScrollEventHandler = throttle(() => {
     const { innerHeight } = window;
     const {
       documentElement: { scrollTop, offsetHeight },
@@ -10,7 +10,7 @@ export const useScroll = (callback: () => void) => {
     if (innerHeight + scrollTop >= offsetHeight) {
       callback();
     }
-  };
+  }, 150);
 
   document.addEventListener("scroll", onScrollEventHandler);
 };

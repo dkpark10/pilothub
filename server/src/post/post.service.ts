@@ -3,6 +3,7 @@ import { mockData } from '@/assets/hubmock/index';
 import { PostId, NavName, PostItem } from 'custom-type';
 import { Cache } from 'cache-manager';
 import { Cron, CronExpression } from '@nestjs/schedule';
+import { createForLoopParams } from '@vue/compiler-core';
 
 @Injectable()
 export class PostService {
@@ -26,21 +27,24 @@ export class PostService {
 
   getPostById(postid: PostId): PostItem {
     const category = postid.split('_')[0] as NavName;
-    return mockData[category].find((postItem) => postItem.postId === postid) as PostItem;
+    return mockData[category].find(
+      (postItem) => postItem.postId === postid,
+    ) as PostItem;
   }
 
   /**
-  * @description
-  * 메인허브글은 12시간마다 랜덤으로 추출하여 캐시 설정
-  */
+   * @description
+   * 메인허브글은 12시간마다 랜덤으로 추출하여 캐시 설정
+   */
   @Cron(CronExpression.EVERY_DAY_AT_MIDNIGHT)
   async setCachedMainPost() {
     try {
       const mainPosts = this.extracRandomPost(6);
-      await this.cacheManager.set(this.MAIN_CACHE_KEY, mainPosts, { ttl: 10800 });
-
+      await this.cacheManager.set(this.MAIN_CACHE_KEY, mainPosts, {
+        ttl: 10800,
+      });
     } catch (error) {
-      console.error(error)
+      console.error(error);
     }
   }
 
@@ -58,26 +62,29 @@ export class PostService {
       setTimeout(() => {
         res(mainPosts);
       }, 100);
-    })
+    });
   }
 
   /**
-  * @description
-  * 인기허브글은 30분마다 랜덤으로 추출하여 캐시 설정
-  */
+   * @description
+   * 인기허브글은 30분마다 랜덤으로 추출하여 캐시 설정
+   */
   @Cron(CronExpression.EVERY_30_MINUTES)
   async setCachedRankedPost() {
     try {
       const rankedPost = this.extracRandomPost();
-      await this.cacheManager.set(this.RANKED_CACHE_KEY, rankedPost, { ttl: 10800 });
-
+      await this.cacheManager.set(this.RANKED_CACHE_KEY, rankedPost, {
+        ttl: 10800,
+      });
     } catch (e) {
       console.error(e);
     }
   }
 
   async getRankedPost(): Promise<PostItem[]> {
-    const result = await this.cacheManager.get<PostItem[]>(this.RANKED_CACHE_KEY);
+    const result = await this.cacheManager.get<PostItem[]>(
+      this.RANKED_CACHE_KEY,
+    );
     if (result !== undefined) {
       console.log('인기 허브 글 캐시 데이터 반환');
       return result;
@@ -90,16 +97,27 @@ export class PostService {
       setTimeout(() => {
         res(rankedPosts);
       }, 100);
-    })
+    });
   }
 
-  extracRandomPost(length: number = 9): PostItem[] {
+  getChannelPost() {
+    const result: PostItem[] = [];
+    for (let i = 0; i < 3; i += 1) {
+      const idx = (new Date().getDay() + i) % 8;
+      const category = this.domain[idx];
+      result.push(...mockData[category].slice(0, 4));
+    }
+
+    return result;
+  }
+
+  extracRandomPost(length = 9): PostItem[] {
     const randomPosts: PostItem[] = [];
     this.domain.forEach((item) => {
       const random = Math.floor(Math.random() * 72);
       const postId: PostId = `${item}_${random}`;
       randomPosts.push(this.getPostById(postId));
-    })
+    });
     randomPosts.push(this.getPostById('culture_42'));
 
     return randomPosts.slice(0, length);
@@ -113,8 +131,8 @@ export class PostService {
         if (post.title.indexOf(keyword) === 0) {
           results.push(post);
         }
-      })
-    })
+      });
+    });
     return results;
   }
 
