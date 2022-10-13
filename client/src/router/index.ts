@@ -86,6 +86,12 @@ export default () => {
         component: () =>
           import(/* webpackChunkName: "hub" */ "../components/page/Hub.vue"),
       },
+      {
+        path: "/search/:keyword",
+        name: "search",
+        component: () =>
+          import(/* webpackChunkName: "hub" */ "../components/page/Search.vue"),
+      },
     ],
   });
 };

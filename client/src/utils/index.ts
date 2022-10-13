@@ -1,3 +1,8 @@
+import { PostId } from "custom-type";
+import { RECENT_POST_KEY } from "@/hooks/use_recent_post";
+
+export const isServerEnv = typeof window === "undefined";
+
 export const BASE_URL = "http://localhost:3000";
 
 // eslint-disable-next-line
@@ -25,4 +30,23 @@ export const throttle = (callback: (args?: any) => void, delay: number) => {
       }, delay);
     }
   };
+};
+
+const duplicateRecentPostCheck = (postList: string[], postId: string) => {
+  return postList.filter((item) => item !== postId);
+};
+
+export const setRecentPost = (recentPost: PostId[] | null, postId: PostId) => {
+  if (typeof window === "undefined") {
+    return;
+  }
+
+  if (recentPost === null) {
+    localStorage.setItem(RECENT_POST_KEY, JSON.stringify([postId]));
+    return;
+  }
+
+  const newRecentPost = duplicateRecentPostCheck(recentPost, postId);
+  newRecentPost.push(postId);
+  localStorage.setItem(RECENT_POST_KEY, JSON.stringify(newRecentPost));
 };

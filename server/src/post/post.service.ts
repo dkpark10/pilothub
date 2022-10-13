@@ -32,7 +32,7 @@ export class PostService {
    * 인기허브글은 3시간마다 랜덤으로 추출하여 캐시 설정
    */
   @Cron('0 */3 * * *')
-  setCachedRankedPost(){
+  setCachedRankedPost() {
     const rankedPost = this.extractRankedPost();
     this.cacheManager.set(this.CACHE_KEY, rankedPost);
   }
@@ -64,5 +64,18 @@ export class PostService {
         res(rankedPost);
       }, 100);
     })
+  }
+
+  getSearchResult(keyword: string): PostItem[] {
+    const results: PostItem[] = [];
+
+    Object.keys(mockData).forEach((hubName: string) => {
+      mockData[hubName as NavName].map((post) => {
+        if(post.title.indexOf(keyword) === 0){
+          results.push(post);
+        }
+      })
+    })
+    return results;
   }
 }

@@ -11,6 +11,11 @@ export class PostController {
     return await this.postService.getRankedPost();
   }
 
+  @Get('/search/:keyword')
+  getSearchResult(@Param('keyword') keyword: string): PostItem[] {
+    return this.postService.getSearchResult(keyword);
+  }
+
   @Get('/:postid')
   getPostById(@Param('postid') postid: PostId): PostItem {
     return this.postService.getPostById(postid);

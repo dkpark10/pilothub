@@ -1,10 +1,15 @@
 <template>
   <div class="search_bar">
     <label for="search">
-      <input type="text" name="search" placeholder="허브글, 채널 검색" />
+      <input
+        v-model="keyword"
+        type="text"
+        name="search"
+        placeholder="허브글, 채널 검색"
+      />
     </label>
     <div class="magnifier_wrapper">
-      <button type="button" name="search_keyword_button">
+      <button type="button" name="search_keyword_button" @click="search">
         <Magnifier />
       </button>
     </div>
@@ -12,13 +17,28 @@
 </template>
 
 <script lang="ts">
-import { defineComponent } from "vue";
+import axios from "axios";
+import { defineComponent, ref } from "vue";
 import Magnifier from "@/components/atoms/Magnifier.vue";
+import { useRouter } from "vue-router";
 
 export default defineComponent({
   name: "search-bar",
   components: {
     Magnifier,
+  },
+  setup() {
+    const keyword = ref<string>("");
+    const router = useRouter();
+
+    const search = () => {
+      router.push(`/search/${keyword.value}`);
+    };
+
+    return {
+      keyword,
+      search,
+    };
   },
 });
 </script>
