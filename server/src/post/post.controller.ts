@@ -11,14 +11,14 @@ export class PostController {
     return await this.postService.getMainPost();
   }
 
+  @Get('/channel')
+  getChannelPost() {
+    return this.postService.getChannelPost();
+  }
+
   @Get('/ranking')
   async getRankedPost(): Promise<PostItem[]> {
     return await this.postService.getRankedPost();
-  }
-
-  @Get('/channel')
-  getChannelPost(): PostItem[] {
-    return this.postService.getChannelPost();
   }
 
   @Get('/search/:keyword')

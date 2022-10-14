@@ -14,7 +14,9 @@ export class AppController {
   }
 
   @Get('/:category')
-  async getDataByCategory(@Param('category') category: string): Promise<PostItem[]> {
+  async getDataByCategory(
+    @Param('category') category: string,
+  ): Promise<PostItem[]> {
     return await this.appService.getDataByCategory(category as NavName);
   }
 
