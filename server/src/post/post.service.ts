@@ -3,6 +3,7 @@ import { mockData } from '@/assets/hubmock/index';
 import { PostId, NavName, PostItem } from 'custom-type';
 import { Cache } from 'cache-manager';
 import { Cron, CronExpression } from '@nestjs/schedule';
+import { resourceLimits } from 'worker_threads';
 
 @Injectable()
 export class PostService {
@@ -27,6 +28,18 @@ export class PostService {
   getPostById(postid: PostId): PostItem {
     const category = postid.split('_')[0] as NavName;
     return mockData[category].find((postItem) => postItem.postId === postid) as PostItem;
+  }
+
+  getChannelPost(): PostItem[] {
+    const result: PostItem[] = [];
+
+    for (let day = 0; day < 3; day += 1) {
+      const idx = (new Date().getDay() + day) % 8;
+      const category = this.domain[idx];   
+      result.push(...mockData[category].slice(0, 4));
+    }
+
+    return result;
   }
 
   /**

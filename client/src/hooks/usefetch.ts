@@ -19,6 +19,7 @@ export const useFetch = <T>(
       error.value = true;
     } finally {
       loading.value = false;
+      console.log(`api 요청 : ${url}`);
     }
   };
 

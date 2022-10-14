@@ -92,6 +92,12 @@ export default () => {
         component: () =>
           import(/* webpackChunkName: "hub" */ "../components/page/Search.vue"),
       },
+      {
+        path: "/suspense",
+        name: "suspense",
+        component: () =>
+          import(/* webpackChunkName: "hub" */ "../components/page/Suspense.vue"),
+      },
     ],
   });
 };

@@ -16,6 +16,11 @@ export class PostController {
     return await this.postService.getRankedPost();
   }
 
+  @Get('/channel')
+  getChannelPost(): PostItem[] {
+    return this.postService.getChannelPost();
+  }
+
   @Get('/search/:keyword')
   getSearchResult(@Param('keyword') keyword: string): PostItem[] {
     return this.postService.getSearchResult(keyword);

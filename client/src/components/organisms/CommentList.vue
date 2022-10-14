@@ -1,5 +1,5 @@
 <template>
-  <section v-if="commentData.length">
+  <section v-if="commentData && commentData.length">
     <div class="comment_sort">
       <button>최신순</button>
       <button>과거순</button>

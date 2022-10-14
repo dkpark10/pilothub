@@ -9,8 +9,8 @@
         <router-link :to="menuItem.url">
           <span
             class="navi_item"
-            @click="onClickMenu(idx)"
-            @keydown="onClickMenu(idx)"
+            @click="onClickMenu(menuItem.url)"
+            @keydown="onClickMenu(menuItem.url)"
             :class="{ on_tab: isCurrentTab(menuItem.url) }"
           >
             {{ menuItem.text }}
@@ -22,25 +22,23 @@
 </template>
 
 <script lang="ts">
-import { defineComponent } from "vue";
+import { defineComponent, onMounted, onUnmounted, ref } from "vue";
 import { Carousel, Slide } from "vue3-carousel";
 import "vue3-carousel/dist/carousel.css";
 import { NavText, NavUrl } from "custom-type";
+import { RootState } from "@/store/index";
+import { SET_CURRENT_TAB } from "@/store/tab/index";
+import { useStore } from "vuex";
 
 interface MenuItem {
   text: NavText;
   url: NavUrl;
 }
 
-interface State {
-  menuItems: MenuItem[];
-  selectedMenuItemIndex: number;
-  showElementFixed: boolean;
-  breakpoints: {
-    [key: number]: {
-      itemsToShow: number;
-      snapAlign: string;
-    };
+interface BreakPoints {
+  [key: number]: {
+    itemsToShow: number;
+    snapAlign: string;
   };
 }
 
@@ -50,80 +48,91 @@ export default defineComponent({
     Carousel,
     Slide,
   },
-  mounted() {
-    document.addEventListener("scroll", this.onScrollEvent);
-  },
-  unmounted() {
-    document.removeEventListener("scroll", this.onScrollEvent);
-  },
-  methods: {
-    onClickMenu(idx: number) {
-      this.selectedMenuItemIndex = idx;
-    },
-    isCurrentTab(url: string) {
-      return this.$route.path === url;
-    },
-    onScrollEvent() {
+  setup() {
+    const menuItems: MenuItem[] = [
+      {
+        text: "홈",
+        url: "/",
+      },
+      {
+        text: "라이프",
+        url: "/life",
+      },
+      {
+        text: "푸드",
+        url: "/food",
+      },
+      {
+        text: "여행",
+        url: "/trip",
+      },
+      {
+        text: "컬처",
+        url: "/culture",
+      },
+      {
+        text: "테크",
+        url: "/tech",
+      },
+      {
+        text: "비즈",
+        url: "/biz",
+      },
+      {
+        text: "이슈",
+        url: "/issue",
+      },
+      {
+        text: "연예",
+        url: "/entertainment",
+      },
+    ];
+
+    const showElementFixed = ref(false);
+    const store = useStore<RootState>();
+
+    const onScrollEvent = () => {
       if (window.pageYOffset <= 48) {
-        this.showElementFixed = false;
+        showElementFixed.value = false;
         return;
       }
+      showElementFixed.value = true;
+    };
 
-      this.showElementFixed = true;
-    },
-  },
-  data(): State {
-    return {
-      menuItems: [
-        {
-          text: "홈",
-          url: "/",
-        },
-        {
-          text: "라이프",
-          url: "/life",
-        },
-        {
-          text: "푸드",
-          url: "/food",
-        },
-        {
-          text: "여행",
-          url: "/trip",
-        },
-        {
-          text: "컬처",
-          url: "/culture",
-        },
-        {
-          text: "테크",
-          url: "/tech",
-        },
-        {
-          text: "비즈",
-          url: "/biz",
-        },
-        {
-          text: "이슈",
-          url: "/issue",
-        },
-        {
-          text: "연예",
-          url: "/entertainment",
-        },
-      ],
-      selectedMenuItemIndex: 0,
-      showElementFixed: false,
-      breakpoints: {
-        325: {
-          itemsToShow: 7.5,
-          snapAlign: "start",
-        },
-        455: {
-          itemsToShow: 9,
-          snapAlign: "start",
-        },
+    const onClickMenu = (url: NavUrl) => {
+      store.commit(SET_CURRENT_TAB, url);
+    };
+
+    const isCurrentTab = (url: NavUrl) => {
+      return store.state.currentTabModule.currentTab === url;
+    };
+
+    onMounted(() => {
+      document.addEventListener("scroll", onScrollEvent);
+    });
+
+    onUnmounted(() => {
+      document.removeEventListener("scroll", onScrollEvent);
+    });
+
+    const breakpoints: BreakPoints = {
+      325: {
+        itemsToShow: 7.5,
+        snapAlign: "start",
       },
+      455: {
+        itemsToShow: 9,
+        snapAlign: "start",
+      },
+    };
+
+    return {
+      menuItems,
+      selectedMenuItemIndex: 0,
+      showElementFixed,
+      breakpoints,
+      onClickMenu,
+      isCurrentTab,
     };
   },
 });

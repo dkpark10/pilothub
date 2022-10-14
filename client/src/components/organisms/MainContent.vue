@@ -35,6 +35,8 @@ import "vue3-carousel/dist/carousel.css";
 import ImageContainer from "@/components/atoms/ImageContainer.vue";
 import Overlay from "@/components/atoms/Overlay.vue";
 import { PostItem } from "@/assets/hubmock/MainContent";
+import { BASE_URL } from "@/utils";
+import { useFetch } from "@/hooks/index";
 
 interface State {
   breakpoints: {
@@ -53,11 +55,6 @@ export default defineComponent({
     ImageContainer,
     Overlay,
   },
-  props: {
-    mainData: {
-      type: Object as PropType<PostItem[]>,
-    },
-  },
   setup() {
     const breakpoints: State["breakpoints"] = {
       1: {
@@ -66,6 +63,10 @@ export default defineComponent({
       },
     };
 
+    const [mainData, mainLoading, mainError] = useFetch<PostItem[]>(
+      `${BASE_URL}/post/main`
+    );
+
     const parsingTitle = (title: string, idx: number) => {
       return title.split("\n")[idx];
     };
@@ -73,6 +74,9 @@ export default defineComponent({
     return {
       breakpoints,
       parsingTitle,
+      mainData,
+      mainLoading,
+      mainError,
     };
   },
 });

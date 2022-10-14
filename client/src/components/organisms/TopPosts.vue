@@ -1,13 +1,13 @@
 <template>
   <section class="top_posts_wrapper">
     <h4>인기허브글</h4>
-    <ul v-for="(postItem, idx) in postItems" :key="idx">
-      <router-link :to="`post/${postItem.postId}`">
+    <ul v-for="(rankItem, idx) in rankItems" :key="idx">
+      <router-link :to="`post/${rankItem.postId}`">
         <li>
           <PostInfo
             :show-rank="true"
-            :title="postItem.title"
-            :author="postItem.author"
+            :title="rankItem.title"
+            :author="rankItem.author"
           >
             <span> {{ idx + 1 }} </span>
           </PostInfo>
@@ -18,11 +18,11 @@
 </template>
 
 <script lang="ts">
-import axios from "axios";
-import { defineComponent, ref, onMounted } from "vue";
+import { defineComponent } from "vue";
 import PostInfo from "@/components/molecules/PostInfo.vue";
 import { RankedPostItem } from "custom-type";
 import { BASE_URL } from "@/utils/index";
+import { useFetch } from "@/hooks/usefetch";
 
 export default defineComponent({
   name: "top-posts",
@@ -30,20 +30,14 @@ export default defineComponent({
     PostInfo,
   },
   setup() {
-    const postItems = ref<RankedPostItem[]>([]);
-
-    onMounted(async () => {
-      const { data } = await axios.get<RankedPostItem[]>(
-        `${BASE_URL}/post/ranking`
-      );
-      postItems.value = data.map((item, idx) => ({
-        ...item,
-        rank: idx + 1,
-      }));
-    });
+    const [rankItems, loading, error] = useFetch<RankedPostItem[]>(
+      `${BASE_URL}/post/ranking`
+    );
 
     return {
-      postItems,
+      rankItems,
+      loading,
+      error,
     };
   },
 });
