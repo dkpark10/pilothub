@@ -7,11 +7,15 @@ import { readFile } from 'fs';
 
 @Injectable()
 export class AppService {
+  // eslint-disable-next-line @typescript-eslint/no-empty-function
   constructor() {}
 
   async getServerSideRender(): Promise<string> {
+    // eslint-disable-next-line @typescript-eslint/no-var-requires
     const manifest = require('../ssr/server/ssr-manifest.json');
     const appPath = join(__dirname, '../ssr', 'server', manifest['app.js']);
+
+    // eslint-disable-next-line @typescript-eslint/no-var-requires
     const createApp = require(appPath).default;
 
     const { app, router } = await createApp();

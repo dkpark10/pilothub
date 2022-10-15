@@ -12,7 +12,7 @@ import { join } from 'path';
 
 @Module({
   imports: [
-    // TypeOrmModule.forRoot(typeORMConfig),
+    TypeOrmModule.forRoot(typeORMConfig),
     ServeStaticModule.forRoot({
       rootPath: join(__dirname, '..', 'ssr/client'),
     }),

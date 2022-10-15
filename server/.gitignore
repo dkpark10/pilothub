@@ -3,6 +3,7 @@
 /node_modules
 /ssr
 /ssr2
+/private
 
 # Logs
 logs

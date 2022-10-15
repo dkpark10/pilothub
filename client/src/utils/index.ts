@@ -1,4 +1,4 @@
-import { PostId } from "custom-type";
+import { PostId, CommentDate } from "custom-type";
 import { RECENT_POST_KEY } from "@/hooks/use_recent_post";
 
 export const isServerEnv = typeof window === "undefined";
@@ -49,4 +49,19 @@ export const setRecentPost = (recentPost: PostId[] | null, postId: PostId) => {
   const newRecentPost = duplicateRecentPostCheck(recentPost, postId);
   newRecentPost.push(postId);
   localStorage.setItem(RECENT_POST_KEY, JSON.stringify(newRecentPost));
+};
+
+export const calculDate = (date: CommentDate): number => {
+  const [d, t] = date.split(" ");
+  const dd = d
+    .split(".")
+    .map((s) => Number(s))
+    .reduce((acc, num) => acc + num, 0);
+
+  const tt = t
+    .split(":")
+    .map((s) => Number(s))
+    .reduce((acc, num) => acc + num, 0);
+
+  return dd + tt;
 };

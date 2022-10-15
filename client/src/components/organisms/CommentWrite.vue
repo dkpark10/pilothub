@@ -1,15 +1,15 @@
 <template>
-  <div class="comment_write_wrapper">
-    <div class="comment_header">
-      <span class="left">전체 댓글</span>
-      <span class="right">내 댓글</span>
-    </div>
-    <div>
+  <div>
+    <div class="comment_write_wrapper">
       <div class="textarea_header">
         <span class="user">dkpark10</span>
         <span class="comment_length">{{ comment.length }} / 1000</span>
       </div>
-      <textarea :value="comment" @input="onChangeComment" />
+      <textarea
+        :value="comment"
+        @input="onChangeComment"
+        placeholder="당신의 생각을 남겨주세요"
+      />
       <div class="button_wrapper">
         <span />
         <Button
@@ -28,56 +28,43 @@
   </div>
 </template>
 
-<script lang="ts">
+<script setup lang="ts">
 import axios from "axios";
-import { defineComponent, Ref, PropType } from "vue";
+import { defineProps } from "vue";
 import { useInput } from "@/hooks/useinput";
 import Button from "@/components/atoms/Button.vue";
 import { useRouter } from "vue-router";
 import { PostId } from "custom-type";
 
-export default defineComponent({
-  name: "comment-write",
-  components: {
-    Button,
-  },
-  props: {
-    postId: {
-      type: Object as PropType<PostId>,
-    },
-  },
-  setup(props) {
-    const [comment, onChangeComment] = useInput({
-      init: "",
-      validator: (value) => value.length > 1000,
-    });
-    const router = useRouter();
-
-    const submitComment = async () => {
-      await axios.post("http://localhost:3000/comment", {
-        postId: props.postId,
-        author: "wakandadeveloper",
-        description: comment.value,
-      });
-
-      router.go(0);
-    };
-
-    return {
-      router,
-      comment,
-      onChangeComment,
-      submitComment,
-    };
-  },
+interface Props {
+  postId: PostId;
+}
+const props = defineProps<Props>();
+const [comment, onChangeComment] = useInput({
+  init: "",
+  validator: (value) => value.length > 1000,
 });
+
+const router = useRouter();
+
+const submitComment = async () => {
+  await axios.post("http://localhost:3000/comment", {
+    postId: props.postId,
+    author: "wakandadeveloper",
+    description: comment.value,
+  });
+
+  router.go(0);
+};
 </script>
 
 <style lang="scss" scoped>
 .comment_write_wrapper {
   @include mob-hub-padding;
-  padding-top: 15px;
+  padding-bottom: 8px;
   background-color: white;
+  border-top: 1px solid $darker-gray;
+  border-bottom: 1px solid $darker-gray;
 }
 
 .comment_header {
@@ -95,9 +82,7 @@ export default defineComponent({
 
 .textarea_header {
   @include flex-space-between-align-center;
-  border-top: 1px solid $darker-gray;
-  margin: 7px 0;
-  height: 32px;
+  height: 40px;
   color: $font-color;
 
   .user {
@@ -114,9 +99,8 @@ export default defineComponent({
 textarea {
   @include flex-space-between-align-center;
   width: 100%;
-  height: 112px;
+  height: 96px;
   border: none;
-  border-bottom: 1px solid $darker-gray;
   resize: none;
 
   &:focus {

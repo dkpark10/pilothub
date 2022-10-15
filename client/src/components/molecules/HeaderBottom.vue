@@ -9,9 +9,9 @@
         <router-link :to="menuItem.url">
           <span
             class="navi_item"
+            :class="{ on_tab: isCurrentTab(menuItem.url) }"
             @click="onClickMenu(menuItem.url)"
             @keydown="onClickMenu(menuItem.url)"
-            :class="{ on_tab: isCurrentTab(menuItem.url) }"
           >
             {{ menuItem.text }}
           </span>

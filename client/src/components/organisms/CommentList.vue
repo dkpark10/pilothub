@@ -1,20 +1,31 @@
 <template>
-  <section v-if="commentData && commentData.length">
+  <section v-if="!loading && commentData?.length">
     <div class="comment_sort">
-      <button>최신순</button>
-      <button>과거순</button>
-      <button>추천순</button>
-      <button>반대순</button>
+      <button
+        type="button"
+        :class="{ on_tab: isCurrentTab(0) }"
+        @click="commentSortByDate(true, 0)"
+      >
+        최신순
+      </button>
+      <button
+        type="button"
+        :class="{ on_tab: isCurrentTab(1) }"
+        @click="commentSortByDate(false, 1)"
+      >
+        과거순
+      </button>
     </div>
     <ul
       v-for="(
-        { author, description, date, like, hate, commentId }, idx
+        { author, description, date, like, hate, id }, idx
       ) in commentData"
       :key="idx"
     >
       <li>
         <CommentItem
-          :commentId="commentId"
+          :commentId="id"
+          :postId="postId"
           :author="author"
           :description="description"
           :date="date"
@@ -24,50 +35,56 @@
       </li>
     </ul>
   </section>
+  <section class="no_comment" v-else-if="error">
+    <Sweat />
+    <span>댓글을 불러오지 못했습니다.</span>
+  </section>
   <section class="no_comment" v-else>
     <Sweat />
     <span>아직 댓글이 없습니다.</span>
   </section>
 </template>
 
-<script lang="ts">
-import axios from "axios";
-import { defineComponent, ref, onMounted, PropType } from "vue";
+<script setup lang="ts">
+import { defineProps, onUpdated, ref } from "vue";
 import CommentItem from "@/components/molecules/CommentItem.vue";
 import Sweat from "@/components/atoms/Sweat.vue";
 import { PostId, Comment } from "custom-type";
+import { BASE_URL, calculDate } from "@/utils/index";
+import { useFetch } from "@/hooks/index";
+import { useStore } from "vuex";
+import { RootState } from "@/store";
+import { SET_COMMENT_LENGTH } from "@/store/comment";
+import { computed } from "@vue/reactivity";
 
-export default defineComponent({
-  name: "comment-list",
-  components: {
-    CommentItem,
-    Sweat,
-  },
-  props: {
-    postId: {
-      type: Object as PropType<PostId>,
-    },
-  },
-  setup(props) {
-    const commentData = ref<Comment[]>([]);
+interface Props {
+  postId: PostId;
+}
 
-    const fetchComment = async () => {
-      const { data } = await axios.get<Comment[]>(
-        `http://localhost:3000/comment/${props.postId}`
-      );
-      commentData.value = data;
-    };
+const store = useStore<RootState>();
+const props = defineProps<Props>();
+const currentSortStatus = ref(0);
+const GET_COMMENT_URL = `${BASE_URL}/comment/${props.postId}`;
+const [commentData, loading, error] = useFetch<Comment[]>(GET_COMMENT_URL);
 
-    onMounted(() => {
-      fetchComment();
-    });
+const isCurrentTab = (state: number) => state === currentSortStatus.value;
 
-    return {
-      commentData,
-    };
-  },
+const commentSortByDate = (asc: boolean, nextSortStatus: number) => {
+  currentSortStatus.value = nextSortStatus;
+  commentData.value = commentData.value?.sort((prev, next) => {
+    return asc
+      ? calculDate(prev.date) - calculDate(next.date)
+      : calculDate(next.date) - calculDate(prev.date);
+  });
+};
+
+onUpdated(() => {
+  if (commentData.value) {
+    store.commit(SET_COMMENT_LENGTH, commentData.value.length);
+  }
 });
 </script>
+
 <style lang="scss" scoped>
 section {
   @include mob-hub-padding;
@@ -76,13 +93,13 @@ section {
 
 .comment_sort {
   @include flex-align-items-center;
-  height: 32px;
+  height: 38px;
   border-bottom: 1px solid $darker-gray;
 
   button {
     margin-right: 2vw;
     color: $font-color;
-    font-size: 0.85rem;
+    font-size: 0.88rem;
   }
 }
 
@@ -95,5 +112,9 @@ section {
   @include flex-center;
   font-size: 0.85rem;
   color: $font-color;
+}
+
+.on_tab {
+  font-weight: bold;
 }
 </style>

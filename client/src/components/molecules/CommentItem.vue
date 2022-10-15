@@ -9,12 +9,11 @@
         {{ description }}
       </p>
     </div>
-    <div class="comment_date">
-      {{ date }}
-      <button @click="deleteComment">삭제</button>
-    </div>
     <div class="comment_handler">
-      <span></span>
+      <div class="comment_date">
+        {{ date }}
+        <button @click="deleteComment">삭제</button>
+      </div>
       <div class="likehate">
         <button>
           <Like />
@@ -29,56 +28,34 @@
   </div>
 </template>
 
-<script lang="ts">
-import { defineComponent, computed, PropType } from "vue";
+<script setup lang="ts">
+import axios from "axios";
+import { computed, defineProps } from "vue";
 import Like from "@/components/atoms/Like.vue";
 import Hate from "@/components/atoms/Hate.vue";
-import { Comment } from "custom-type";
+import { Comment, PostId } from "custom-type";
+import { BASE_URL } from "@/utils/index";
+import { useRouter } from "vue-router";
 
-export default defineComponent({
-  name: "comment-item",
-  components: {
-    Like,
-    Hate,
-  },
-  props: {
-    author: {
-      type: Object as PropType<string>,
-      require: true,
-    },
-    description: {
-      type: Object as PropType<string>,
-      require: true,
-    },
-    date: {
-      type: Object as PropType<string>,
-      require: true,
-    },
-    like: {
-      type: Object as PropType<number>,
-      require: true,
-    },
-    hate: {
-      type: Object as PropType<number>,
-      require: true,
-    },
-    commentId: {
-      type: Object as PropType<Comment["commentId"]>,
-      require: true,
-    },
-  },
-  setup(props) {
-    const parsedAuthor = computed(() => `${props.author?.slice(0, -3)}****`);
-    const deleteComment = () => {
-      console.log(`이 댓글은 삭제한다. ${props.commentId}`);
-    };
+interface Props {
+  author: string;
+  description: string;
+  date: string;
+  like: number;
+  hate: number;
+  commentId: Comment["id"];
+  postId: PostId;
+}
+const props = defineProps<Props>();
+const router = useRouter();
 
-    return {
-      parsedAuthor,
-      deleteComment,
-    };
-  },
-});
+const parsedAuthor = computed(() => `${props.author?.slice(0, -3)}****`);
+const deleteComment = async () => {
+  const { commentId, postId } = props;
+  const DELETE_URL = `${BASE_URL}/comment/${commentId}?postid=${postId}`;
+  await axios.delete(DELETE_URL);
+  router.go(0);
+};
 </script>
 
 <style lang="scss" scoped>
@@ -101,7 +78,8 @@ export default defineComponent({
 .comment_author {
   color: $main-color;
   font-weight: bold;
-  font-size: 0.86rem;
+  font-size: 0.94rem;
+  height: 25px;
 }
 
 .comment_description {

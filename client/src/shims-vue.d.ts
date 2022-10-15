@@ -54,11 +54,14 @@ declare module 'custom-type' {
     rank: number;
   };
 
+  export type CommentDate = `${number}.${number}.${number} ${number}:${number}`;
+
   export interface Comment {
-    commentId: `${PostId}_${number}`;
+    id: number;
+    postid: `${PostId}_${number}`;
     description: string;
     author: string;
-    date: string;
+    date: CommentDate;
     like: number;
     hate: number;
   };
