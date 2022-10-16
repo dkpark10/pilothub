@@ -2,8 +2,11 @@
   <HeaderTop />
   <main>
     <div class="tag_content_wrapper">
-      <div class="page_title">인기 허브글</div>
-      <ul v-for="(item, idx) in postItems" :key="idx">
+      <div class="page_title_wrapper">
+        <div class="page_title">인기 허브글</div>
+        <span class="date">{{ rankItems?.date }} 기준</span>
+      </div>
+      <ul v-for="(item, idx) in rankItems?.rankedPosts" :key="idx">
         <li>
           <ImageContainer
             width="100%"
@@ -12,7 +15,7 @@
             :alt="item.title"
           />
           <PostInfo :show-rank="true" :title="item.title" :author="item.author">
-            <span> {{ item.rank }} </span>
+            <span> {{ idx + 1 }} </span>
           </PostInfo>
         </li>
       </ul>
@@ -22,13 +25,14 @@
 </template>
 
 <script lang="ts">
-import axios from "axios";
-import { defineComponent, ref, onMounted } from "vue";
+import { defineComponent } from "vue";
 import HeaderTop from "@/components/molecules/HeaderTop.vue";
 import ImageContainer from "@/components/atoms/ImageContainer.vue";
 import Footer from "@/components/organisms/Footer.vue";
 import PostInfo from "@/components/molecules/PostInfo.vue";
-import { RankedPostItem } from "custom-type";
+import { RankedPost } from "custom-type";
+import { useFetch } from "@/hooks/usefetch";
+import { BASE_URL } from "@/utils/index";
 
 export default defineComponent({
   name: "ranking-page",
@@ -39,20 +43,14 @@ export default defineComponent({
     PostInfo,
   },
   setup() {
-    const postItems = ref<RankedPostItem[]>([]);
-
-    onMounted(async () => {
-      const { data } = await axios.get<RankedPostItem[]>(
-        "http://localhost:3000/post/ranking"
-      );
-      postItems.value = data.map((item, idx) => ({
-        ...item,
-        rank: idx + 1,
-      }));
-    });
+    const [rankItems, loading, error] = useFetch<RankedPost>(
+      `${BASE_URL}/post/ranking`
+    );
 
     return {
-      postItems,
+      rankItems,
+      loading,
+      error,
     };
   },
 });
@@ -65,6 +63,12 @@ export default defineComponent({
   background-color: white;
 }
 
+.page_title_wrapper {
+  @include flex-space-between-align-center;
+  span {
+    @include date;
+  }
+}
 .page_title {
   font-size: 1.1rem;
   font-weight: bold;

@@ -1,8 +1,12 @@
 import { Injectable, CACHE_MANAGER, Inject } from '@nestjs/common';
 import { mockData } from '@/assets/hubmock/index';
-import { PostId, NavName, PostItem } from 'custom-type';
+import { PostId, NavName, PostItem, RankedPost } from 'custom-type';
 import { Cache } from 'cache-manager';
 import { Cron, CronExpression } from '@nestjs/schedule';
+import { parsingDate } from '@/utils';
+import { PostEntity } from './post.entity';
+import { InjectRepository } from '@nestjs/typeorm';
+import { PostRepository } from './post.repository';
 
 @Injectable()
 export class PostService {
@@ -19,7 +23,11 @@ export class PostService {
   private readonly RANKED_CACHE_KEY = 'RANKED_POST_KEY';
   private readonly MAIN_CACHE_KEY = 'MAIN_POST_KEY';
 
-  constructor(@Inject(CACHE_MANAGER) private readonly cacheManager: Cache) {
+  constructor(
+    @InjectRepository(PostEntity)
+    private readonly postRepository: PostRepository,
+    @Inject(CACHE_MANAGER) private readonly cacheManager: Cache,
+  ) {
     this.setCachedMainPost();
     this.setCachedRankedPost();
   }
@@ -33,10 +41,11 @@ export class PostService {
 
   getChannelPost(): PostItem[] {
     const result: PostItem[] = [];
+    console.log('채널 허브 글 데이터 반환');
 
     for (let day = 0; day < 3; day += 1) {
       const idx = (new Date().getDay() + day) % 8;
-      const category = this.domain[idx];   
+      const category = this.domain[idx];
       result.push(...mockData[category].slice(0, 4));
     }
 
@@ -45,7 +54,7 @@ export class PostService {
 
   /**
    * @description
-   * 메인허브글은 12시간마다 랜덤으로 추출하여 캐시 설정
+   * 메인허브글은 24시간마다 랜덤으로 추출하여 캐시 설정
    */
   @Cron(CronExpression.EVERY_DAY_AT_MIDNIGHT)
   async setCachedMainPost() {
@@ -83,17 +92,23 @@ export class PostService {
   @Cron(CronExpression.EVERY_30_MINUTES)
   async setCachedRankedPost() {
     try {
-      const rankedPost = this.extracRandomPost();
-      await this.cacheManager.set(this.RANKED_CACHE_KEY, rankedPost, {
-        ttl: 10800,
-      });
+      const date = parsingDate();
+      const rankedPosts = this.extracRandomPost();
+      this.cacheManager.set(
+        this.RANKED_CACHE_KEY,
+        {
+          date,
+          rankedPosts,
+        },
+        { ttl: 10800 },
+      );
     } catch (e) {
       console.error(e);
     }
   }
 
-  async getRankedPost(): Promise<PostItem[]> {
-    const result = await this.cacheManager.get<PostItem[]>(
+  async getRankedPost(): Promise<RankedPost> {
+    const result = await this.cacheManager.get<RankedPost>(
       this.RANKED_CACHE_KEY,
     );
     if (result !== undefined) {
@@ -101,12 +116,23 @@ export class PostService {
       return result;
     }
 
+    const date = parsingDate();
     const rankedPosts = this.extracRandomPost();
-    await this.cacheManager.set(this.RANKED_CACHE_KEY, rankedPosts);
+    this.cacheManager.set(
+      this.RANKED_CACHE_KEY,
+      {
+        date,
+        rankedPosts,
+      },
+      { ttl: 10800 },
+    );
 
     return new Promise((res) => {
       setTimeout(() => {
-        res(rankedPosts);
+        res({
+          date,
+          rankedPosts,
+        });
       }, 100);
     });
   }
@@ -134,6 +160,37 @@ export class PostService {
       });
     });
     return results;
+  }
+
+  async getReadPost(): Promise<PostItem[]> {
+    const readPosts = await this.postRepository.find();
+    return readPosts.map((post): PostItem => {
+      const [category, idx] = post.postid.split('_');
+      return mockData[category as NavName][idx];
+    });
+  }
+
+  async setReadPost(postid: PostId): Promise<boolean> {
+    this.delteReadPost(postid);
+
+    const readPosts = await this.postRepository.find();
+    if (readPosts.length >= 30) {
+      await this.postRepository.delete(readPosts[0].id);
+    }
+
+    const newReadPost = this.postRepository.create({ postid });
+    await this.postRepository.save(newReadPost);
+
+    return true;
+  }
+
+  async delteReadPost(postid: PostId) {
+    await this.postRepository
+      .createQueryBuilder()
+      .delete()
+      .from(PostEntity)
+      .where('postid = :postid', { postid })
+      .execute();
   }
 
   async setCacheTest() {

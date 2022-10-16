@@ -1,7 +1,7 @@
 <template>
   <section class="top_posts_wrapper">
     <h4>인기허브글</h4>
-    <ul v-for="(rankItem, idx) in rankItems" :key="idx">
+    <ul v-for="(rankItem, idx) in rankItems?.rankedPosts" :key="idx">
       <router-link :to="`post/${rankItem.postId}`">
         <li>
           <PostInfo
@@ -20,7 +20,7 @@
 <script lang="ts">
 import { defineComponent } from "vue";
 import PostInfo from "@/components/molecules/PostInfo.vue";
-import { RankedPostItem } from "custom-type";
+import { RankedPost } from "custom-type";
 import { BASE_URL } from "@/utils/index";
 import { useFetch } from "@/hooks/usefetch";
 
@@ -30,7 +30,7 @@ export default defineComponent({
     PostInfo,
   },
   setup() {
-    const [rankItems, loading, error] = useFetch<RankedPostItem[]>(
+    const [rankItems, loading, error] = useFetch<RankedPost>(
       `${BASE_URL}/post/ranking`
     );
 

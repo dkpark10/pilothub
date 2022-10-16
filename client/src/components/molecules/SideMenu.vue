@@ -1,6 +1,6 @@
 <template>
   <div>
-    <Overlay @click="closeSideMenu" :zIndex="1" />
+    <Overlay @click="closeSideMenu" :zIndex="2" />
     <nav>
       <ul>
         <router-link to="/">

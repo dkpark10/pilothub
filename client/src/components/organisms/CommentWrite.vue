@@ -2,7 +2,7 @@
   <div>
     <div class="comment_write_wrapper">
       <div class="textarea_header">
-        <span class="user">dkpark10</span>
+        <span class="user">wakandadeveloper</span>
         <span class="comment_length">{{ comment.length }} / 1000</span>
       </div>
       <textarea

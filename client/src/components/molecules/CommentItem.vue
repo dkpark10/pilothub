@@ -88,8 +88,7 @@ const deleteComment = async () => {
 }
 
 .comment_date {
-  font-size: 0.73rem;
-  color: $light-font-color;
+  @include date;
 
   button {
     font-size: inherit;

@@ -54,6 +54,11 @@ declare module 'custom-type' {
     rank: number;
   };
 
+  export interface RankedPost {
+    date: string;
+    rankedPosts: RankedPostItem[];
+  }
+
   export type CommentDate = `${number}.${number}.${number} ${number}:${number}`;
 
   export interface Comment {

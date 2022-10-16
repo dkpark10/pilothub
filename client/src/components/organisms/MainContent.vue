@@ -92,12 +92,17 @@ export default defineComponent({
   width: 100%;
   height: 100%;
 }
-
 .main_content_text {
   @include absolute-center;
+  @include word-ellipsis;
+  text-align: center;
   color: white;
   font-size: 1.1rem;
   width: 67%;
+  font-weight: bold;
+  display: -webkit-box;
+  -webkit-line-clamp: 2;
+  -webkit-box-orient: vertical;
 }
 
 .author_wrapper {

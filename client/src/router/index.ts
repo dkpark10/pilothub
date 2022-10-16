@@ -56,12 +56,12 @@ export default () => {
         name: "home",
         component: HomeView,
       },
-      {
-        path: "/login",
-        name: "login",
-        component: () =>
-          import(/* webpackChunkName: "login" */ "../components/page/Login.vue"),
-      },
+      // {
+      //   path: "/login",
+      //   name: "login",
+      //   component: () =>
+      //     import(/* webpackChunkName: "login" */ "../components/page/Login.vue"),
+      // },
       {
         path: "/ranking",
         name: "ranking",

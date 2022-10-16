@@ -1,6 +1,7 @@
-import { Controller, Get, Param } from '@nestjs/common';
+import { Controller, Get, Param, Post } from '@nestjs/common';
 import { PostService } from './post.service';
-import { PostId, PostItem } from 'custom-type';
+import { PostId, PostItem, RankedPost } from 'custom-type';
+import { PostEntity } from './post.entity';
 
 @Controller('post')
 export class PostController {
@@ -17,13 +18,18 @@ export class PostController {
   }
 
   @Get('/ranking')
-  async getRankedPost(): Promise<PostItem[]> {
+  async getRankedPost(): Promise<RankedPost> {
     return await this.postService.getRankedPost();
   }
 
   @Get('/search/:keyword')
   getSearchResult(@Param('keyword') keyword: string): PostItem[] {
     return this.postService.getSearchResult(keyword);
+  }
+
+  @Get('/read')
+  getReadPost(): Promise<PostItem[]> {
+    return this.postService.getReadPost();
   }
 
   @Get('/test')
@@ -34,5 +40,10 @@ export class PostController {
   @Get('/:postid')
   getPostById(@Param('postid') postid: PostId): PostItem {
     return this.postService.getPostById(postid);
+  }
+
+  @Post('/read/:postid')
+  setReadPost(@Param('postid') postid: PostId): Promise<boolean> {
+    return this.postService.setReadPost(postid);
   }
 }

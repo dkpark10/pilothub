@@ -72,3 +72,8 @@
 @mixin margin-y-axis {
   margin: 10px 0;
 }
+
+@mixin date {
+  font-size: 0.75rem;
+  color: $light-font-color;
+}

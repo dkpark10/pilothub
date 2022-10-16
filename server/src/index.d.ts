@@ -42,6 +42,11 @@ declare module 'custom-type' {
     author: string;
   }
 
+  export interface RankedPost {
+    date: string;
+    rankedPosts: PostItem[];
+  }
+
   export interface Comment {
     commentId: `${PostId}_${number}`;
     description: string;
