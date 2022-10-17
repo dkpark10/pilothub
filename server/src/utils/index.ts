@@ -14,3 +14,7 @@ export const parsingDate = (): string => {
     day,
   )} ${isitLessThan_10(hour)}:${isitLessThan_10(minute)}`;
 };
+
+export const getRandomLess50 = () => {
+  return Math.floor(Math.random() * 100) <= 0;
+}

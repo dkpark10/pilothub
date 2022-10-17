@@ -22,7 +22,7 @@ import { defineComponent } from "vue";
 import PostInfo from "@/components/molecules/PostInfo.vue";
 import { RankedPost } from "custom-type";
 import { BASE_URL } from "@/utils/index";
-import { useFetch } from "@/hooks/usefetch";
+import { useFetch } from "@/hooks/index";
 
 export default defineComponent({
   name: "top-posts",

@@ -3,14 +3,16 @@
     <h4>#{{ parseTitle(0) }}</h4>
     <div class="tag_content">
       <ul v-for="(item, index) in channelData?.slice(0, 4)" :key="index">
-        <li>
-          <TagContentCard
-            :imgUrl="item.imgUrl"
-            :title="item.title"
-            :author="item.author"
-            :webkitLineClamp="2"
-          />
-        </li>
+        <router-link :to="`post/${item.postId}`">
+          <li>
+            <TagContentCard
+              :imgUrl="item.imgUrl"
+              :title="item.title"
+              :author="item.author"
+              :webkitLineClamp="2"
+            />
+          </li>
+        </router-link>
       </ul>
     </div>
   </section>
@@ -18,14 +20,16 @@
     <h4>#{{ parseTitle(4) }}</h4>
     <div class="tag_content">
       <ul v-for="(item, index) in channelData?.slice(4, 8)" :key="index">
-        <li>
-          <TagContentCard
-            :imgUrl="item.imgUrl"
-            :title="item.title"
-            :author="item.author"
-            :webkitLineClamp="2"
-          />
-        </li>
+        <router-link :to="`post/${item.postId}`">
+          <li>
+            <TagContentCard
+              :imgUrl="item.imgUrl"
+              :title="item.title"
+              :author="item.author"
+              :webkitLineClamp="2"
+            />
+          </li>
+        </router-link>
       </ul>
     </div>
   </section>
@@ -33,14 +37,16 @@
     <h4>#{{ parseTitle(8) }}</h4>
     <div class="tag_content">
       <ul v-for="(item, index) in channelData?.slice(8)" :key="index">
-        <li>
-          <TagContentCard
-            :imgUrl="item.imgUrl"
-            :title="item.title"
-            :author="item.author"
-            :webkitLineClamp="2"
-          />
-        </li>
+        <router-link :to="`post/${item.postId}`">
+          <li>
+            <TagContentCard
+              :imgUrl="item.imgUrl"
+              :title="item.title"
+              :author="item.author"
+              :webkitLineClamp="2"
+            />
+          </li>
+        </router-link>
       </ul>
     </div>
   </section>

@@ -12,7 +12,7 @@
 <script lang="ts">
 import ImageContainer from "@/components/atoms/ImageContainer.vue";
 import { CSSProperties, defineComponent, Ref } from "vue";
-import { useFontSize } from "@/hooks/usefontsize";
+import { useFontSize } from "@/hooks/use_fontsize";
 
 interface Status {
   titleStyle: Ref<CSSProperties>;

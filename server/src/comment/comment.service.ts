@@ -4,6 +4,7 @@ import {
   CACHE_MANAGER,
   InternalServerErrorException,
   NotFoundException,
+  ServiceUnavailableException,
 } from '@nestjs/common';
 import { Cache } from 'cache-manager';
 import { CommentCredentialsDto } from './dto/comment.dto';
@@ -11,7 +12,7 @@ import { PostId } from 'custom-type';
 import { InjectRepository } from '@nestjs/typeorm';
 import { CommentRepository } from './comment.repository';
 import { CommentEntity } from './comment.entity';
-import { parsingDate } from '@/utils';
+import { parsingDate, getRandomLess50 } from '@/utils';
 
 @Injectable()
 export class CommentService {
@@ -22,6 +23,10 @@ export class CommentService {
   ) {}
 
   async getPostCommentById(postid: PostId): Promise<CommentEntity[]> {
+    if (getRandomLess50()) {
+      throw new ServiceUnavailableException("댓글 가져오기 실패 랜덤 50");
+    }
+
     const commentList = await this.commentRepository.find({
       where: { postid },
     });

@@ -13,7 +13,7 @@
 <script lang="ts">
 import { CSSProperties, defineComponent, Ref } from "vue";
 import { NavText, NavUrl } from "custom-type";
-import { useFontSize } from "@/hooks/usefontsize";
+import { useFontSize } from "@/hooks/use_fontsize";
 
 type FooterNavText = Exclude<NavText, "홈">;
 type FooterNavURL = Exclude<NavUrl, "/">;

@@ -42,52 +42,77 @@
   </div>
 </template>
 
-<script lang="ts">
-import { defineComponent, PropType } from "vue";
+<script setup lang="ts">
+import { ref, defineProps, defineEmits } from "vue";
 import Hamburger from "@/components/atoms/Hamburger.vue";
 import Magnifier from "@/components/atoms/Magnifier.vue";
 import ZoomLogo from "@/components/atoms/ZumLogo.vue";
 import Close from "@/components/atoms/Close.vue";
 import SideMenu from "@/components/molecules/SideMenu.vue";
 
-interface Status {
-  isShownSideMenu: boolean;
+interface Props {
+  isShownSearchBar: boolean;
 }
+defineProps<Props>();
 
-export default defineComponent({
-  name: "header-top",
-  props: {
-    isShownSearchBar: {
-      type: Object as PropType<boolean>,
-    },
-  },
-  data(): Status {
-    return {
-      isShownSideMenu: false,
-    };
-  },
-  components: {
-    Hamburger,
-    Magnifier,
-    Close,
-    ZoomLogo,
-    SideMenu,
-  },
-  methods: {
-    openSearchBar() {
-      this.$emit("show-search-bar");
-    },
-    closeSearchBar() {
-      this.$emit("close-search-bar");
-    },
-    openSideMenu() {
-      this.isShownSideMenu = true;
-    },
-    closeSideMenu() {
-      this.isShownSideMenu = false;
-    },
-  },
-});
+const emit = defineEmits(["show-search-bar", "close-search-bar"]);
+const isShownSideMenu = ref(false);
+
+const openSearchBar = () => {
+  emit("show-search-bar");
+};
+
+const closeSearchBar = () => {
+  emit("close-search-bar");
+};
+
+const openSideMenu = () => {
+  isShownSideMenu.value = true;
+};
+
+const closeSideMenu = () => {
+  isShownSideMenu.value = false;
+};
+
+// export default defineComponent({
+//   name: "header-top",
+//   props: {
+//     isShownSearchBar: {
+//       type: Object as PropType<boolean>,
+//     },
+//   },
+//   setup() {
+//     const isShownSideMenu = ref(false);
+//     const openSearchBar = () => {
+//       this.$emit("show-search-bar");
+//     }
+
+//     return {
+//       isShownSideMenu,
+//     };
+//   },
+//   components: {
+//     Hamburger,
+//     Magnifier,
+//     Close,
+//     ZoomLogo,
+//     SideMenu,
+//   },
+//   methods: {
+//     openSearchBar() {
+//       this.$emit("show-search-bar");
+//     },
+//     closeSearchBar() {
+//       this.$emit("close-search-bar");
+//     },
+//     openSideMenu() {
+//       this.isShownSideMenu = true;
+//     },
+//     closeSideMenu() {
+//       this.isShownSideMenu = false;
+//     },
+//   },
+// });
 </script>
 
 <style lang="scss" scoped>

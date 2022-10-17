@@ -3,7 +3,7 @@
   <div class="title_wrapper">
     <span>최근 읽은 글</span>
   </div>
-  <main v-if="data">
+  <main v-if="data && data.length > 0">
     <div class="content_wrapper">
       <ul v-for="(item, idx) in data" :key="idx">
         <router-link :to="`post/${item.postId}`">
@@ -25,7 +25,10 @@
     </div>
   </main>
   <main v-else>
-    <div class="content_wrapper">읽은 글이 없습니다.</div>
+    <div class="content_wrapper">
+      <Sweat />
+      읽은 글이 없습니다.
+    </div>
   </main>
   <Footer />
 </template>
@@ -34,11 +37,12 @@
 import { defineComponent } from "vue";
 import HeaderTop from "@/components/molecules/HeaderTop.vue";
 import Footer from "@/components/organisms/Footer.vue";
-import { mockData } from "@/assets/hubmock/index";
-import { useRecentPosts } from "@/hooks/use_recent_post";
 import ImageContainer from "@/components/atoms/ImageContainer.vue";
 import PostInfo from "@/components/molecules/PostInfo.vue";
-import { NavName, PostItem } from "custom-type";
+import Sweat from "@/components/atoms/Sweat.vue";
+import { BASE_URL } from "@/utils/index";
+import { useFetch } from "@/hooks/index";
+import { PostItem } from "custom-type";
 
 export default defineComponent({
   name: "recent-read-post",
@@ -47,24 +51,11 @@ export default defineComponent({
     HeaderTop,
     ImageContainer,
     PostInfo,
+    Sweat,
   },
   setup() {
-    const findRecentPost = () => {
-      const recentReadPosts = useRecentPosts();
-      if (recentReadPosts === null) {
-        return undefined;
-      }
-
-      return recentReadPosts.map((postId): PostItem => {
-        const category = postId.split("_")[0];
-
-        return mockData[category as NavName].find(
-          (postItem) => postItem.postId === postId
-        ) as PostItem;
-      });
-    };
-
-    const data = findRecentPost();
+    const URL = `${BASE_URL}/post/read`;
+    const [data, loading, error] = useFetch<PostItem[]>(URL);
     return {
       data,
     };

@@ -31,7 +31,7 @@ import ImageContainer from "@/components/atoms/ImageContainer.vue";
 import Footer from "@/components/organisms/Footer.vue";
 import PostInfo from "@/components/molecules/PostInfo.vue";
 import { RankedPost } from "custom-type";
-import { useFetch } from "@/hooks/usefetch";
+import { useFetch } from "@/hooks/index";
 import { BASE_URL } from "@/utils/index";
 
 export default defineComponent({

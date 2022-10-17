@@ -17,7 +17,7 @@
 
 <script lang="ts">
 import { defineComponent, PropType, Ref, CSSProperties } from "vue";
-import { useFontSize } from "@/hooks/usefontsize";
+import { useFontSize } from "@/hooks/index";
 
 interface Status {
   titleStyle: Ref<CSSProperties>;

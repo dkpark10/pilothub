@@ -16,10 +16,10 @@ export default defineComponent({
       type: Object as PropType<CSSProperties["zIndex"]>,
     },
   },
-  data(): Status {
+  setup(props): Status {
     return {
       style: {
-        zIndex: this.$props.zIndex || 0,
+        zIndex: props.zIndex || 0,
       },
     };
   },

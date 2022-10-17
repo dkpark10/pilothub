@@ -1,5 +1,5 @@
 <template>
-  <section v-if="!loading && commentData?.length">
+  <section v-if="store.state.commentModule.commentData.length > 0">
     <div class="comment_sort">
       <button
         type="button"
@@ -17,9 +17,8 @@
       </button>
     </div>
     <ul
-      v-for="(
-        { author, description, date, like, hate, id }, idx
-      ) in commentData"
+      v-for="({ author, description, date, like, hate, id }, idx) in store.state
+        .commentModule.commentData"
       :key="idx"
     >
       <li>
@@ -35,7 +34,7 @@
       </li>
     </ul>
   </section>
-  <section class="no_comment" v-else-if="error">
+  <section class="no_comment" v-else-if="store.state.commentModule.error">
     <Sweat />
     <span>댓글을 불러오지 못했습니다.</span>
   </section>
@@ -46,15 +45,13 @@
 </template>
 
 <script setup lang="ts">
-import { defineProps, onUpdated, ref } from "vue";
+import { defineProps, ref, onMounted } from "vue";
 import CommentItem from "@/components/molecules/CommentItem.vue";
 import Sweat from "@/components/atoms/Sweat.vue";
-import { PostId, Comment } from "custom-type";
-import { BASE_URL, calculDate } from "@/utils/index";
-import { useFetch } from "@/hooks/index";
+import { PostId } from "custom-type";
 import { useStore } from "vuex";
 import { RootState } from "@/store";
-import { SET_COMMENT_LENGTH } from "@/store/comment";
+import { GET_COMMENT_LIST_ACTION, SORT_COMMENT_DATA } from "@/store/comment";
 
 interface Props {
   postId: PostId;
@@ -63,24 +60,20 @@ interface Props {
 const store = useStore<RootState>();
 const props = defineProps<Props>();
 const currentSortStatus = ref(0);
-const GET_COMMENT_URL = `${BASE_URL}/comment/${props.postId}`;
-const [commentData, loading, error] = useFetch<Comment[]>(GET_COMMENT_URL);
 
 const isCurrentTab = (state: number) => state === currentSortStatus.value;
 
-const commentSortByDate = (asc: boolean, nextSortStatus: number) => {
+const setSortStatus = (nextSortStatus: number) => {
   currentSortStatus.value = nextSortStatus;
-  commentData.value = commentData.value?.sort((prev, next) => {
-    return asc
-      ? calculDate(prev.date) - calculDate(next.date)
-      : calculDate(next.date) - calculDate(prev.date);
-  });
 };
 
-onUpdated(() => {
-  if (commentData.value) {
-    store.commit(SET_COMMENT_LENGTH, commentData.value.length);
-  }
+const commentSortByDate = (asc: boolean, nextSortStatus: number) => {
+  setSortStatus(nextSortStatus);
+  store.commit(SORT_COMMENT_DATA, asc);
+};
+
+onMounted(() => {
+  store.dispatch(GET_COMMENT_LIST_ACTION, props.postId);
 });
 </script>
 

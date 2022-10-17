@@ -34,9 +34,9 @@ import { Carousel, Slide } from "vue3-carousel";
 import "vue3-carousel/dist/carousel.css";
 import ImageContainer from "@/components/atoms/ImageContainer.vue";
 import Overlay from "@/components/atoms/Overlay.vue";
-import { PostItem } from "@/assets/hubmock/MainContent";
 import { BASE_URL } from "@/utils";
 import { useFetch } from "@/hooks/index";
+import { PostItem } from "custom-type";
 
 interface State {
   breakpoints: {

@@ -1,6 +1,7 @@
-import { Controller, Get, Post, Param, Header } from '@nestjs/common';
+import { Controller, Get, Post, Param, Header, ServiceUnavailableException } from '@nestjs/common';
 import { AppService } from './app.service';
 import { NavName, PostItem } from 'custom-type';
+import { getRandomLess50 } from './utils';
 
 @Controller('/')
 export class AppController {
@@ -11,6 +12,14 @@ export class AppController {
   getTest(): string {
     console.log('들어옴');
     return '테스틉니당 다시 테스트 한다!';
+  }
+
+  @Get('/random')
+  getRandomTest(): string {
+    if (getRandomLess50()) {
+      throw new ServiceUnavailableException("랜덤 50 이하");
+    }
+    return '랜덤 테스트';
   }
 
   @Get('/:category')

@@ -11,36 +11,33 @@
 </template>
 
 <script lang="ts">
-import { defineComponent } from "vue";
+import { defineComponent, ref } from "vue";
 import HeaderBottom from "@/components/molecules/HeaderBottom.vue";
 import HeaderTop from "@/components/molecules/HeaderTop.vue";
 import SearchBar from "@/components/molecules/SearchBar.vue";
-import Carousel from "@/components/atoms/Carousel.vue";
-
-interface State {
-  isShownSearchBar: boolean;
-}
 
 export default defineComponent({
-  name: "header-component",
+  name: "HeaderComponent",
   components: {
-    HeaderTop,
     HeaderBottom,
+    HeaderTop,
     SearchBar,
-    Carousel,
   },
-  data(): State {
-    return {
-      isShownSearchBar: false,
+  setup() {
+    const isShownSearchBar = ref(false);
+    const showSearchBar = () => {
+      isShownSearchBar.value = true;
     };
-  },
-  methods: {
-    showSearchBar() {
-      this.isShownSearchBar = true;
-    },
-    closeSearchBar() {
-      this.isShownSearchBar = false;
-    },
+
+    const closeSearchBar = () => {
+      isShownSearchBar.value = false;
+    };
+
+    return {
+      isShownSearchBar,
+      showSearchBar,
+      closeSearchBar,
+    };
   },
 });
 </script>

@@ -1,10 +1,10 @@
 import { useRecentPosts } from "./use_recent_post";
-import { useFetch } from "./usefetch";
-import { useFontSize } from "./usefontsize";
-import { useInput } from "./useinput";
-import { useIntersection } from "./useintersection";
-import { useRequestAniFrame } from "./userequestaniframe";
-import { useScroll } from "./usescroll";
+import { useFetch } from "./use_fetch";
+import { useFontSize } from "./use_fontsize";
+import { useInput } from "./use_input";
+import { useIntersection } from "./use_intersection";
+import { useRequestAniFrame } from "./use_requestaniframe";
+import { useScroll } from "./use_scroll";
 
 export {
   useRecentPosts,

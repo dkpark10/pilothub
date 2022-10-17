@@ -31,9 +31,9 @@ import Header from "@/components/organisms/Header.vue";
 import Footer from "@/components/organisms/Footer.vue";
 import { BASE_URL } from "@/utils/index";
 import { PostItem } from "custom-type";
-import { useIntersection } from "@/hooks/useintersection";
-import { useScroll } from "@/hooks/usescroll";
-import { useRequestAniFrame } from "@/hooks/userequestaniframe";
+import { useIntersection } from "@/hooks/use_intersection";
+import { useScroll } from "@/hooks/use_scroll";
+import { useRequestAniFrame } from "@/hooks/use_requestaniframe";
 
 interface Status {
   shwonItem: Ref<PostItem[]>;

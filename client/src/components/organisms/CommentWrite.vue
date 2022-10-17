@@ -31,7 +31,7 @@
 <script setup lang="ts">
 import axios from "axios";
 import { defineProps } from "vue";
-import { useInput } from "@/hooks/useinput";
+import { useInput } from "@/hooks/use_input";
 import Button from "@/components/atoms/Button.vue";
 import { useRouter } from "vue-router";
 import { PostId } from "custom-type";
