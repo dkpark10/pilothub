@@ -14,16 +14,6 @@
         {{ date }}
         <button @click="deleteComment">삭제</button>
       </div>
-      <div class="likehate">
-        <button>
-          <Like />
-        </button>
-        <span>{{ like }}</span>
-        <button>
-          <Hate />
-        </button>
-        <span>{{ hate }}</span>
-      </div>
     </div>
   </div>
 </template>
@@ -31,8 +21,6 @@
 <script setup lang="ts">
 import axios from "axios";
 import { computed, defineProps } from "vue";
-import Like from "@/components/atoms/Like.vue";
-import Hate from "@/components/atoms/Hate.vue";
 import { Comment, PostId } from "custom-type";
 import { BASE_URL } from "@/utils/index";
 import { useRouter } from "vue-router";

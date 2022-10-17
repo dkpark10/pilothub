@@ -43,7 +43,7 @@ export class PostController {
   }
 
   @Post('/read/:postid')
-  setReadPost(@Param('postid') postid: PostId): Promise<boolean> {
+  setReadPost(@Param('postid') postid: PostId): Promise<PostEntity[]> {
     return this.postService.setReadPost(postid);
   }
 }

@@ -55,7 +55,6 @@ import { useFetch } from "@/hooks/index";
 import { useStore } from "vuex";
 import { RootState } from "@/store";
 import { SET_COMMENT_LENGTH } from "@/store/comment";
-import { computed } from "@vue/reactivity";
 
 interface Props {
   postId: PostId;

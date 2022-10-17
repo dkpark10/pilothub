@@ -170,7 +170,7 @@ export class PostService {
     });
   }
 
-  async setReadPost(postid: PostId): Promise<boolean> {
+  async setReadPost(postid: PostId): Promise<PostEntity[]> {
     this.delteReadPost(postid);
 
     const readPosts = await this.postRepository.find();
@@ -181,7 +181,7 @@ export class PostService {
     const newReadPost = this.postRepository.create({ postid });
     await this.postRepository.save(newReadPost);
 
-    return true;
+    return [...readPosts, newReadPost];
   }
 
   async delteReadPost(postid: PostId) {
