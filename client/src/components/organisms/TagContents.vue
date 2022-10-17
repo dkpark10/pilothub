@@ -74,7 +74,9 @@ export default defineComponent({
       if (channelData.value === undefined) {
         return "";
       }
-      const channelName = channelData.value[idx].postId.split("_")[0];
+
+      const postid = channelData.value[idx].postId;
+      const channelName = postid.split("_")[0];
       return `${channelName[0].toUpperCase()}${channelName.slice(1)}`;
     };
 

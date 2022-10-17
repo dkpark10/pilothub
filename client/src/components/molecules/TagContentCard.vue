@@ -9,48 +9,21 @@
   </article>
 </template>
 
-<script lang="ts">
+<script setup lang="ts">
 import ImageContainer from "@/components/atoms/ImageContainer.vue";
-import { CSSProperties, defineComponent, Ref } from "vue";
+import { defineProps } from "vue";
 import { useFontSize } from "@/hooks/use_fontsize";
 
-interface Status {
-  titleStyle: Ref<CSSProperties>;
-  authorStyle: Ref<CSSProperties>;
+interface Props {
+  imgUrl: string;
+  title: string;
+  author: string;
+  webkitLineClamp: number;
 }
 
-export default defineComponent({
-  name: "tag-content-card",
-  components: {
-    ImageContainer,
-  },
-  props: {
-    imgUrl: {
-      type: String,
-      require: true,
-    },
-    title: {
-      type: String,
-      require: true,
-    },
-    author: {
-      type: String,
-      require: true,
-    },
-    webkitLineClamp: {
-      type: Number,
-    },
-  },
-  setup(): Status {
-    const titleStyle = useFontSize(15);
-    const authorStyle = useFontSize(12);
-
-    return {
-      titleStyle,
-      authorStyle,
-    };
-  },
-});
+defineProps<Props>();
+const titleStyle = useFontSize(15);
+const authorStyle = useFontSize(12);
 </script>
 
 <style lang="scss" scoped>

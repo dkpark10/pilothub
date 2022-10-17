@@ -7,6 +7,7 @@ import { AppModule } from './app.module';
     origin: [
       'http://localhost:8080',
       'http://localhost:4001',
+      'http://localhost:4002',
     ],
   });
   const PORT = 3000;
