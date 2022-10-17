@@ -89,7 +89,8 @@ export class PostService {
    * @description
    * 인기허브글은 30분마다 랜덤으로 추출하여 캐시 설정
    */
-  @Cron(CronExpression.EVERY_30_MINUTES)
+  // @Cron(CronExpression.EVERY_30_MINUTES)
+  @Cron(CronExpression.EVERY_MINUTE)
   async setCachedRankedPost() {
     try {
       const date = parsingDate();
