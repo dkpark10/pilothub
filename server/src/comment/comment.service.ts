@@ -24,7 +24,7 @@ export class CommentService {
 
   async getPostCommentById(postid: PostId): Promise<CommentEntity[]> {
     if (getRandomLess50()) {
-      throw new ServiceUnavailableException("댓글 가져오기 실패 랜덤 50");
+      throw new ServiceUnavailableException('댓글 가져오기 실패 랜덤 50');
     }
 
     const commentList = await this.commentRepository.find({

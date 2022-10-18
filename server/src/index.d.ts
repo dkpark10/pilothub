@@ -43,6 +43,7 @@ declare module 'custom-type' {
   }
 
   export interface RankedPost {
+    updatedMillSec: number;
     date: string;
     rankedPosts: PostItem[];
   }

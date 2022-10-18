@@ -43,7 +43,6 @@ export class PostService {
 
   getChannelPost(): PostItem[] {
     const result: PostItem[] = [];
-    console.log('채널 허브 글 데이터 반환');
 
     for (let day = 0; day < 3; day += 1) {
       const idx = (new Date().getDay() + day) % 8;
@@ -56,7 +55,7 @@ export class PostService {
 
   /**
    * @description
-   * 메인허브글은 24시간마다 랜덤으로 추출하여 캐시 설정
+   * 메인허브글도 1분마다 랜덤으로 추출하여 캐시 설정
    */
   @Cron(CronExpression.EVERY_MINUTE)
   async setCachedMainPost() {
@@ -89,7 +88,7 @@ export class PostService {
 
   /**
    * @description
-   * 인기허브글은 30분마다 랜덤으로 추출하여 캐시 설정
+   * 인기허브글은 1분마다 랜덤으로 추출하여 캐시 설정
    */
   // @Cron(CronExpression.EVERY_30_MINUTES)
   @Cron(CronExpression.EVERY_MINUTE)
@@ -97,9 +96,10 @@ export class PostService {
     try {
       const date = parsingDate();
       const rankedPosts = this.extracRandomPost();
-      this.cacheManager.set(
+      this.cacheManager.set<RankedPost>(
         this.RANKED_CACHE_KEY,
         {
+          updatedMillSec: new Date().getTime(),
           date,
           rankedPosts,
         },
@@ -115,15 +115,18 @@ export class PostService {
       this.RANKED_CACHE_KEY,
     );
     if (result !== undefined) {
-      console.log(`인기 허브 글 캐시 데이터 반환${++this.rankCRequestount % 20}`);
+      console.log(
+        `인기 허브 글 캐시 데이터 반환${++this.rankCRequestount % 20}`,
+      );
       return result;
     }
 
     const date = parsingDate();
     const rankedPosts = this.extracRandomPost();
-    this.cacheManager.set(
+    this.cacheManager.set<RankedPost>(
       this.RANKED_CACHE_KEY,
       {
+        updatedMillSec: new Date().getTime(),
         date,
         rankedPosts,
       },
@@ -133,6 +136,7 @@ export class PostService {
     return new Promise((res) => {
       setTimeout(() => {
         res({
+          updatedMillSec: new Date().getTime(),
           date,
           rankedPosts,
         });

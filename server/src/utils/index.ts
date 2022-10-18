@@ -17,4 +17,4 @@ export const parsingDate = (): string => {
 
 export const getRandomLess50 = () => {
   return Math.floor(Math.random() * 100) <= 0;
-}
+};
