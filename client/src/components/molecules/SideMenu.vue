@@ -18,24 +18,30 @@
 </template>
 
 <script lang="ts">
-import { defineComponent } from "vue";
+import { defineComponent, onMounted, ref } from "vue";
 import Overlay from "@/components/atoms/Overlay.vue";
-import { useRecentPosts } from "@/hooks/use_recent_post";
+import { useStore } from "vuex";
+import { BASE_URL } from "@/utils";
+import { httpFetchData } from "@/utils/apihandler";
+import { SET_RECENT_READ_POST_LEN } from "@/store/ui";
+import { RootState } from "@/store/index";
+import { PostItem } from "custom-type";
 
 export default defineComponent({
   name: "side-menu",
   components: {
     Overlay,
   },
-  methods: {
-    closeSideMenu() {
-      this.$emit("close-side-menu");
-    },
-  },
-  setup() {
-    const recentReadPosts = useRecentPosts();
+  setup(_, { emit }) {
+    const store = useStore<RootState>();
+    const closeSideMenu = () => {
+      emit("close-side-menu");
+    };
+    const recentReadPostsLength = ref(store.state.uiModule.recentReadPostsLen);
+
     return {
-      recentReadPostsLength: recentReadPosts?.length || 0,
+      recentReadPostsLength,
+      closeSideMenu,
     };
   },
 });

@@ -17,7 +17,7 @@ import TagContent from "@/components/organisms/TagContents.vue";
 import Footer from "@/components/organisms/Footer.vue";
 import { RootState } from "@/store/index";
 import { useStore } from "vuex";
-import { SET_CURRENT_TAB } from "@/store/tab";
+import { SET_CURRENT_TAB } from "@/store/ui";
 
 export default defineComponent({
   name: "app",

@@ -2,7 +2,11 @@
   <footer>
     <div class="footer_top">
       <div>
-        <button class="footer_button" :style="{ width: '32px' }">
+        <button
+          class="footer_button"
+          @click="refresh"
+          :style="{ width: '32px' }"
+        >
           <Refresh />
         </button>
       </div>
@@ -65,12 +69,7 @@ import FontSmaller from "@/components/atoms/FontSmaller.vue";
 import { INCREASE_FONT_SIZE, DECREASE_FONT_SIZE } from "@/store/fontsize/index";
 import { RootState } from "@/store/index";
 import { useStore } from "vuex";
-
-interface State {
-  increaseFontSize: () => void;
-  decreaseFontSize: () => void;
-  toTop: () => void;
-}
+import { useRouter } from "vue-router";
 
 export default defineComponent({
   name: "footer-component",
@@ -79,8 +78,14 @@ export default defineComponent({
     FontLouder,
     FontSmaller,
   },
-  setup(): State {
+  setup() {
     const store = useStore<RootState>();
+    const router = useRouter();
+
+    const refresh = () => {
+      router.go(0);
+    };
+
     const increaseFontSize = () => {
       store.commit(INCREASE_FONT_SIZE, 1.1);
     };
@@ -97,6 +102,7 @@ export default defineComponent({
       increaseFontSize,
       decreaseFontSize,
       toTop,
+      refresh,
     };
   },
 });

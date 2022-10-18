@@ -24,7 +24,7 @@
 
 <script lang="ts">
 import axios from "axios";
-import { defineComponent, onMounted, onUnmounted, watch, ref, Ref } from "vue";
+import { defineComponent, onMounted, onUnmounted, watch, ref } from "vue";
 import { useRoute } from "vue-router";
 import TagContentCard from "@/components/molecules/TagContentCard.vue";
 import Header from "@/components/organisms/Header.vue";
@@ -32,15 +32,8 @@ import Footer from "@/components/organisms/Footer.vue";
 import { BASE_URL } from "@/utils/index";
 import { PostItem } from "custom-type";
 import { useIntersection } from "@/hooks/use_intersection";
-import { useScroll } from "@/hooks/use_scroll";
-import { useRequestAniFrame } from "@/hooks/use_requestaniframe";
-
-interface Status {
-  shwonItem: Ref<PostItem[]>;
-  targetRef: Ref<Element | undefined>;
-  countOfFetchData: number;
-  beginIndexofFetchData: number;
-}
+// import { useScroll } from "@/hooks/use_scroll";
+// import { useRequestAniFrame } from "@/hooks/use_requestaniframe";
 
 export default defineComponent({
   name: "app",
@@ -49,7 +42,7 @@ export default defineComponent({
     TagContentCard,
     Footer,
   },
-  setup(): Status {
+  setup() {
     const route = useRoute();
     let beginIndexofFetchData = 0;
     let category = route.params.category;

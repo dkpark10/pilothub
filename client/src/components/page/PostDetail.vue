@@ -7,7 +7,7 @@
           :src="(post?.imgUrl as string)"
           :alt="(post?.title as string)"
           width="100%"
-          height="160px"
+          height="200px"
         />
         <div class="title">{{ post?.title as string }}</div>
         <div class="author"><em>by </em>{{ post?.author as string }}</div>
@@ -24,7 +24,6 @@
 </template>
 
 <script setup lang="ts">
-import { onMounted } from "vue";
 import { useRoute } from "vue-router";
 import Header from "@/components/organisms/Header.vue";
 import Footer from "@/components/organisms/Footer.vue";
@@ -33,22 +32,17 @@ import CommentWrite from "@/components/organisms/CommentWrite.vue";
 import CommentList from "@/components/organisms/CommentList.vue";
 import ImageContainer from "@/components/atoms/ImageContainer.vue";
 import { PostId, PostItem } from "custom-type";
-import { useRecentPosts, useFetch } from "@/hooks/index";
-import { BASE_URL, setRecentPost } from "@/utils";
+import { useFetch } from "@/hooks/index";
+import { BASE_URL } from "@/utils";
 import { useStore } from "vuex";
 import { RootState } from "@/store";
 
 const store = useStore<RootState>();
 const route = useRoute();
 const postid = route.params.id as PostId;
-const recentPost = useRecentPosts();
 
 const getFetchPostURL = `${BASE_URL}/post/${postid}`;
-const [post, postLoading, postError] = useFetch<PostItem>(getFetchPostURL);
-
-onMounted(() => {
-  setRecentPost(recentPost, postid);
-});
+const [post, postLoading] = useFetch<PostItem>(getFetchPostURL);
 </script>
 
 <style lang="scss" scoped>

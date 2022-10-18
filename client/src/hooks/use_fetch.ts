@@ -1,4 +1,5 @@
-import axios, { AxiosRequestConfig } from "axios";
+import { AxiosRequestConfig } from "axios";
+import { httpFetchData } from "@/utils/apihandler";
 import { ref, Ref } from "vue";
 
 type Return<T> = [Ref<T | undefined>, Ref<boolean>, Ref<boolean>];
@@ -13,7 +14,7 @@ export const useFetch = <T>(
 
   const fetch = async () => {
     try {
-      const response = await axios.get<T>(url);
+      const response = await httpFetchData<T>(url, option);
       data.value = response.data;
     } catch (e) {
       error.value = true;

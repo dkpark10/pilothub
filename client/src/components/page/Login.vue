@@ -47,18 +47,13 @@ import { defineComponent } from "vue";
 import InputText from "@/components/atoms/InputText.vue";
 import Button from "@/components/atoms/Button.vue";
 
-interface Status {
-  width: string;
-  height: string;
-}
-
 export default defineComponent({
   name: "login-page",
   components: {
     InputText,
     Button,
   },
-  setup(): Status {
+  setup() {
     return {
       width: "100%",
       height: "45px",

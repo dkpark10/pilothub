@@ -5,10 +5,6 @@
 <script lang="ts">
 import { defineComponent, PropType, CSSProperties } from "vue";
 
-interface Status {
-  style: CSSProperties;
-}
-
 export default defineComponent({
   name: "input-text-component",
   props: {
@@ -19,7 +15,7 @@ export default defineComponent({
       type: Object as PropType<CSSProperties["height"]>,
     },
   },
-  setup(props): Status {
+  setup(props) {
     const style = {
       width: props.width,
       height: props.height,

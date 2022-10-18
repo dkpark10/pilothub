@@ -3,18 +3,24 @@ import { RootState } from "@/store/index";
 import { NavUrl } from "custom-type";
 
 export const SET_CURRENT_TAB = "SET_CURRENT_TAB";
+export const SET_RECENT_READ_POST_LEN = "SET_RECENT_READ_POST_LEN";
 
-export interface CurrentTabState {
+export interface UiStatus {
   currentTab: NavUrl;
+  recentReadPostsLen: number;
 }
 
-export const currentTabModule: Module<CurrentTabState, RootState> = {
-  state: (): CurrentTabState => ({
+export const uiModule: Module<UiStatus, RootState> = {
+  state: (): UiStatus => ({
     currentTab: "/",
+    recentReadPostsLen: 0,
   }),
   mutations: {
     [SET_CURRENT_TAB](state, tab: NavUrl) {
       state.currentTab = tab;
+    },
+    [SET_RECENT_READ_POST_LEN](state, len: number) {
+      state.recentReadPostsLen = len;
     },
   },
   actions: {

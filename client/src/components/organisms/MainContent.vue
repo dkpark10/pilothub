@@ -9,23 +9,25 @@
       :breakpoints="breakpoints"
     >
       <Slide v-for="(menuItem, idx) in mainData" :key="idx">
-        <div class="main_content_item_wrapper">
-          <Overlay />
-          <strong class="main_content_text">
-            {{ parsingTitle(menuItem.title, 0) }}
-            <br />
-            {{ parsingTitle(menuItem.title, 1) }}
-          </strong>
-          <div class="author_wrapper">
-            <em>by</em>
-            {{ menuItem.author }}
+        <router-link :to="`/post/${menuItem.postId}`">
+          <div class="main_content_item_wrapper">
+            <Overlay />
+            <strong class="main_content_text">
+              {{ parsingTitle(menuItem.title, 0) }}
+              <br />
+              {{ parsingTitle(menuItem.title, 1) }}
+            </strong>
+            <div class="author_wrapper">
+              <em>by</em>
+              {{ menuItem.author }}
+            </div>
+            <ImageContainer
+              height="100%"
+              :src="menuItem.imgUrl"
+              :alt="menuItem.title"
+            />
           </div>
-          <ImageContainer
-            height="100%"
-            :src="menuItem.imgUrl"
-            :alt="menuItem.title"
-          />
-        </div>
+        </router-link>
       </Slide>
     </Carousel>
   </div>
@@ -42,12 +44,10 @@ import { BASE_URL } from "@/utils";
 import { useFetch } from "@/hooks/index";
 import { PostItem } from "custom-type";
 
-interface State {
-  breakpoints: {
-    [width: number]: {
-      itemsToShow: number;
-      snapAlign: string;
-    };
+interface BreakPoints {
+  [width: number]: {
+    itemsToShow: number;
+    snapAlign: string;
   };
 }
 
@@ -61,7 +61,7 @@ export default defineComponent({
     Skeleton,
   },
   setup() {
-    const breakpoints: State["breakpoints"] = {
+    const breakpoints: BreakPoints = {
       1: {
         itemsToShow: 1.2,
         snapAlign: "start",
@@ -97,6 +97,7 @@ export default defineComponent({
   width: 100%;
   height: 100%;
 }
+
 .main_content_text {
   @include absolute-center;
   @include word-ellipsis;

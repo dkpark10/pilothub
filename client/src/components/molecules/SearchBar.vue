@@ -17,7 +17,6 @@
 </template>
 
 <script lang="ts">
-import axios from "axios";
 import { defineComponent, PropType, ref } from "vue";
 import Magnifier from "@/components/atoms/Magnifier.vue";
 import { useRouter } from "vue-router";

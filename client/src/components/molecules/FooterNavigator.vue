@@ -11,7 +11,7 @@
 </template>
 
 <script lang="ts">
-import { CSSProperties, defineComponent, Ref } from "vue";
+import { defineComponent } from "vue";
 import { NavText, NavUrl } from "custom-type";
 import { useFontSize } from "@/hooks/use_fontsize";
 
@@ -23,14 +23,9 @@ interface MenuItem {
   url: FooterNavURL;
 }
 
-interface Status {
-  fontSizeStyle: Ref<CSSProperties>;
-  menuItems: MenuItem[];
-}
-
 export default defineComponent({
   name: "footer-component",
-  setup(): Status {
+  setup() {
     const fontSizeStyle = useFontSize(14);
     const menuItems: MenuItem[] = [
       {

@@ -2,9 +2,19 @@ import { createApp } from "vue";
 import App from "./App.vue";
 import createRouter from "./router/index";
 import createStore from "./store/index";
+import { getRecentReadPost } from "@/middlewares/readposts";
 
 const app = createApp(App);
-app.use(createStore()).use(createRouter()).mount("#app");
+const store = createStore();
+const router = createRouter();
+
+router.beforeEach(async (to, from, next) => {
+  await getRecentReadPost(store);
+  next();
+});
+
+app.use(store).use(router).mount("#app");
+
 const isProductionMode = process.env.NODE_ENV === "production";
 
 /**

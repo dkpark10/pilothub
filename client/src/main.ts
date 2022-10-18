@@ -11,11 +11,12 @@ export default () => {
 
   const isSSR = process.env.SSR;
   const app = (isSSR ? createSSRApp : createApp)(rootComponent);
-  const router = createRouter();
-  const store = createStore();
 
-  app.use(router);
+  const store = createStore();
   app.use(store);
+
+  const router = createRouter();
+  app.use(router);
 
   return {
     app,

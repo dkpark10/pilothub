@@ -51,7 +51,7 @@ import Close from "@/components/atoms/Close.vue";
 import SideMenu from "@/components/molecules/SideMenu.vue";
 
 interface Props {
-  isShownSearchBar: boolean;
+  isShownSearchBar?: boolean;
 }
 defineProps<Props>();
 
@@ -73,46 +73,6 @@ const openSideMenu = () => {
 const closeSideMenu = () => {
   isShownSideMenu.value = false;
 };
-
-// export default defineComponent({
-//   name: "header-top",
-//   props: {
-//     isShownSearchBar: {
-//       type: Object as PropType<boolean>,
-//     },
-//   },
-//   setup() {
-//     const isShownSideMenu = ref(false);
-//     const openSearchBar = () => {
-//       this.$emit("show-search-bar");
-//     }
-
-//     return {
-//       isShownSideMenu,
-//     };
-//   },
-//   components: {
-//     Hamburger,
-//     Magnifier,
-//     Close,
-//     ZoomLogo,
-//     SideMenu,
-//   },
-//   methods: {
-//     openSearchBar() {
-//       this.$emit("show-search-bar");
-//     },
-//     closeSearchBar() {
-//       this.$emit("close-search-bar");
-//     },
-//     openSideMenu() {
-//       this.isShownSideMenu = true;
-//     },
-//     closeSideMenu() {
-//       this.isShownSideMenu = false;
-//     },
-//   },
-// });
 </script>
 
 <style lang="scss" scoped>

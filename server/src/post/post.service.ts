@@ -22,6 +22,8 @@ export class PostService {
   ];
   private readonly RANKED_CACHE_KEY = 'RANKED_POST_KEY';
   private readonly MAIN_CACHE_KEY = 'MAIN_POST_KEY';
+  private mainRequestCount = 0;
+  private rankCRequestount = 0;
 
   constructor(
     @InjectRepository(PostEntity)
@@ -71,7 +73,7 @@ export class PostService {
   async getMainPost() {
     const result = await this.cacheManager.get<PostItem[]>(this.MAIN_CACHE_KEY);
     if (result !== undefined) {
-      console.log('메인 허브 글 캐시 데이터 반환');
+      console.log(`메인 허브 글 캐시 데이터 반환${this.mainRequestCount % 20}`);
       return result;
     }
 
@@ -113,7 +115,7 @@ export class PostService {
       this.RANKED_CACHE_KEY,
     );
     if (result !== undefined) {
-      console.log('인기 허브 글 캐시 데이터 반환');
+      console.log(`인기 허브 글 캐시 데이터 반환${++this.rankCRequestount % 20}`);
       return result;
     }
 

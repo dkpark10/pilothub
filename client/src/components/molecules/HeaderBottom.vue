@@ -27,7 +27,7 @@ import { Carousel, Slide } from "vue3-carousel";
 import "vue3-carousel/dist/carousel.css";
 import { NavText, NavUrl } from "custom-type";
 import { RootState } from "@/store/index";
-import { SET_CURRENT_TAB } from "@/store/tab/index";
+import { SET_CURRENT_TAB } from "@/store/ui/index";
 import { useStore } from "vuex";
 
 interface MenuItem {
@@ -104,7 +104,7 @@ export default defineComponent({
     };
 
     const isCurrentTab = (url: NavUrl) => {
-      return store.state.currentTabModule.currentTab === url;
+      return store.state.uiModule.currentTab === url;
     };
 
     onMounted(() => {
