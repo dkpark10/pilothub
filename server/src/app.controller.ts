@@ -1,4 +1,4 @@
-import { Controller, Get, Post, Param, Header, ServiceUnavailableException } from '@nestjs/common';
+import { Controller, Get, Request, Param, Header, ServiceUnavailableException, Req } from '@nestjs/common';
 import { AppService } from './app.service';
 import { NavName, PostItem } from 'custom-type';
 import { getRandomLess50 } from './utils';
@@ -30,7 +30,7 @@ export class AppController {
   }
 
   @Get('/')
-  async getHome(): Promise<string> {
-    return await this.appService.getServerSideRender();
+  async getHome(@Req() request: Request): Promise<string> {
+    return await this.appService.getServerSideRender(request.url);
   }
 }

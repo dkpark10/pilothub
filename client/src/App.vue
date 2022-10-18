@@ -1,5 +1,7 @@
 <template>
-  <router-view :key="route.fullPath" />
+  <div id="app">
+    <router-view :key="route.fullPath" />
+  </div>
 </template>
 
 <script lang="ts">

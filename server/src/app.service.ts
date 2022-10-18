@@ -10,7 +10,7 @@ export class AppService {
   // eslint-disable-next-line @typescript-eslint/no-empty-function
   constructor() {}
 
-  async getServerSideRender(): Promise<string> {
+  async getServerSideRender(url: string): Promise<string> {
     // eslint-disable-next-line @typescript-eslint/no-var-requires
     const manifest = require('../ssr/server/ssr-manifest.json');
     const appPath = join(__dirname, '../ssr', 'server', manifest['app.js']);
@@ -20,7 +20,7 @@ export class AppService {
 
     const { app, router } = await createApp();
 
-    router.push('/');
+    router.push(url);
     await router.isReady();
     let appContent = await renderToString(app);
 

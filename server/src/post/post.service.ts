@@ -56,7 +56,7 @@ export class PostService {
    * @description
    * 메인허브글은 24시간마다 랜덤으로 추출하여 캐시 설정
    */
-  @Cron(CronExpression.EVERY_DAY_AT_MIDNIGHT)
+  @Cron(CronExpression.EVERY_MINUTE)
   async setCachedMainPost() {
     try {
       const mainPosts = this.extracRandomPost(6);

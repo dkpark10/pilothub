@@ -1,5 +1,8 @@
 <template>
-  <div class="main_content_wrapper">
+  <div class="main_content_wrapper" v-if="!mainData && mainLoading">
+    <Skeleton />
+  </div>
+  <div class="main_content_wrapper" v-else>
     <Carousel
       :style="{ width: '100%' }"
       :transition="100"
@@ -33,6 +36,7 @@ import { defineComponent } from "vue";
 import { Carousel, Slide } from "vue3-carousel";
 import "vue3-carousel/dist/carousel.css";
 import ImageContainer from "@/components/atoms/ImageContainer.vue";
+import Skeleton from "@/components/atoms/Skeleton.vue";
 import Overlay from "@/components/atoms/Overlay.vue";
 import { BASE_URL } from "@/utils";
 import { useFetch } from "@/hooks/index";
@@ -54,6 +58,7 @@ export default defineComponent({
     Slide,
     ImageContainer,
     Overlay,
+    Skeleton,
   },
   setup() {
     const breakpoints: State["breakpoints"] = {
