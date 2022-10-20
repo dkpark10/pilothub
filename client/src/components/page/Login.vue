@@ -7,7 +7,7 @@
       <form>
         <fieldset>
           <div class="input_container">
-            <label for="inputid"></label>
+            <label for="inputid" />
             <InputText
               id="inputid"
               name="inputid"
@@ -16,7 +16,7 @@
               :width="width"
               :height="height"
             />
-            <label for="inputpwd"></label>
+            <label for="inputpwd" />
             <InputText
               id="inputpwd"
               name="inputpwd"
@@ -30,7 +30,7 @@
             type="submit"
             class="login_btn"
             color="white"
-            borderRadius="4px"
+            border-radius="4px"
             :width="width"
             :height="height"
           >
@@ -48,7 +48,7 @@ import InputText from "@/components/atoms/InputText.vue";
 import Button from "@/components/atoms/Button.vue";
 
 export default defineComponent({
-  name: "login-page",
+  name: "LoginPage",
   components: {
     InputText,
     Button,

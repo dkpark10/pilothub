@@ -4,8 +4,8 @@
       <div>
         <button
           class="footer_button"
-          @click="refresh"
           :style="{ width: '32px' }"
+          @click="refresh"
         >
           <Refresh />
         </button>
@@ -13,15 +13,15 @@
       <div class="font_size_controller_wrapper">
         <button
           class="footer_button"
-          @click="decreaseFontSize"
           :style="{ width: '43px' }"
+          @click="decreaseFontSize"
         >
           <FontSmaller />
         </button>
         <button
           class="footer_button"
-          @click="increaseFontSize"
           :style="{ width: '44px' }"
+          @click="increaseFontSize"
         >
           <FontLouder />
         </button>
@@ -72,7 +72,7 @@ import { useStore } from "vuex";
 import { useRouter } from "vue-router";
 
 export default defineComponent({
-  name: "footer-component",
+  name: "FooterComponent",
   components: {
     Refresh,
     FontLouder,

@@ -1,12 +1,12 @@
 <template>
-  <div class="loader"></div>
+  <div class="loader" />
 </template>
 
 <script lang="ts">
 import { defineComponent } from "vue";
 
 export default defineComponent({
-  name: "spinner-component",
+  name: "SpinnerComponent",
 });
 </script>
 

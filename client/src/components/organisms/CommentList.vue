@@ -23,8 +23,8 @@
     >
       <li>
         <CommentItem
-          :commentId="id"
-          :postId="postId"
+          :comment-id="id"
+          :post-id="postId"
           :author="author"
           :description="description"
           :date="date"
@@ -34,11 +34,11 @@
       </li>
     </ul>
   </section>
-  <section class="no_comment" v-else-if="store.state.commentModule.error">
+  <section v-else-if="store.state.commentModule.error" class="no_comment">
     <Sweat />
     <span>댓글을 불러오지 못했습니다.</span>
   </section>
-  <section class="no_comment" v-else>
+  <section v-else class="no_comment">
     <Sweat />
     <span>아직 댓글이 없습니다.</span>
   </section>

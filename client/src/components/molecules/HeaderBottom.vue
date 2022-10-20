@@ -43,7 +43,7 @@ interface BreakPoints {
 }
 
 export default defineComponent({
-  name: "header-bottom",
+  name: "HeaderBottom",
   components: {
     Carousel,
     Slide,

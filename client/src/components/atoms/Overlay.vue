@@ -10,7 +10,7 @@ interface Status {
 }
 
 export default defineComponent({
-  name: "overlay-component",
+  name: "OverlayComponent",
   props: {
     zIndex: {
       type: Object as PropType<CSSProperties["zIndex"]>,

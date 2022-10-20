@@ -1,5 +1,4 @@
 <template>
-  <HeaderTop />
   <main>
     <div class="tag_content_wrapper">
       <div class="page_title_wrapper">
@@ -21,24 +20,19 @@
       </ul>
     </div>
   </main>
-  <Footer />
 </template>
 
 <script lang="ts">
 import { defineComponent } from "vue";
-import HeaderTop from "@/components/molecules/HeaderTop.vue";
 import ImageContainer from "@/components/atoms/ImageContainer.vue";
-import Footer from "@/components/organisms/Footer.vue";
 import PostInfo from "@/components/molecules/PostInfo.vue";
 import { RankedPost } from "custom-type";
 import { useFetch } from "@/hooks/index";
 import { BASE_URL } from "@/utils/index";
 
 export default defineComponent({
-  name: "ranking-page",
+  name: "RankingPage",
   components: {
-    Footer,
-    HeaderTop,
     ImageContainer,
     PostInfo,
   },

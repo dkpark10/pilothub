@@ -6,7 +6,7 @@
 import { defineComponent } from "vue";
 
 export default defineComponent({
-  name: "font-smaller-component",
+  name: "FontSmallerComponent",
 });
 </script>
 

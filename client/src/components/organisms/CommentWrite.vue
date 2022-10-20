@@ -7,19 +7,19 @@
       </div>
       <textarea
         :value="comment"
-        @input="onChangeComment"
         placeholder="당신의 생각을 남겨주세요"
+        @input="onChangeComment"
       />
       <div class="button_wrapper">
         <span />
         <Button
-          @click="submitComment"
           class="main_color"
           type="submit"
           color="white"
           width="59px"
           height="28px"
-          borderRadius="18px"
+          border-radius="18px"
+          @click="submitComment"
         >
           등록
         </Button>

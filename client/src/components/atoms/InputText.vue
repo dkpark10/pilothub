@@ -1,12 +1,12 @@
 <template>
-  <input :style="style" />
+  <input :style="style" >
 </template>
 
 <script lang="ts">
 import { defineComponent, PropType, CSSProperties } from "vue";
 
 export default defineComponent({
-  name: "input-text-component",
+  name: "InputTextComponent",
   props: {
     width: {
       type: Object as PropType<CSSProperties["width"]>,

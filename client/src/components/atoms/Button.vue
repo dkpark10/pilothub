@@ -8,7 +8,7 @@
 import { defineComponent, CSSProperties, PropType } from "vue";
 
 export default defineComponent({
-  name: "button-component",
+  name: "ButtonComponent",
   props: {
     width: {
       type: Object as PropType<CSSProperties["width"]>,

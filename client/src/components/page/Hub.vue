@@ -1,5 +1,4 @@
 <template>
-  <Header />
   <main>
     <div class="tag_content_wrapper">
       <div class="tag_content">
@@ -7,19 +6,18 @@
           <router-link :to="`post/${item.postId}`">
             <li>
               <TagContentCard
-                :imgUrl="item.imgUrl"
+                :img-url="item.imgUrl"
                 :title="item.title"
                 :author="item.author"
-                :webkitLineClamp="2"
+                :webkit-line-clamp="2"
               />
             </li>
           </router-link>
         </ul>
       </div>
-      <div class="target" ref="targetRef" />
+      <div ref="targetRef" class="target" />
     </div>
   </main>
-  <Footer />
 </template>
 
 <script lang="ts">
@@ -27,8 +25,6 @@ import axios from "axios";
 import { defineComponent, onMounted, onUnmounted, watch, ref } from "vue";
 import { useRoute } from "vue-router";
 import TagContentCard from "@/components/molecules/TagContentCard.vue";
-import Header from "@/components/organisms/Header.vue";
-import Footer from "@/components/organisms/Footer.vue";
 import { BASE_URL } from "@/utils/index";
 import { PostItem } from "custom-type";
 import { useIntersection } from "@/hooks/use_intersection";
@@ -36,11 +32,9 @@ import { useIntersection } from "@/hooks/use_intersection";
 // import { useRequestAniFrame } from "@/hooks/use_requestaniframe";
 
 export default defineComponent({
-  name: "app",
+  name: "App",
   components: {
-    Header,
     TagContentCard,
-    Footer,
   },
   setup() {
     const route = useRoute();

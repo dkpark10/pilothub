@@ -22,7 +22,7 @@ import Magnifier from "@/components/atoms/Magnifier.vue";
 import { useRouter } from "vue-router";
 
 export default defineComponent({
-  name: "search-bar",
+  name: "SearchBar",
   components: {
     Magnifier,
   },

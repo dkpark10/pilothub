@@ -1,12 +1,12 @@
 <template>
-  <span class="hamburger"> </span>
+  <span class="hamburger" />
 </template>
 
 <script lang="ts">
 import { defineComponent } from "vue";
 
 export default defineComponent({
-  name: "hamburger-button",
+  name: "HamburgerButton",
 });
 </script>
 

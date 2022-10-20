@@ -6,10 +6,10 @@
         <router-link :to="`post/${item.postId}`">
           <li>
             <TagContentCard
-              :imgUrl="item.imgUrl"
+              :img-url="item.imgUrl"
               :title="item.title"
               :author="item.author"
-              :webkitLineClamp="2"
+              :webkit-line-clamp="2"
             />
           </li>
         </router-link>
@@ -23,10 +23,10 @@
         <router-link :to="`post/${item.postId}`">
           <li>
             <TagContentCard
-              :imgUrl="item.imgUrl"
+              :img-url="item.imgUrl"
               :title="item.title"
               :author="item.author"
-              :webkitLineClamp="2"
+              :webkit-line-clamp="2"
             />
           </li>
         </router-link>
@@ -40,10 +40,10 @@
         <router-link :to="`post/${item.postId}`">
           <li>
             <TagContentCard
-              :imgUrl="item.imgUrl"
+              :img-url="item.imgUrl"
               :title="item.title"
               :author="item.author"
-              :webkitLineClamp="2"
+              :webkit-line-clamp="2"
             />
           </li>
         </router-link>
@@ -62,7 +62,7 @@ import { PostId, PostItem } from "custom-type";
 type TagTitle = Capitalize<PostId>;
 
 export default defineComponent({
-  name: "tag-contents",
+  name: "TagContents",
   components: {
     TagContentCard,
   },

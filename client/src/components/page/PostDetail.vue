@@ -1,6 +1,5 @@
 <template>
   <section>
-    <Header />
     <article>
       <div v-show="!postLoading && post !== undefined">
         <ImageContainer
@@ -9,7 +8,9 @@
           width="100%"
           height="200px"
         />
-        <div class="title">{{ post?.title as string }}</div>
+        <div class="title">
+          {{ post?.title as string }}
+        </div>
         <div class="author"><em>by </em>{{ post?.author as string }}</div>
       </div>
     </article>
@@ -19,14 +20,11 @@
     <CommentWrite :post-id="postid" />
     <CommentList :post-id="postid" />
     <FooterNavigator />
-    <Footer />
   </section>
 </template>
 
 <script setup lang="ts">
 import { useRoute } from "vue-router";
-import Header from "@/components/organisms/Header.vue";
-import Footer from "@/components/organisms/Footer.vue";
 import FooterNavigator from "@/components/molecules/FooterNavigator.vue";
 import CommentWrite from "@/components/organisms/CommentWrite.vue";
 import CommentList from "@/components/organisms/CommentList.vue";

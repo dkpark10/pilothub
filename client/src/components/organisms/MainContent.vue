@@ -1,8 +1,8 @@
 <template>
-  <div class="main_content_wrapper" v-if="!mainData && mainLoading">
+  <div v-if="!mainData && mainLoading" class="main_content_wrapper">
     <Skeleton />
   </div>
-  <div class="main_content_wrapper" v-else>
+  <div v-else class="main_content_wrapper">
     <Carousel
       :style="{ width: '100%' }"
       :transition="100"
@@ -52,7 +52,7 @@ interface BreakPoints {
 }
 
 export default defineComponent({
-  name: "main-content",
+  name: "MainContent",
   components: {
     Carousel,
     Slide,

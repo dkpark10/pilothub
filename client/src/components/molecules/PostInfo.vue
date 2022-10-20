@@ -1,6 +1,6 @@
 <template>
   <div class="postitem_wrapper">
-    <span class="rank_wrapper" v-show="showRank">
+    <span v-show="showRank" class="rank_wrapper">
       <slot />
     </span>
     <div class="title_wrapper">
@@ -25,7 +25,7 @@ interface Status {
 }
 
 export default defineComponent({
-  name: "top-post-item",
+  name: "TopPostItem",
   props: {
     rank: {
       type: Object as PropType<number>,

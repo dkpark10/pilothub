@@ -10,7 +10,7 @@
           <span>허브</span>
         </router-link>
       </div>
-      <div class="header_item_wrapper right" v-if="!isShownSearchBar">
+      <div v-if="!isShownSearchBar" class="header_item_wrapper right">
         <button
           type="button"
           name="open_search_bar"
@@ -22,8 +22,8 @@
         <button
           type="button"
           name="open_side_menu"
-          @click="openSideMenu"
           aria-label="open_side_menu_button"
+          @click="openSideMenu"
         >
           <Hamburger />
         </button>
@@ -32,8 +32,8 @@
         <button
           type="button"
           name="close_search_bar"
-          @click="closeSearchBar"
           aria-label="close_search_bar_button"
+          @click="closeSearchBar"
         >
           <Close />
         </button>

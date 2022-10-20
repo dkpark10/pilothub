@@ -1,6 +1,6 @@
 <template>
   <div>
-    <Overlay @click="closeSideMenu" :zIndex="2" />
+    <Overlay :z-index="2" @click="closeSideMenu" />
     <nav>
       <ul>
         <router-link to="/">
@@ -18,17 +18,13 @@
 </template>
 
 <script lang="ts">
-import { defineComponent, onMounted, ref } from "vue";
+import { defineComponent, ref } from "vue";
 import Overlay from "@/components/atoms/Overlay.vue";
 import { useStore } from "vuex";
-import { BASE_URL } from "@/utils";
-import { httpFetchData } from "@/utils/apihandler";
-import { SET_RECENT_READ_POST_LEN } from "@/store/ui";
 import { RootState } from "@/store/index";
-import { PostItem } from "custom-type";
 
 export default defineComponent({
-  name: "side-menu",
+  name: "SideMenu",
   components: {
     Overlay,
   },

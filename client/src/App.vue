@@ -1,16 +1,36 @@
 <template>
+  <metainfo />
   <div id="app">
+    <Header />
     <router-view :key="route.fullPath" />
+    <Footer />
   </div>
 </template>
 
 <script lang="ts">
 import { defineComponent } from "vue";
 import { useRoute } from "vue-router";
+import Header from "@/components/organisms/Header.vue";
+import Footer from "@/components/organisms/Footer.vue";
+import { useMeta } from "vue-meta";
 
 export default defineComponent({
-  name: "app",
+  name: "App",
+  components: {
+    Header,
+    Footer,
+  },
   setup() {
+    useMeta({
+      title: "hub줌 클론",
+      meta: [
+        {
+          vmid: "description",
+          name: "description",
+          content: "세상의 변화와 취향을 담은 웰메이드 콘텐츠를 만나보세요!",
+        },
+      ],
+    });
     const route = useRoute();
     return {
       route,

@@ -24,7 +24,7 @@ interface MenuItem {
 }
 
 export default defineComponent({
-  name: "footer-component",
+  name: "FooterComponent",
   setup() {
     const fontSizeStyle = useFontSize(14);
     const menuItems: MenuItem[] = [

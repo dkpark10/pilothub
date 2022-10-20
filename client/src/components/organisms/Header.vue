@@ -1,7 +1,7 @@
 <template>
   <header>
     <HeaderTop
-      :isShownSearchBar="isShownSearchBar"
+      :is-shown-search-bar="isShownSearchBar"
       @show-search-bar="showSearchBar"
       @close-search-bar="closeSearchBar"
     />

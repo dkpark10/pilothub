@@ -57,7 +57,7 @@ export class PostService {
    * @description
    * 메인허브글도 1분마다 랜덤으로 추출하여 캐시 설정
    */
-  @Cron(CronExpression.EVERY_MINUTE)
+  @Cron(CronExpression.EVERY_30_MINUTES)
   async setCachedMainPost() {
     try {
       const mainPosts = this.extracRandomPost(6);
@@ -90,8 +90,7 @@ export class PostService {
    * @description
    * 인기허브글은 1분마다 랜덤으로 추출하여 캐시 설정
    */
-  // @Cron(CronExpression.EVERY_30_MINUTES)
-  @Cron(CronExpression.EVERY_MINUTE)
+  @Cron(CronExpression.EVERY_30_MINUTES)
   async setCachedRankedPost() {
     try {
       const date = parsingDate();

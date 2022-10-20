@@ -1,7 +1,7 @@
 <template>
   <div class="img_wrapper">
     <Skeleton v-show="loading && !error" />
-    <div class="error_msg_wrapper" v-show="error">
+    <div v-show="error" class="error_msg_wrapper">
       <span>이미지를 불러오는데 실패하였습니다.</span>
     </div>
     <img :src="src" @load="onLoad" :alt="alt" @error="onError" />
@@ -13,7 +13,7 @@ import { defineComponent, PropType, CSSProperties, ref } from "vue";
 import Skeleton from "@/components/atoms/Skeleton.vue";
 
 export default defineComponent({
-  name: "image-container",
+  name: "ImageContainer",
   components: {
     Skeleton,
   },

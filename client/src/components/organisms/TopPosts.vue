@@ -25,7 +25,7 @@ import { BASE_URL } from "@/utils/index";
 import { useFetch } from "@/hooks/index";
 
 export default defineComponent({
-  name: "top-posts",
+  name: "TopPosts",
   components: {
     PostInfo,
   },

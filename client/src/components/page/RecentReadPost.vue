@@ -1,5 +1,4 @@
 <template>
-  <HeaderTop />
   <div class="title_wrapper">
     <span>최근 읽은 글</span>
   </div>
@@ -15,7 +14,7 @@
               :alt="item.title"
             />
             <PostInfo
-              :showRank="false"
+              :show-rank="false"
               :title="item.title"
               :author="item.author"
             />
@@ -30,13 +29,10 @@
       읽은 글이 없습니다.
     </div>
   </main>
-  <Footer />
 </template>
 
 <script lang="ts">
 import { defineComponent } from "vue";
-import HeaderTop from "@/components/molecules/HeaderTop.vue";
-import Footer from "@/components/organisms/Footer.vue";
 import ImageContainer from "@/components/atoms/ImageContainer.vue";
 import PostInfo from "@/components/molecules/PostInfo.vue";
 import Sweat from "@/components/atoms/Sweat.vue";
@@ -45,10 +41,8 @@ import { useFetch } from "@/hooks/index";
 import { PostItem } from "custom-type";
 
 export default defineComponent({
-  name: "recent-read-post",
+  name: "RecentReadPost",
   components: {
-    Footer,
-    HeaderTop,
     ImageContainer,
     PostInfo,
     Sweat,

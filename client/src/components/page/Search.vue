@@ -1,8 +1,7 @@
 <template>
-  <HeaderTop />
   <SearchBar :init-keyword="keyword" />
   <main>
-    <div class="noresult" v-if="serachResult.length === 0">
+    <div v-if="serachResult.length === 0" class="noresult">
       검색결과가 없습니다.
     </div>
     <div v-else class="tag_content_wrapper">
@@ -28,15 +27,12 @@
       </ul>
     </div>
   </main>
-  <Footer />
 </template>
 
 <script lang="ts">
 import axios from "axios";
 import { defineComponent, ref, onMounted } from "vue";
-import HeaderTop from "@/components/molecules/HeaderTop.vue";
 import ImageContainer from "@/components/atoms/ImageContainer.vue";
-import Footer from "@/components/organisms/Footer.vue";
 import PostInfo from "@/components/molecules/PostInfo.vue";
 import SearchBar from "@/components/molecules/SearchBar.vue";
 import { PostItem } from "custom-type";
@@ -46,8 +42,6 @@ import { BASE_URL } from "@/utils/index";
 export default defineComponent({
   name: "ranking-page",
   components: {
-    Footer,
-    HeaderTop,
     ImageContainer,
     PostInfo,
     SearchBar,

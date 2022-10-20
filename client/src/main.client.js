@@ -3,6 +3,7 @@ import App from "./App.vue";
 import createRouter from "./router/index";
 import createStore from "./store/index";
 import { getRecentReadPost } from "@/middlewares/readposts";
+import { createMetaManager } from "vue-meta";
 
 const app = createApp(App);
 const store = createStore();
@@ -13,7 +14,7 @@ router.beforeEach(async (to, from, next) => {
   next();
 });
 
-app.use(store).use(router).mount("#app");
+app.use(store).use(router).use(createMetaManager()).mount("#app");
 
 const isProductionMode = process.env.NODE_ENV === "production";
 
