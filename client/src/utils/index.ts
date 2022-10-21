@@ -1,6 +1,8 @@
 import { PostId, CommentDate } from "custom-type";
 import { RECENT_POST_KEY } from "@/hooks/use_recent_post";
 
+export * from "./apihandler";
+
 export const isServerEnv = typeof window === "undefined";
 
 export const BASE_URL = "http://localhost:3000";

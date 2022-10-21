@@ -1,6 +1,10 @@
 import { EntityRepository, Repository } from 'typeorm';
 import { PostEntity } from './post.entity';
 
+interface RepositoryAdaptor {
+  
+}
+
 @EntityRepository(PostEntity)
 export class PostRepository extends Repository<PostEntity> {
   test() {

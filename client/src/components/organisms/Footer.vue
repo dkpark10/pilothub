@@ -61,8 +61,7 @@
   </footer>
 </template>
 
-<script lang="ts">
-import { defineComponent } from "vue";
+<script setup lang="ts">
 import Refresh from "@/components/atoms/Refresh.vue";
 import FontLouder from "@/components/atoms/FontLouder.vue";
 import FontSmaller from "@/components/atoms/FontSmaller.vue";
@@ -71,41 +70,24 @@ import { RootState } from "@/store/index";
 import { useStore } from "vuex";
 import { useRouter } from "vue-router";
 
-export default defineComponent({
-  name: "FooterComponent",
-  components: {
-    Refresh,
-    FontLouder,
-    FontSmaller,
-  },
-  setup() {
-    const store = useStore<RootState>();
-    const router = useRouter();
+const store = useStore<RootState>();
+const router = useRouter();
 
-    const refresh = () => {
-      router.go(0);
-    };
+const refresh = () => {
+  router.go(0);
+};
 
-    const increaseFontSize = () => {
-      store.commit(INCREASE_FONT_SIZE, 1.1);
-    };
+const increaseFontSize = () => {
+  store.commit(INCREASE_FONT_SIZE, 1.1);
+};
 
-    const decreaseFontSize = () => {
-      store.commit(DECREASE_FONT_SIZE, 1.1);
-    };
+const decreaseFontSize = () => {
+  store.commit(DECREASE_FONT_SIZE, 1.1);
+};
 
-    const toTop = () => {
-      window.scrollTo(0, 0);
-    };
-
-    return {
-      increaseFontSize,
-      decreaseFontSize,
-      toTop,
-      refresh,
-    };
-  },
-});
+const toTop = () => {
+  window.scrollTo(0, 0);
+};
 </script>
 
 <style lang="scss" scoped>

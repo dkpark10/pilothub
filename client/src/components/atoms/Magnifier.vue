@@ -2,13 +2,7 @@
   <div class="magnifier" />
 </template>
 
-<script lang="ts">
-import { defineComponent } from "vue";
-
-export default defineComponent({
-  name: "MagnifierComponent",
-});
-</script>
+<script setup lang="ts"></script>
 
 <style lang="scss" scoped>
 .magnifier {

@@ -22,6 +22,18 @@ module.exports = {
         endOfLine: "auto",
       },
     ],
+    "vue/multi-word-component-names": ["error", {
+      "ignores": [
+        "default", 
+        "Header", 
+        "Sweat",
+        "Skeleton", 
+        "Footer",
+        "Login",
+        "Like",
+        "Hate",
+      ],
+    }],
   },
   overrides: [
     {

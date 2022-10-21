@@ -42,24 +42,12 @@
   </div>
 </template>
 
-<script lang="ts">
-import { defineComponent } from "vue";
+<script setup lang="ts">
 import InputText from "@/components/atoms/InputText.vue";
 import Button from "@/components/atoms/Button.vue";
 
-export default defineComponent({
-  name: "LoginPage",
-  components: {
-    InputText,
-    Button,
-  },
-  setup() {
-    return {
-      width: "100%",
-      height: "45px",
-    };
-  },
-});
+const width = "100%";
+const height = "45px";
 </script>
 
 <style lang="scss" scoped>
