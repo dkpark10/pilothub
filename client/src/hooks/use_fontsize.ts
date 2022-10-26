@@ -4,10 +4,10 @@ import { useStore } from "vuex";
 
 export const useFontSize = (defaultSize: number): Ref<CSSProperties> => {
   const store = useStore<RootState>();
+  const { fontSizeRatio } = store.state.fontSizeModule;
+
   const style = ref({
-    fontSize: computed(
-      () => `${store.state.fontSizeModule.fontSizeRatio * defaultSize}px`
-    ),
+    fontSize: computed(() => `${fontSizeRatio * defaultSize}px`),
   });
 
   return style;

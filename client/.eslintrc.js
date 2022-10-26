@@ -32,6 +32,7 @@ module.exports = {
         "Login",
         "Like",
         "Hate",
+        "Magnifier",
       ],
     }],
   },

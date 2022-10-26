@@ -1,0 +1,5 @@
+name: test-action
+on:
+    push:
+      branches: [ master ]
+jobs:
